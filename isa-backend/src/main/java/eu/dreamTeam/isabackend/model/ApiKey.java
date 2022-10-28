@@ -1,6 +1,5 @@
 package eu.dreamTeam.isabackend.model;
 
-import eu.dreamTeam.isabackend.model.enums.BloodType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,18 +12,14 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BloodSample {
+public class ApiKey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
-    @Enumerated(EnumType.STRING)
-    private BloodType bloodType;
-
+    private long id;
     @Column
-    private double amount;
+    private String apiKey;
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;
+
 }
