@@ -16,7 +16,7 @@ public class IsaBackendApplication {
 		SpringApplication.run(IsaBackendApplication.class, args);
 	}
 
-	@Component
+	/*@Component
 	class DemoCommandLineRunner implements CommandLineRunner {
 
 		@Autowired
@@ -43,5 +43,5 @@ public class IsaBackendApplication {
 			bloodSampleRepository.save(bs4);
 
 		}
-	}
+	}*/
 }
