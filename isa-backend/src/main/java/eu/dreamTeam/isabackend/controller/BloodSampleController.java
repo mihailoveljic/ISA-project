@@ -33,12 +33,12 @@ public class BloodSampleController {
         {
             var apiKey = httpServletRequest.getHeader("Authorization");
             if (!apiKey.equals("api_key_blood_bank_1")){
-                return ResponseEntity.ok("NEVALIDAN API KLJUC");
+                return new ResponseEntity<>("NEVALIDAN API KLJUC", HttpStatus.UNAUTHORIZED);
             }
-            BloodSample bs = bloodSampleService.getBloodSample("0_NEGATIVE");
+            BloodSample bs = bloodSampleService.getBloodSample(bloodType);
             if(bs == null)
                 return new ResponseEntity<>("Blood type not found", HttpStatus.NOT_FOUND);
-            if(bs.getAmount() < Integer.parseInt("100"))
+            if(bs.getAmount() < Integer.parseInt(amount))
                 return new ResponseEntity<>("Not enough blood for chosen blood type", HttpStatus.NOT_FOUND);
 
             return new ResponseEntity<>("Blood type exists in chosen amount", HttpStatus.OK);

@@ -15,7 +15,6 @@ public class IsaBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IsaBackendApplication.class, args);
 	}
-
 	/*@Component
 	class DemoCommandLineRunner implements CommandLineRunner {
 
