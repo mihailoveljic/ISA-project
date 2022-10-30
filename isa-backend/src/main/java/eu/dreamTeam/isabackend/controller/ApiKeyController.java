@@ -1,5 +1,8 @@
 package eu.dreamTeam.isabackend.controller;
 
+import eu.dreamTeam.isabackend.service.ApiKeyService;
+import eu.dreamTeam.isabackend.service.BloodSampleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/api/api-key")
 public class ApiKeyController {
 
+    private final ApiKeyService apiKeyService;
+    @Autowired
+    public ApiKeyController(BloodSampleService bloodSampleService, ApiKeyService apiKeyService) {
+        this.apiKeyService = apiKeyService;
+    }
     @GetMapping(value = "/validate")
-    @CrossOrigin(origins = "*")
     public ResponseEntity validateApiKey(HttpServletRequest httpServletRequest){
         var apiKey = httpServletRequest.getHeader("Authorization");
-        if (!apiKey.equals("veljin_kljuc")){
+        if (!apiKey.equals(apiKeyService.getBloodBankApiKey().getApiKeyCode())){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(HttpStatus.OK);

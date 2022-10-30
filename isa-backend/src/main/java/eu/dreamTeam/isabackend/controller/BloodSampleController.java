@@ -1,4 +1,5 @@
 package eu.dreamTeam.isabackend.controller;
+import eu.dreamTeam.isabackend.handler.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.model.BloodSample;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
 import eu.dreamTeam.isabackend.service.BloodSampleService;
@@ -28,12 +29,12 @@ public class BloodSampleController {
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
             @RequestParam @Pattern(regexp = "^(A|B|AB|O)_(POSITIVE|NEGATIVE)$") String bloodType,
-            @RequestParam @Pattern(regexp = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9])$") String amount
+            @RequestParam @Pattern(regexp = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])$") String amount
     )
         {
             var apiKey = httpServletRequest.getHeader("Authorization");
-            if (!apiKey.equals("api_key_blood_bank_1")){
-                return new ResponseEntity<>("NEVALIDAN API KLJUC", HttpStatus.UNAUTHORIZED);
+            if (!apiKey.equals(apiKeyService.getBloodBankApiKey().getApiKeyCode())){
+                throw new InvalidApiKeyException();
             }
             BloodSample bs = bloodSampleService.getBloodSample(bloodType);
             if(bs == null)

@@ -17,7 +17,9 @@ public class ApiKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private String apiKey;
+    private String apiKeyCode;
+    @Column
+    private boolean isValid;
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;

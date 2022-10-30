@@ -12,11 +12,8 @@ public class ApiKeyService {
     @Autowired
     private ApiKeyRepository apiKeyRepository;
 
-    public ApiKey GetByBloodBankId(long bloodBankId) {
-        return apiKeyRepository.findByBloodBankId(bloodBankId);
-    }
-    public ApiKey GetByApiKey(String apiKey) {
-        return apiKeyRepository.findByApiKey(apiKey);
+    public ApiKey getBloodBankApiKey() {
+        return apiKeyRepository.getValidApiKey();
     }
 
 }

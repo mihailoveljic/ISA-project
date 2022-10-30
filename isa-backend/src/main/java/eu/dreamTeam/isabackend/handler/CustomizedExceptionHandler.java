@@ -1,7 +1,5 @@
 package eu.dreamTeam.isabackend.handler;
 
-import org.hibernate.TypeMismatchException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -11,6 +9,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(InvalidApiKeyException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ErrorResponse handleInvalidApiKeyException(InvalidApiKeyException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Invalid api key entered.");
+        return errorResponse;
+    }
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
