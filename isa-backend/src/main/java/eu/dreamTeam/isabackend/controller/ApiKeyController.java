@@ -23,6 +23,11 @@ public class ApiKeyController {
     public ApiKeyController(BloodSampleService bloodSampleService, ApiKeyService apiKeyService) {
         this.apiKeyService = apiKeyService;
     }
+
+    @GetMapping
+    public ResponseEntity<String> getApiKey(){
+        return new ResponseEntity<>(apiKeyService.getBloodBankApiKey().getApiKeyCode(),HttpStatus.OK);
+    }
     @GetMapping(value = "/validate")
     public ResponseEntity validateApiKey(HttpServletRequest httpServletRequest){
         var apiKey = httpServletRequest.getHeader("Authorization");
