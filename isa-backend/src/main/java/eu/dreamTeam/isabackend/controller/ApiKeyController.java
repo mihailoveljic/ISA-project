@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,16 +21,12 @@ public class ApiKeyController {
         this.apiKeyService = apiKeyService;
     }
 
-    @GetMapping
-    public ResponseEntity<String> getApiKey(){
-        return new ResponseEntity<>(apiKeyService.getBloodBankApiKey().getApiKeyCode(),HttpStatus.OK);
-    }
-    @GetMapping(value = "/validate")
-    public ResponseEntity validateApiKey(HttpServletRequest httpServletRequest){
+    @GetMapping(value = "/validate/{bloodBankId}")
+    public ResponseEntity validateApiKey(HttpServletRequest httpServletRequest, @PathVariable int bloodBankId){
         var apiKey = httpServletRequest.getHeader("Authorization");
-        if (!apiKey.equals(apiKeyService.getBloodBankApiKey().getApiKeyCode())){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+        boolean isValid = apiKeyService.isValidApiKey(apiKey, bloodBankId);
+        if(isValid) return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
     }
 }

@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ApiKeyRepository extends JpaRepository<ApiKey, Long> {
-    @Query(value = "select * from api_key where is_valid = true", nativeQuery = true)
-    ApiKey getValidApiKey();
+    @Query(value = "select * from api_key where blood_bank_id = ?1", nativeQuery = true)
+    List<ApiKey> findAllByBloodBankId(long id);
 }

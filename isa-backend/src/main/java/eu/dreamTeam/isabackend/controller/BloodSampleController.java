@@ -25,15 +25,16 @@ public class BloodSampleController {
         this.apiKeyService = apiKeyService;
     }
 
-    @GetMapping
+    @GetMapping("{bloodBankId}")
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
+            @PathVariable int bloodBankId,
             @RequestParam @Pattern(regexp = "^(A|B|AB|O)_(POSITIVE|NEGATIVE)$") String bloodType,
             @RequestParam @Pattern(regexp = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])$") String amount
     )
         {
             var apiKey = httpServletRequest.getHeader("Authorization");
-            if (!apiKey.equals(apiKeyService.getBloodBankApiKey().getApiKeyCode())){
+            if (!apiKeyService.isValidApiKey(apiKey, bloodBankId)){
                 throw new InvalidApiKeyException();
             }
             BloodSample bs = bloodSampleService.getBloodSample(bloodType);
