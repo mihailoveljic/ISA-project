@@ -25,7 +25,7 @@ public class BloodSampleController {
         this.apiKeyService = apiKeyService;
     }
 
-    @GetMapping("{bloodBankId}")
+    @GetMapping()
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
             @RequestParam @Pattern(regexp = "^(A|B|AB|O)_(POSITIVE|NEGATIVE)$") String bloodType,

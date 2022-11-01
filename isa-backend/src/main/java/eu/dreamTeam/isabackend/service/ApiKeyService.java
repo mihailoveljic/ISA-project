@@ -11,7 +11,7 @@ public class ApiKeyService {
 
     public boolean ValidateApiKey(String apiKey) {
         var apiKeyFromDB = apiKeyRepository.findByApiKeyCode(apiKey);
-        if(apiKey.equals(apiKeyFromDB)) return true;
+        if(apiKey.equals(apiKeyFromDB.getApiKeyCode())) return true;
         return false;
     }
 

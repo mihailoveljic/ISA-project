@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ApiKeyRepository extends JpaRepository<ApiKey, Long> {
-    String findByApiKeyCode(String apiKey);
+
+    ApiKey findByApiKeyCode(String apiKeyCode);
 }
