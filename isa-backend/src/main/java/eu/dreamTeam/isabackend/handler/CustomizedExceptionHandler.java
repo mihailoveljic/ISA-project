@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidApiKeyException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleInvalidApiKeyException(InvalidApiKeyException ex) {
         ErrorResponse errorResponse = new ErrorResponse();
