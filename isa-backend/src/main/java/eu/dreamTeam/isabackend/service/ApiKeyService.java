@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.service;
 
+import eu.dreamTeam.isabackend.handler.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.repository.ApiKeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,12 @@ public class ApiKeyService {
     private ApiKeyRepository apiKeyRepository;
 
     public boolean ValidateApiKey(String apiKey) {
-        var apiKeyFromDB = apiKeyRepository.findByApiKeyCode(apiKey);
-        if(apiKey.equals(apiKeyFromDB.getApiKeyCode())) return true;
-        return false;
+        try {
+            var apiKeyFromDB = apiKeyRepository.findByApiKeyCode(apiKey);
+            return apiKey.equals(apiKeyFromDB.getApiKeyCode());
+        }catch(Exception e){
+            throw new InvalidApiKeyException();
+        }
     }
 
 }
