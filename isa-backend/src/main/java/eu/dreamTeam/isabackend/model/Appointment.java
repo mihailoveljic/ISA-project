@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,4 +34,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBankForAppointment;
+    @OneToMany(mappedBy = "appointment")
+    private Set<Staff> staff;
 }

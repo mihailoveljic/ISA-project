@@ -40,4 +40,12 @@ public class BloodBank {
     private Set<Delivery> receivedDeliveries;
     @OneToMany(mappedBy = "bloodBankForAppointment", cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private SystemAdmin systemAdmin;
+    @OneToMany(mappedBy = "bloodBank")
+    private Set<Staff> staff;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address-id")
+    private Address address;
 }
