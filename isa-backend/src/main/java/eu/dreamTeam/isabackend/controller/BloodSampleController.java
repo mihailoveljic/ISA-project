@@ -25,7 +25,7 @@ public class BloodSampleController {
         this.apiKeyService = apiKeyService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
             @RequestParam @Pattern(regexp = "^(A|B|AB|O)_(POSITIVE|NEGATIVE)$") String bloodType,
@@ -36,12 +36,13 @@ public class BloodSampleController {
             if (!apiKeyService.ValidateApiKey(apiKey)){
                 throw new InvalidApiKeyException();
             }
-            BloodSample bs = bloodSampleService.getBloodSample(bloodType);
-            if(bs == null)
+            int bs = bloodSampleService.getBloodSample(bloodType);
+            if(bs == 0)
                 return new ResponseEntity<>("Blood type not found", HttpStatus.NOT_FOUND);
-            if(bs.getAmount() < Integer.parseInt(amount))
-                return new ResponseEntity<>("Not enough blood for chosen blood type", HttpStatus.NOT_FOUND);
+            double availableAmount = bloodSampleService.getBloodSampleAmount(bloodType);
+            if(availableAmount < Double.parseDouble(amount))
+                return new ResponseEntity<>("Not enough blood for chosen blood type. There is currently " + availableAmount + "ml in supplies.", HttpStatus.NOT_FOUND);
 
-            return new ResponseEntity<>("Blood type exists in chosen amount", HttpStatus.OK);
+            return new ResponseEntity<>("Blood type exists in chosen amount. There is currently " + availableAmount + "ml in supplies.", HttpStatus.OK);
         }
 }

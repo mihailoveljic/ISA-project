@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BloodSampleService {
 
     private final BloodSampleRepository bloodSampleRepository;
-    @Autowired
     public BloodSampleService(BloodSampleRepository bloodSampleRepository) {
         this.bloodSampleRepository = bloodSampleRepository;
     }
 
-    public BloodSample getBloodSample(String bloodType){
+    public int getBloodSample(String bloodType){
         return bloodSampleRepository.getBloodSample(bloodType);
     }
 
+    public double getBloodSampleAmount(String bloodType){
+        return bloodSampleRepository.getBloodSampleAmount(bloodType);
+    }
 
 }

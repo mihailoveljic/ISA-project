@@ -17,12 +17,4 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         errorResponse.setMessage("Invalid api key entered.");
         return errorResponse;
     }
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public ErrorResponse handleBadRequestException(Exception ex) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage("Error in format of entered data.");
-        return errorResponse;
-    }
 }
