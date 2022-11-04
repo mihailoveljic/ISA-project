@@ -45,4 +45,6 @@ public class BloodSampleController {
 
             return new ResponseEntity<>("Blood type exists in chosen amount. There is currently " + availableAmount + "ml in supplies.", HttpStatus.OK);
         }
+
+
 }

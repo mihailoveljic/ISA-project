@@ -33,13 +33,4 @@ public class WorkTime {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Column
     private LocalTime endTime;
-    @ManyToMany(mappedBy = "workTimes")
-    private Set<BloodBank> bloodBanks;
-    @ManyToMany
-    @JoinTable(
-            name = "worktime_days",
-            joinColumns = @JoinColumn(name = "worktime_id"),
-            inverseJoinColumns = @JoinColumn(name = "day_id")
-    )
-    private Set<Day> days;
 }

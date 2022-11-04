@@ -27,13 +27,9 @@ public class BloodBank {
     private boolean isDeleted;
     @OneToMany(mappedBy = "bloodBank")
     private Set<BloodSample> bloodSamples;
-    @ManyToMany
-    @JoinTable(
-            name = "blood_bank_worktime",
-            joinColumns = @JoinColumn(name = "blood_bank_id"),
-            inverseJoinColumns = @JoinColumn(name = "worktime_id")
-    )
-    private Set<WorkTime> workTimes;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "worktime_id")
+    private WorkTime workTime;
     @OneToMany(mappedBy = "bloodBankSupplier")
     private Set<Delivery> suppliedDeliveries;
     @OneToMany(mappedBy = "bloodBankReceiver")
@@ -45,7 +41,8 @@ public class BloodBank {
     private SystemAdmin systemAdmin;
     @OneToMany(mappedBy = "bloodBank")
     private Set<Staff> staff;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address-id")
     private Address address;
+
 }

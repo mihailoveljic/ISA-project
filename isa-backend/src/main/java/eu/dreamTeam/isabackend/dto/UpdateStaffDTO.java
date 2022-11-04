@@ -1,10 +1,7 @@
 package eu.dreamTeam.isabackend.dto;
 
-import eu.dreamTeam.isabackend.model.*;
-import eu.dreamTeam.isabackend.model.enums.Gender;
-import lombok.*;
+import lombok.Data;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
