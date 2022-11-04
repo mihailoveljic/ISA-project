@@ -35,7 +35,7 @@ public class WorkTime {
     private LocalTime endTime;
     @ManyToMany(mappedBy = "workTimes")
     private Set<BloodBank> bloodBanks;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "worktime_days",
             joinColumns = @JoinColumn(name = "worktime_id"),

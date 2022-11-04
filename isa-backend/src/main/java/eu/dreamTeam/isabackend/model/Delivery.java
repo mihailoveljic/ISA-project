@@ -29,6 +29,6 @@ public class Delivery {
     @ManyToOne
     @JoinColumn(name = "blood_bank_receiver_id")
     private BloodBank bloodBankReceiver;
-    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "delivery")
     private Set<BloodSample> bloodSamples;
 }

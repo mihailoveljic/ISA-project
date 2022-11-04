@@ -25,27 +25,27 @@ public class BloodBank {
     private double averageRating;
     @Column
     private boolean isDeleted;
-    @OneToMany(mappedBy = "bloodBank", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bloodBank")
     private Set<BloodSample> bloodSamples;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "blood_bank_worktime",
             joinColumns = @JoinColumn(name = "blood_bank_id"),
             inverseJoinColumns = @JoinColumn(name = "worktime_id")
     )
     private Set<WorkTime> workTimes;
-    @OneToMany(mappedBy = "bloodBankSupplier", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bloodBankSupplier")
     private Set<Delivery> suppliedDeliveries;
-    @OneToMany(mappedBy = "bloodBankReceiver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bloodBankReceiver")
     private Set<Delivery> receivedDeliveries;
-    @OneToMany(mappedBy = "bloodBankForAppointment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bloodBankForAppointment")
     private Set<Appointment> appointments;
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private SystemAdmin systemAdmin;
     @OneToMany(mappedBy = "bloodBank")
     private Set<Staff> staff;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "address-id")
     private Address address;
 }

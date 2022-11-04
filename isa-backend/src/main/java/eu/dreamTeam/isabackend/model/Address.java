@@ -29,6 +29,4 @@ public class Address {
     private double longitude;
     @Column
     private double latitude;
-    @OneToOne(mappedBy = "address")
-    private BloodBank bloodBank;
 }

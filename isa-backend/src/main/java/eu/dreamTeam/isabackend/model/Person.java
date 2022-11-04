@@ -12,6 +12,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
+@Getter
+@Setter
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +32,10 @@ public class Person {
     private String profession;
     @Column
     private String professionInfo;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "account-id")
     private Account account;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 }
