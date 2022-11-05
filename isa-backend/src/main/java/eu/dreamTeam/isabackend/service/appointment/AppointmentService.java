@@ -1,6 +1,8 @@
 package eu.dreamTeam.isabackend.service.appointment;
 
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
+import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
+import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
 import eu.dreamTeam.isabackend.model.Appointment;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
@@ -10,7 +12,9 @@ import eu.dreamTeam.isabackend.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,7 +33,7 @@ public class AppointmentService {
 }
 
     private Appointment CreateAppointmentDTOToEntity(CreateAppointmentDTO createAppointmentDTO) {
-        LocalDateTime localDateTime = TransformStringToLocalDateTime(createAppointmentDTO.getDate());//not implemented
+        LocalDateTime localDateTime = TransformStringToLocalDateTime(createAppointmentDTO.getDate());
         Set<Staff> staffs = new HashSet<>();
         for(Long id : createAppointmentDTO.getStaff()){
             staffs.add(staffRepository.findById(id).stream().findFirst().orElse(null));
@@ -37,7 +41,7 @@ public class AppointmentService {
         return  Appointment.builder()
                 .date(localDateTime)
                 .duration(createAppointmentDTO.getDuration())
-                .status(AppointmentStatus.SCHEDULED)
+                .status(AppointmentStatus.FREE)
                 .description(createAppointmentDTO.getDescription())
                 .price(createAppointmentDTO.getPrice())
                 .bloodBankForAppointment(bloodBankRepository.findById(createAppointmentDTO.getBloodBankForAppointment()).stream().findFirst().orElse(null))
@@ -47,7 +51,39 @@ public class AppointmentService {
 
     private LocalDateTime TransformStringToLocalDateTime(String date) {
         String[] parts = date.split("-");
-        LocalDateTime localDateTime = LocalDateTime.of(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]) -1, Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), 0, 0);
+        LocalDateTime localDateTime = LocalDateTime.of(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]) -1, Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), Integer.valueOf(parts[4]), 0);
         return localDateTime;
+    }
+
+    public List<ScheduleAppointmentDTO> getAllFreeAppointments() {
+        try {
+             var freeAppointments = appointmentRepository.findAllFreeAppointments();
+             List<ScheduleAppointmentDTO> scheduledAppointmentsDTOs = new ArrayList<ScheduleAppointmentDTO>();
+             for(Appointment a : freeAppointments) {
+                 scheduledAppointmentsDTOs.add(FromAppointmentToScheduleAppointmentDto(a));
+             }
+             return scheduledAppointmentsDTOs;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private ScheduleAppointmentDTO FromAppointmentToScheduleAppointmentDto(Appointment freeAppointment) {
+        return ScheduleAppointmentDTO.builder()
+                .id(freeAppointment.getId())
+                .date(freeAppointment.getDate().toString())
+                .duration(freeAppointment.getDuration())
+                .description(freeAppointment.getDescription())
+                .price(freeAppointment.getPrice())
+                .bloodBankForAppointment(null)
+                .staff(null)
+                .build();
+    }
+
+    public ScheduleAppointmentDTO scheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
+        Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
+        appointment.setStatus(AppointmentStatus.SCHEDULED);
+        appointmentRepository.save(appointment);
+        return scheduleAppointmentDTO;
     }
 }

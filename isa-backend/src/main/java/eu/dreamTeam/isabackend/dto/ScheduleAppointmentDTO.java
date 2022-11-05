@@ -8,10 +8,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateAppointmentDTO {
+public class ScheduleAppointmentDTO {
+    private Long id;
     private String date;
     private int duration;
-    private AppointmentStatus status;
     private String description;
     private double price;
     private Long bloodBankForAppointment;

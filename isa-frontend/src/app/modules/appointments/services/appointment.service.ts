@@ -14,4 +14,15 @@ export class AppointmentService {
       appointmentDto
     );
   }
+  scheduleAppointment(appointmentDto: any): any {
+    return this.http.put<any>(
+      `${environment.bloodBank}/api/appointment/scheduleAppointment`,
+      appointmentDto
+    );
+  }
+  getAllFreeAppointments(): any {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/freeAppointments`
+    );
+  }
 }

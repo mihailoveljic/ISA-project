@@ -1,20 +1,11 @@
 <div class="create-appointment-div">
-    <span class="mat-display-1">Create new appointment</span><br>
-    <form class="api-key-form" [formGroup]="formGroup">
-        <mat-form-field appearance="fill">
-            <input matInput type="date" name="dateOfAppointment" formControlName="dateOfAppointment">
-        </mat-form-field><br>
-        <mat-form-field appearance="outline" color="primary">
-            <mat-label>Enter time:</mat-label>
-            <input matInput type="number" name="timeOfAppointment" formControlName="timeOfAppointment">
-        </mat-form-field><br>
+    <span class="mat-display-1">Create new appointment</span>
+    <form class="create-appointment-form" [formGroup]="formGroup">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Enter duration:</mat-label>
             <input matInput type="number" name="duration" formControlName="duration">
             <mat-hint>in minutes</mat-hint>
         </mat-form-field><br>
-
-
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Description:</mat-label>
             <input matInput type="text" name="description" formControlName="description">
@@ -23,6 +14,12 @@
             <mat-label>Price:</mat-label>
             <input matInput type="number" name="price" formControlName="price">
         </mat-form-field><br>
-        <br><button mat-raised-button color="primary" (click)="createAppointment()" [disabled]="!formGroup.valid">Create</button>
-    </form><br>
+        <mat-form-field appearance="fill">
+            <input matInput type="date" name="dateOfAppointment" formControlName="dateOfAppointment">
+        </mat-form-field><br>
+    </form>
+        <div class="time-picker-div">
+            <ngx-timepicker-field [(ngModel)]="timeOfAppointment"></ngx-timepicker-field><br>
+        </div>
+        <button mat-raised-button color="primary" (click)="createAppointment()" [disabled]="timeOfAppointment=='' || !formGroup.valid">Create</button>
 </div>
