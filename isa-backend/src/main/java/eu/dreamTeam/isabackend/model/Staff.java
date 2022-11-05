@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,9 +15,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Staff extends Person{
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "appointment_id")
-    private Appointment appointment;
+    private List<Appointment> appointments;
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;

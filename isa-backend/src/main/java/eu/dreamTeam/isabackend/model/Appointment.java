@@ -2,10 +2,7 @@ package eu.dreamTeam.isabackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +32,7 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBankForAppointment;
-    @OneToMany(mappedBy = "appointment")
+    @ManyToMany()
+    @JoinColumn(name = "staff_id")
     private Set<Staff> staff;
 }

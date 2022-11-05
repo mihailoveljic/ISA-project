@@ -1,1 +1,28 @@
-<full-calendar [options]='calendarOptions'></full-calendar>
+<div class="create-appointment-div">
+    <span class="mat-display-1">Create new appointment</span><br>
+    <form class="api-key-form" [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+            <input matInput type="date" name="dateOfAppointment" formControlName="dateOfAppointment">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Enter time:</mat-label>
+            <input matInput type="number" name="timeOfAppointment" formControlName="timeOfAppointment">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Enter duration:</mat-label>
+            <input matInput type="number" name="duration" formControlName="duration">
+            <mat-hint>in minutes</mat-hint>
+        </mat-form-field><br>
+
+
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Description:</mat-label>
+            <input matInput type="text" name="description" formControlName="description">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Price:</mat-label>
+            <input matInput type="number" name="price" formControlName="price">
+        </mat-form-field><br>
+        <br><button mat-raised-button color="primary" (click)="createAppointment()" [disabled]="!formGroup.valid">Create</button>
+    </form><br>
+</div>
