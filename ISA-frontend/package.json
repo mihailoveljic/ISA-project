@@ -1,5 +1,5 @@
 {
-  "name": "isa-frontend",
+  "name": "angular-isa-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,22 +11,23 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
-    "@angular/cdk": "^14.2.5",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
     "@angular/forms": "^14.2.0",
-    "@angular/material": "^14.2.5",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@fullcalendar/core": "^6.0.0-beta.1",
+    "@fullcalendar/daygrid": "^6.0.0-beta.1",
+    "@fullcalendar/web-component": "^6.0.0-beta.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.6",
-    "@angular/cli": "~14.2.6",
+    "@angular-devkit/build-angular": "^14.2.8",
+    "@angular/cli": "~14.2.8",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
