@@ -6,7 +6,6 @@
     margin-top: 10%;
 }
 .time-picker-div {
-    text-align: center;
-    margin-left: 40%;
-    margin-right: 50%;
+    width: 220px;
+    margin: auto;
 }

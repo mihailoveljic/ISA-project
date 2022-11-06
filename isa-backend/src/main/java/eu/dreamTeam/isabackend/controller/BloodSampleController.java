@@ -1,6 +1,5 @@
 package eu.dreamTeam.isabackend.controller;
-import eu.dreamTeam.isabackend.handler.InvalidApiKeyException;
-import eu.dreamTeam.isabackend.model.BloodSample;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
 import eu.dreamTeam.isabackend.service.BloodSampleService;
 import org.springframework.beans.factory.annotation.Autowired;

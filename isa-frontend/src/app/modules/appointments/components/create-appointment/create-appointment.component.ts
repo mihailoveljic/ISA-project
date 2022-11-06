@@ -25,6 +25,9 @@ export class CreateAppointmentComponent implements OnInit {
       duration: new FormControl(this.duration, [Validators.required]),
       description: new FormControl(this.description, [Validators.required]),
       price: new FormControl(this.price, [Validators.required]),
+      timeOfAppointment: new FormControl(this.timeOfAppointment, [
+        Validators.required,
+      ]),
     });
     console.log(this.timeOfAppointment);
   }
@@ -40,6 +43,7 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   private bindPropertiesFromFormControl() {
+    this.timeOfAppointment = this.formGroup.value.timeOfAppointment;
     let parts1 = this.timeOfAppointment.split(' ');
     let parts2 = parts1[0].split(':');
     let hours = parts2[0];
