@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppointmentService } from '../../services/appointment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-appointment',
@@ -15,7 +16,10 @@ export class CreateAppointmentComponent implements OnInit {
   description: any;
   price: any;
   appointmentDto: any;
-  constructor(private appointmentService: AppointmentService) {}
+  constructor(
+      private appointmentService: AppointmentService,
+      private toastr : ToastrService
+      ) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -25,25 +29,35 @@ export class CreateAppointmentComponent implements OnInit {
       duration: new FormControl(this.duration, [Validators.required]),
       description: new FormControl(this.description, [Validators.required]),
       price: new FormControl(this.price, [Validators.required]),
-      timeOfAppointment: new FormControl(this.timeOfAppointment, [
-        Validators.required,
-      ]),
     });
     console.log(this.timeOfAppointment);
   }
 
   createAppointment() {
-    //KADA SE NE REFRESHUJE PAGE DATUM I VREME SE POREMETE PRI SLANJU, RESITI BAG
     this.bindPropertiesFromFormControl();
     this.appointmentService
       .createAppointment(this.appointmentDto)
-      .subscribe((result: any) => {
-        console.log(result);
-      });
+      .subscribe({
+        next : (result:any) => {
+          this.showSuccess();
+          this.timeOfAppointment="";
+          this.dateOfAppointment="";
+        },
+        error: (e:any) => {
+          if(!e.error.message) {
+            this.showError("Something went wrong on the server side, please try again later", "Blood bank application")
+            this.timeOfAppointment="";
+            this.dateOfAppointment="";
+            return;
+          }
+          this.showError(e.error.message, e.error.title)
+          this.timeOfAppointment="";
+          this.dateOfAppointment="";
+        }
+      })
   }
 
   private bindPropertiesFromFormControl() {
-    this.timeOfAppointment = this.formGroup.value.timeOfAppointment;
     let parts1 = this.timeOfAppointment.split(' ');
     let parts2 = parts1[0].split(':');
     let hours = parts2[0];
@@ -66,5 +80,14 @@ export class CreateAppointmentComponent implements OnInit {
       bloodBankForAppointment: 1,
       staff: [1],
     };
+  }
+  showSuccess() {
+    this.toastr.success(
+      'Successfully create appointment!',
+      'Blood bank application'
+    );
+  }
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
   }
 }

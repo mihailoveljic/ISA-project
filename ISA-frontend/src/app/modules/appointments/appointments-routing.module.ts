@@ -9,8 +9,10 @@ import { ScheduleAppointmentComponent } from './components/schedule-appointment/
 
 const routes: Routes = [
   { path: '', component: AppointmentsComponent },
-  { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent, canActivate: [HasStaffRoleGuard]},
-  { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent, canActivate: [HasUserRoleGuard]},
+  // { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent, canActivate: [HasStaffRoleGuard]},
+  // { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent, canActivate: [HasUserRoleGuard]},
+  { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent},
+  { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent},
 ];
 
 @NgModule({

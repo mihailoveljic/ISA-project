@@ -2,7 +2,7 @@ package eu.dreamTeam.isabackend.service.appointment;
 
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
-import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTOException;
 import eu.dreamTeam.isabackend.model.Appointment;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
@@ -27,9 +27,13 @@ public class AppointmentService {
     private StaffRepository staffRepository;
 
     public CreateAppointmentDTO createAppointment(CreateAppointmentDTO createAppointmentDTO) {
-        Appointment appointment = CreateAppointmentDTOToEntity(createAppointmentDTO);
-        appointmentRepository.save(appointment);
-        return  createAppointmentDTO;
+        try {
+            Appointment appointment = CreateAppointmentDTOToEntity(createAppointmentDTO);
+            appointmentRepository.save(appointment);
+            return  createAppointmentDTO;
+        }catch (Exception ex){
+            throw new InvalidCreateAppointmentDTOException();
+        }
 }
 
     private Appointment CreateAppointmentDTOToEntity(CreateAppointmentDTO createAppointmentDTO) {
@@ -38,6 +42,7 @@ public class AppointmentService {
         for(Long id : createAppointmentDTO.getStaff()){
             staffs.add(staffRepository.findById(id).stream().findFirst().orElse(null));
         }
+        if(createAppointmentDTO.getPrice() < 0) throw new InvalidCreateAppointmentDTOException();
         return  Appointment.builder()
                 .date(localDateTime)
                 .duration(createAppointmentDTO.getDuration())
@@ -51,7 +56,9 @@ public class AppointmentService {
 
     private LocalDateTime TransformStringToLocalDateTime(String date) {
         String[] parts = date.split("-");
-        LocalDateTime localDateTime = LocalDateTime.of(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]) -1, Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), Integer.valueOf(parts[4]), 0);
+        LocalDateTime localDateTime = LocalDateTime.of(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), Integer.valueOf(parts[4]), 0);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if(currentDateTime.isAfter(localDateTime)) throw new InvalidCreateAppointmentDTOException();
         return localDateTime;
     }
 

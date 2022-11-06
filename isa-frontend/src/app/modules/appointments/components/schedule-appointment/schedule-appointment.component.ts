@@ -54,15 +54,15 @@ export class ScheduleAppointmentComponent implements OnInit {
         this.showSuccess();
       },
       error: (e: any) => {
-        this.showError(e.error.Message, e.error.Title);
+        this.showError(e.error.message, e.error.title);
         console.log(e);
       },
     });
   }
   showSuccess() {
     this.toastr.success(
-      'Successfully permission granted for your blood bank!',
-      'Clinic application'
+      'Successfully scheduled appointment!',
+      'Blood bank application'
     );
   }
   showError(message: string, title: string) {

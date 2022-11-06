@@ -1,7 +1,7 @@
 package eu.dreamTeam.isabackend.handler;
 
 import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
-import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTO;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -20,10 +20,10 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         return errorResponse;
     }
 
-    @ExceptionHandler(InvalidCreateAppointmentDTO.class)
+    @ExceptionHandler(InvalidCreateAppointmentDTOException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResponse handleInvalidCreateAppointmentDTOException(InvalidCreateAppointmentDTO ex) {
+    public ErrorResponse handleInvalidCreateAppointmentDTOException(InvalidCreateAppointmentDTOException ex) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage("Some of input fields are not valid!");
         return errorResponse;
