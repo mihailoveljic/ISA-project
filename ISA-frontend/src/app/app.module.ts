@@ -1,16 +1,18 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppointmentsModule } from './modules/appointments/appointments.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/angular-material/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { HomeComponent } from './home/home.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +23,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     FormsModule,
     HttpClientModule,
     NgxMaterialTimepickerModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

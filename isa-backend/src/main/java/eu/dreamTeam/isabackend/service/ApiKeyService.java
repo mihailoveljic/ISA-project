@@ -1,6 +1,6 @@
 package eu.dreamTeam.isabackend.service;
 
-import eu.dreamTeam.isabackend.handler.InvalidApiKeyException;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.repository.ApiKeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
