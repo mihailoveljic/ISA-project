@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -19,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppointmentsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatInputModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

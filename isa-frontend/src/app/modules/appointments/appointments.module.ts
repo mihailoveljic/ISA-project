@@ -6,8 +6,9 @@ import { MaterialModule } from '../angular-material/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ScheduleAppointmentComponent } from './components/schedule-appointment/schedule-appointment.component';
-import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [CreateAppointmentComponent, ScheduleAppointmentComponent],
@@ -16,9 +17,9 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     MaterialModule,
     ReactiveFormsModule,
+    MatInputModule,
     BrowserAnimationsModule,
     FormsModule,
-    MaterialModule,
     NgxMaterialTimepickerModule,
     ToastrModule.forRoot({
       timeOut: 3000,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
-import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-schedule-appointment',
@@ -58,14 +58,11 @@ export class ScheduleAppointmentComponent implements OnInit {
         console.log(e);
       },
     });
-    // .subscribe((result: any) => {
-    //   console.log(result);
-    // });
   }
   showSuccess() {
     this.toastr.success(
-      'Successfully scheduled appointment!',
-      'Blood bank application'
+      'Successfully permission granted for your blood bank!',
+      'Clinic application'
     );
   }
   showError(message: string, title: string) {

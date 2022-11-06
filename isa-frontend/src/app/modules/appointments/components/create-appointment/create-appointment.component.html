@@ -20,6 +20,6 @@
     </form>
         <div class="time-picker-div">
             <ngx-timepicker-field [(ngModel)]="timeOfAppointment"></ngx-timepicker-field><br>
-        </div>
+        </div><br>
         <button mat-raised-button color="primary" (click)="createAppointment()" [disabled]="timeOfAppointment=='' || !formGroup.valid">Create</button>
 </div>
