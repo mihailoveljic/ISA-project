@@ -13,7 +13,6 @@ import { ScheduleAppointmentComponent } from './components/schedule-appointment/
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule,
     NgxMaterialTimepickerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

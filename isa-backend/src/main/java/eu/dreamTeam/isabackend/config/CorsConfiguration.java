@@ -1,4 +1,4 @@
-package eu.dreamTeam.isabackend.corsConfiguration;
+package eu.dreamTeam.isabackend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

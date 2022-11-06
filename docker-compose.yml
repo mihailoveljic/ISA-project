@@ -1,0 +1,61 @@
+version: "3.8"
+services:
+  #----------------------------------------------------------------
+  blood_bank_db_isa:
+    image: postgres
+    container_name: blood_bank_db_isa
+    restart: always
+    expose:
+      - "54321"
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: blood_bank
+      POSTGRES_PASSWORD: user
+      POSTGRES_HOST: localhost
+    volumes:
+      - blood_bank_data_isa:/var/lib/postgresql/data
+  #----------------------------------------------------------------
+  pgadmin_isa:
+    image: dpage/pgadmin4
+    container_name: pgadmin_isa
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@email.com
+      PGADMIN_DEFAULT_PASSWORD: user
+    volumes:
+      - pgadmin_data_isa:/var/lib/pgadmin
+  #----------------------------------------------------------------
+  keycloak_db_isa:
+    image: postgres
+    container_name: keycloak_db_isa
+    volumes:
+      - keycloak_isa_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+  keycloak_isa:
+    image: quay.io/keycloak/keycloak:legacy
+    container_name: keycloak_isa
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak_db_isa
+      DB_DATABASE: keycloak
+      DB_USER: user
+      DB_SCHEMA: public
+      DB_PASSWORD: user
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - 28080:8080
+    depends_on:
+      - keycloak_db_isa
+#----------------------------------------------------------------
+volumes:
+  pgadmin_data_isa:
+  blood_bank_data_isa:
+  keycloak_isa_data:

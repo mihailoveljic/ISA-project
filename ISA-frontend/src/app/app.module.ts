@@ -8,19 +8,24 @@ import { MaterialModule } from './modules/angular-material/angular-material.modu
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { AuthModule } from './auth/auth.module';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { NavbarModule } from './modules/navbar/navbar.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    OAuthModule.forRoot(),
+    AuthModule,
+    HttpClientModule,
     AppRoutingModule,
     AppointmentsModule,
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-    NgxMaterialTimepickerModule,
+    NgxMaterialTimepickerModule, 
   ],
   providers: [],
   bootstrap: [AppComponent],
