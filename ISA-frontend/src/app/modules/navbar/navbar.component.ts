@@ -10,15 +10,13 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() user?: User;
+  user?: User;
   
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
   }
 
-}
-function Import() {
-  throw new Error('Function not implemented.');
 }
 

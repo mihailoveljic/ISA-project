@@ -10,21 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AuthModule } from './auth/auth.module';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { NavbarModule } from './modules/navbar/navbar.module';
-import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
+import { NavbarModule } from './modules/navbar/navbar.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     OAuthModule.forRoot(),
     AuthModule,
+    NavbarModule,
     HttpClientModule,
     AppRoutingModule,
     AppointmentsModule,
-    BrowserAnimationsModule,
     MaterialModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -39,6 +39,5 @@ import { MatInputModule } from '@angular/material/input';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

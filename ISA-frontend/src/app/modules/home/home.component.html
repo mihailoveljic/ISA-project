@@ -1,4 +1,5 @@
-<app-navbar [user]="user"></app-navbar>
+<app-navbar></app-navbar>
+
 <app-guest-home *ngIf="!user"></app-guest-home>
 <app-user-home *ngIf="user && user.roles.includes('user')"></app-user-home>
 <app-staff-home *ngIf="user && user.roles.includes('staff')"></app-staff-home>

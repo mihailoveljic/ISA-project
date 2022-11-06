@@ -5,6 +5,8 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
 import { GuestNavbarComponent } from './components/guest-navbar/guest-navbar.component';
 import { StaffNavbarComponent } from './components/staff-navbar/staff-navbar.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { MaterialModule } from '../angular-material/angular-material.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -17,7 +19,9 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     AdminNavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    MatToolbarModule
   ],
   exports: [
     NavbarComponent

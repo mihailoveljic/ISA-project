@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Route } from 'src/app/utils/routes';
 
 @Component({
   selector: 'app-staff-navbar',
@@ -9,12 +11,18 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class StaffNavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  navigateToCreateAppointment() {
+    this.router.navigate([Route.CREATE_APPOINTMENT]);
   }
 }
