@@ -1,4 +1,4 @@
-package eu.dreamTeam.isabackend.handler.exceptions;
+package eu.dreamTeam.isabackend.handler;
 
 
 import org.springframework.http.HttpStatus;
