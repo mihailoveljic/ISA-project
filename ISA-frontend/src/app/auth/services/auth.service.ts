@@ -55,7 +55,7 @@ export class AuthService {
    * to a configured logout path (Configured above in authConfig#postLogoutRedirectUri)
    */
   public logout(): void {
-      this.oauthService.revokeTokenAndLogout();
+      this.oauthService.logOut();
   }
 
   /**
