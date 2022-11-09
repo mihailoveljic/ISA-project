@@ -3,15 +3,11 @@ package eu.dreamTeam.isabackend.controller.appointment;
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
-import eu.dreamTeam.isabackend.dto.UpdateBloodBankDTO;
-import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.service.appointment.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/appointment")

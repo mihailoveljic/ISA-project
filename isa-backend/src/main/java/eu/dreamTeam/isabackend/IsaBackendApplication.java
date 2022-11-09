@@ -1,6 +1,9 @@
 package eu.dreamTeam.isabackend;
 
+import eu.dreamTeam.isabackend.model.Account;
+import eu.dreamTeam.isabackend.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +32,6 @@ public class IsaBackendApplication {
 }
 @Component
 class DemoCommandLineRunner implements CommandLineRunner {
-
 	@Override
 	public void run(String... args) throws Exception {
 	}

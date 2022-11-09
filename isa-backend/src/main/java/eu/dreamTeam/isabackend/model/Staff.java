@@ -15,8 +15,12 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Staff extends Person{
-    @ManyToMany
-    @JoinColumn(name = "appointment_id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "staff_appointments",
+            joinColumns = @JoinColumn(name = "staff_id"),
+            inverseJoinColumns = @JoinColumn(name = "appointment_id")
+    )
     private List<Appointment> appointments;
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")

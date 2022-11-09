@@ -32,7 +32,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBankForAppointment;
-    @ManyToMany()
-    @JoinColumn(name = "staff_id")
+    @ManyToMany(mappedBy = "appointments")
     private Set<Staff> staff;
 }

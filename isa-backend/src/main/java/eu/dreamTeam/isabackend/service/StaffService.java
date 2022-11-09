@@ -1,7 +1,7 @@
 package eu.dreamTeam.isabackend.service;
 
-import eu.dreamTeam.isabackend.dto.UpdateStaffDTO;
-import eu.dreamTeam.isabackend.model.Address;
+
+import eu.dreamTeam.isabackend.dto.StaffDTO;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.enums.Gender;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
@@ -15,14 +15,12 @@ public class StaffService {
         this.staffRepository = staffRepository;
     }
 
-    public Staff update(UpdateStaffDTO staff, String email) {
-        Staff staffToUpdate = staffRepository.getStaffByAccount_Email(email);
-        Address address = new Address();
-        address.setNumber(staff.getNumber());
-        address.setStreet(staff.getStreet());
-        address.setCountry(staff.getCountry());
-        address.setCity(staff.getCity());
-        staffToUpdate.setAddress(address);
+    public Staff update(StaffDTO staff) {
+        Staff staffToUpdate = staffRepository.getStaffById(staff.getId());
+        staffToUpdate.getAddress().setNumber(staff.getNumber());
+        staffToUpdate.getAddress().setStreet(staff.getStreet());
+        staffToUpdate.getAddress().setCountry(staff.getCountry());
+        staffToUpdate.getAddress().setCity(staff.getCity());
         staffToUpdate.setName(staff.getName());
         staffToUpdate.setSurname(staff.getSurname());
         staffToUpdate.setGender(Gender.valueOf(staff.getGender()));
@@ -30,5 +28,9 @@ public class StaffService {
         staffToUpdate.setProfessionInfo(staff.getProfessionInfo());
         staffToUpdate.setPhoneNumber(staff.getPhoneNumber());
         return staffRepository.save(staffToUpdate);
+    }
+
+    public Staff getByEmail(String email) {
+        return staffRepository.getStaffByEmail(email);
     }
 }

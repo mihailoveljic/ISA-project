@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.service;
 
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidPasswordException;
 import eu.dreamTeam.isabackend.model.Account;
 import eu.dreamTeam.isabackend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,21 @@ public class AccountService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean validate(String email, String password) {
+    public boolean check(String email) {
         Account account = accountRepository.getAccountByEmail(email);
         if(account != null)
-            return passwordEncoder.matches(password, account.getPassword());
+            return true;
         return false;
     }
-
-    public Account updatePassword(String email, String password) {
+    public Account validate(String email, String password) {
         Account account = accountRepository.getAccountByEmail(email);
-        account.setPassword(passwordEncoder.encode(password));
+        if(account != null && !passwordEncoder.matches(password, account.getPassword()))
+            throw new InvalidPasswordException();
+        return account;
+    }
+
+    public Account updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword));
         return accountRepository.save(account);
     }
 }

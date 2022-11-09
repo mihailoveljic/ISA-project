@@ -19,7 +19,7 @@ public class Account {
     @Column(unique = true)
     @Pattern(regexp = "^(.+)@(\\S+)$")
     private String email;
-    @Column(unique = true)
+    @Column
     private String password;
     @Column
     private boolean requiredPasswordChange;

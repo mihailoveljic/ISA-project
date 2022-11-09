@@ -33,7 +33,7 @@ public class Person {
     @Column
     private String professionInfo;
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "account-id")
+    @JoinColumn(name = "account_id")
     private Account account;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")

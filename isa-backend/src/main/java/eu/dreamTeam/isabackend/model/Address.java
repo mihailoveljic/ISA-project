@@ -25,8 +25,8 @@ public class Address {
     private String city;
     @Column
     private String country;
-    @Column
-    private double longitude;
-    @Column
-    private double latitude;
+//    @Column
+//    private double longitude;
+//    @Column
+//    private double latitude;
 }
