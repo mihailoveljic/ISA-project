@@ -1,8 +1,8 @@
 package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.StaffDTO;
-import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
-import eu.dreamTeam.isabackend.handler.exceptions.StaffNotExistedException;
+import eu.dreamTeam.isabackend.dto.UpdatePasswordDTO;
+import eu.dreamTeam.isabackend.handler.exceptions.*;
 import eu.dreamTeam.isabackend.model.Account;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.service.AccountService;
@@ -51,34 +51,29 @@ public class StaffController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateInfo(
-            @RequestBody @Valid StaffDTO updateStaffDTO,
-            @RequestParam String email) {
-        if(!accountService.check(email))
-            return new ResponseEntity<>("Account doesn't exist.", HttpStatus.NOT_FOUND);
+    public ResponseEntity<StaffDTO> updateInfo(
+            @RequestBody @Valid StaffDTO updateStaffDTO) {
         Staff staffUpdated = staffService.update(updateStaffDTO);
         if (staffUpdated == null)
-            return new ResponseEntity<>("Failed to update entity.", HttpStatus.CONFLICT);
-        return new ResponseEntity<>("Updated entity successfully.", HttpStatus.OK);
+            throw new FailedUpdateException();
+        return new ResponseEntity<>(updateStaffDTO, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/password")
-    public ResponseEntity<String> updatePassword(
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String newPassword) {
-        Account currentAccount = accountService.validate(email, password);
+    @PutMapping("/password")
+    public ResponseEntity<UpdatePasswordDTO> updatePassword(
+            @RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {
+        Account currentAccount = accountService.validate(updatePasswordDTO.getEmail(), updatePasswordDTO.getPassword());
         if(currentAccount == null)
-            return new ResponseEntity<>("Account doesn't exist.", HttpStatus.NOT_FOUND);
-        if(newPassword.length() < 8)
-            return new ResponseEntity<>("New password is too short.", HttpStatus.BAD_REQUEST);
-        if (!newPassword.matches(numRegex))
-            return new ResponseEntity<>("New password doesn't contain number.", HttpStatus.BAD_REQUEST);
-        if(!newPassword.matches(bigAlphaRegex) || !newPassword.matches(smallAlphaRegex))
-            return new ResponseEntity<>("New password doesn't contain letter.", HttpStatus.BAD_REQUEST);
-        Account account = accountService.updatePassword(currentAccount, newPassword);
+            throw new InvalidPasswordException();
+        if(updatePasswordDTO.getNewPassword().length() < 8)
+            throw new TooShortPasswordException();
+        if (!updatePasswordDTO.getNewPassword().matches(numRegex))
+            throw new PasswordDoesntContainNumberException();
+        if(!updatePasswordDTO.getNewPassword().matches(bigAlphaRegex) || !updatePasswordDTO.getNewPassword().matches(smallAlphaRegex))
+            throw new PasswordDoesntContainLetterException();
+        Account account = accountService.updatePassword(currentAccount, updatePasswordDTO.getNewPassword());
         if (account == null)
-            return new ResponseEntity<>("Current password is incorrect.", HttpStatus.CONFLICT);
-        return new ResponseEntity<>("Updated account successfully.", HttpStatus.OK);
+            throw new FailedUpdateException();
+        return new ResponseEntity<>(updatePasswordDTO, HttpStatus.OK);
     }
 }

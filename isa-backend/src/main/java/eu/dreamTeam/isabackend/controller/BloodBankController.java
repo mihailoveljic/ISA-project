@@ -4,6 +4,8 @@ import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.dto.StaffDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.BankNotExistedException;
+import eu.dreamTeam.isabackend.handler.exceptions.FailedUpdateException;
+import eu.dreamTeam.isabackend.handler.exceptions.WrongTimeRangeException;
 import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.service.AccountService;
@@ -52,16 +54,13 @@ public class BloodBankController {
         return new ResponseEntity<>(bloodBankDTO, HttpStatus.OK);
     }
     @PutMapping
-    public ResponseEntity<String> updateInfo(
-            @RequestBody @Valid BloodBankDTO updateBloodBankDTO,
-            @RequestParam String email) {
-        if(!accountService.check(email))
-            return new ResponseEntity<>("Account doesn't exist.", HttpStatus.NOT_FOUND);
+    public ResponseEntity<BloodBankDTO> updateInfo(
+            @RequestBody @Valid BloodBankDTO updateBloodBankDTO) {
         if(updateBloodBankDTO.getEndTime().isBefore(updateBloodBankDTO.getStartTime()))
-            return new ResponseEntity<>("Entered end time is before start time.", HttpStatus.BAD_REQUEST);
+            throw new WrongTimeRangeException();
         BloodBank bloodBank = bloodBankService.update(updateBloodBankDTO);
         if (bloodBank == null)
-            return new ResponseEntity<>("Failed to update entity.", HttpStatus.CONFLICT);
-        return new ResponseEntity<>("Updated entity successfully.", HttpStatus.OK);
+            throw new FailedUpdateException();
+        return new ResponseEntity<>(updateBloodBankDTO, HttpStatus.OK);
     }
 }

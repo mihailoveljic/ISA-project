@@ -2,6 +2,7 @@ package eu.dreamTeam.isabackend.service;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.model.BloodBank;
+import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
@@ -39,6 +40,7 @@ public class BloodBankService {
     }
 
     public BloodBank getByStaffEmail(String email) {
-        return bloodBankRepository.getBloodBankByStaffEmail(email);
+        Staff staff = staffRepository.getStaffByAccount_Email(email);
+        return bloodBankRepository.getBloodBankById(staff.getBloodBank().getId());
     }
 }

@@ -4,10 +4,10 @@ package eu.dreamTeam.isabackend.handler.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class AccountNotExistedException extends RuntimeException {
+@ResponseStatus(HttpStatus.CONFLICT)
+public class FailedUpdateException extends RuntimeException {
 
-    public AccountNotExistedException() {
+    public FailedUpdateException() {
         super();
     }
 }

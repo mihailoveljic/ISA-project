@@ -1,0 +1,16 @@
+.center-info-div {
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+}
+.center-info-form {
+    margin-top: 1%;
+}
+.button {
+    margin: 3%;
+}
+.column {
+    float: left;
+    width: 50%;
+  }

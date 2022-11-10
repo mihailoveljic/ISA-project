@@ -38,7 +38,7 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AccountNotExistedException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleAccountNotExistedException(AccountNotExistedException ex) {
         ErrorResponse errorResponse = new ErrorResponse();
@@ -62,13 +62,45 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         errorResponse.setMessage("Blood bank for staff with given email doesn't exist!");
         return errorResponse;
     }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(FailedUpdateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody
-    public ErrorResponse handleException(Exception ex) {
+    public ErrorResponse handleFailedUpdateException(FailedUpdateException ex) {
         ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage("Server encountered internal error.");
+        errorResponse.setMessage("Failed to update!");
+        return errorResponse;
+    }
+
+    @ExceptionHandler(WrongTimeRangeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleWrongTimeRangeException(WrongTimeRangeException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Entered end of working hours is before start time.");
+        return errorResponse;
+    }
+    @ExceptionHandler(TooShortPasswordException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleTooShortPasswordException(TooShortPasswordException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("New password is too short.");
+        return errorResponse;
+    }
+    @ExceptionHandler(PasswordDoesntContainLetterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handlePasswordDoesntContainLetterException(PasswordDoesntContainLetterException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("New password doesn't contain letter.");
+        return errorResponse;
+    }
+    @ExceptionHandler(PasswordDoesntContainNumberException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handlePasswordDoesntContainNumberException(PasswordDoesntContainNumberException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("New password doesn't contain number.");
         return errorResponse;
     }
 }

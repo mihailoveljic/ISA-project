@@ -11,4 +11,5 @@ public interface StaffRepository  extends JpaRepository<Staff, Long> {
             "INNER JOIN public.address ON address.id = staff.address_id " +
             "WHERE account.email LIKE ?1", nativeQuery = true)
     Staff getStaffByEmail(String email);
+    Staff getStaffByAccount_Email(String email);
 }

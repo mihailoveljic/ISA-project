@@ -13,9 +13,13 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
 import { NavbarModule } from './modules/navbar/navbar.module';
+import { StaffInfoComponent } from './modules/staff-info/component/staff-info/staff-info.component';
+import { MatSelectModule } from '@angular/material/select';
+import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -26,7 +30,9 @@ import { NavbarModule } from './modules/navbar/navbar.module';
     AppRoutingModule,
     AppointmentsModule,
     MaterialModule,
+    MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
     NgxMaterialTimepickerModule, 

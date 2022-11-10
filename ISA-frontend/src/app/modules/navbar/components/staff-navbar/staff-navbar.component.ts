@@ -25,4 +25,10 @@ export class StaffNavbarComponent implements OnInit {
   navigateToCreateAppointment() {
     this.router.navigate([Route.CREATE_APPOINTMENT]);
   }
+  navigateToStaffInfo() {
+    this.router.navigate(['staff-info']);
+  }
+  navigateToCenterInfo() {
+    this.router.navigate(['blood-bank-center-info']);
+  }
 }

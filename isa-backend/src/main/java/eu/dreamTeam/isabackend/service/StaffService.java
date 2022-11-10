@@ -23,7 +23,6 @@ public class StaffService {
         staffToUpdate.getAddress().setCity(staff.getCity());
         staffToUpdate.setName(staff.getName());
         staffToUpdate.setSurname(staff.getSurname());
-        staffToUpdate.setGender(Gender.valueOf(staff.getGender()));
         staffToUpdate.setProfession(staff.getProfession());
         staffToUpdate.setProfessionInfo(staff.getProfessionInfo());
         staffToUpdate.setPhoneNumber(staff.getPhoneNumber());

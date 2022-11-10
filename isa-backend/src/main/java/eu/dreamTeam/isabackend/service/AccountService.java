@@ -23,9 +23,9 @@ public class AccountService {
     }
     public Account validate(String email, String password) {
         Account account = accountRepository.getAccountByEmail(email);
-        if(account != null && !passwordEncoder.matches(password, account.getPassword()))
-            throw new InvalidPasswordException();
-        return account;
+        if(account != null && passwordEncoder.matches(password, account.getPassword()))
+            return account;
+        return null;
     }
 
     public Account updatePassword(Account account, String newPassword) {
