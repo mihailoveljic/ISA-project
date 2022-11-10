@@ -17,6 +17,8 @@ import { StaffInfoComponent } from './modules/staff-info/component/staff-info/st
 import { MatSelectModule } from '@angular/material/select';
 import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {CentersModule} from './modules/centers/centers.module';
+
 
 @NgModule({
   declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent],
@@ -42,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       timeOut: 3000,
       positionClass: 'toast-top-right',
     }),
+    CentersModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

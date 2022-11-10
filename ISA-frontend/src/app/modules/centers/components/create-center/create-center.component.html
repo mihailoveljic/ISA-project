@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+
+<div class="create-center-div">
+    <span class="mat-display-1">Create new blood center</span>
+    <form class="create-center-form">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Center name:</mat-label>
+            <input matInput type="text" name="name" formControlName="name">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Center description:</mat-label>
+            <input matInput type="text" name="description" formControlName="description">
+        </mat-form-field><br>
+        
+
+    </form>
+        <button mat-raised-button color="primary" (click)="createCenter()">Create</button>
+</div>

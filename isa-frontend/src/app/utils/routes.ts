@@ -4,5 +4,6 @@ export enum Route {
   APPOINTMENTS = 'appointments',
   HOME = '',
   CALLBACK = 'callback',
+  CREATE_CENTER = 'createc',
 
 }
