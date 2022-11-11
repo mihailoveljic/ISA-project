@@ -1,8 +1,7 @@
 package eu.dreamTeam.isabackend.service;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
-import eu.dreamTeam.isabackend.model.BloodBank;
-import eu.dreamTeam.isabackend.model.Staff;
+import eu.dreamTeam.isabackend.model.*;
 import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
@@ -39,8 +38,30 @@ public class BloodBankService {
         return bloodBankRepository.save(bloodBankToUpdate);
     }
 
+
     public BloodBank getByStaffEmail(String email) {
         Staff staff = staffRepository.getStaffByAccount_Email(email);
         return bloodBankRepository.getBloodBankById(staff.getBloodBank().getId());
     }
+    public BloodBank create(BloodBankDTO bloodBank) {
+        BloodBank newBloodBank = new BloodBank();
+        Address address = new Address();
+        address.setStreet(bloodBank.getStreet());
+        address.setNumber(bloodBank.getNumber());
+        address.setCountry(bloodBank.getCountry());
+        address.setCity(bloodBank.getCity());
+        address = addressRepository.save(address);
+        newBloodBank.setAddress(address);
+        newBloodBank.setName(bloodBank.getName());
+        newBloodBank.setDescription(bloodBank.getDescription());
+        newBloodBank.setAverageRating(5);
+        WorkTime workTime = new WorkTime();
+        workTime.setStartTime(bloodBank.getStartTime());
+        workTime.setEndTime(bloodBank.getEndTime());
+        workTime = workTimeRepository.save(workTime);
+        newBloodBank.setWorkTime(workTime);
+
+        return bloodBankRepository.save(newBloodBank);
+    }
+
 }

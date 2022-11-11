@@ -25,4 +25,8 @@ export class BloodBankCenterInfoService {
   public update(centerInfo: CenterInfo): Observable<CenterInfo> {
     return this.http.put<CenterInfo>(this.apiUrl, centerInfo, httpOptions);
   }
+
+  public create(centerInfo: CenterInfo): Observable<CenterInfo> {
+    return this.http.post<CenterInfo>(this.apiUrl, centerInfo, httpOptions);
+  }
 }
