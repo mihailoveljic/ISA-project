@@ -1,0 +1,13 @@
+<mat-card-header class="header">
+    <mat-card-title>{{ news.title }}</mat-card-title>
+    <mat-card-subtitle>{{ news.date | date:'dd/MM/2019'}}</mat-card-subtitle>
+</mat-card-header>
+
+<mat-card-content >
+    <p>
+    {{ news.text}}
+    </p>
+</mat-card-content>
+<mat-card-actions class="commands">
+    <button (click)="closeDialog()" color="secondary" class="button" mat-raised-button>Close</button>
+</mat-card-actions>

@@ -11,6 +11,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatToolbarModule, } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -27,6 +29,7 @@ import {MatToolbarModule, } from '@angular/material/toolbar';
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     MatToolbarModule,
+    MatDialogModule,
   ],
   providers: [MatDatepickerModule],
   exports: [
@@ -39,6 +42,7 @@ import {MatToolbarModule, } from '@angular/material/toolbar';
     MatTooltipModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

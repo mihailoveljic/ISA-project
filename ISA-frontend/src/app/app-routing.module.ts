@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: Route.HOME, loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)},
   { path: Route.CALLBACK, loadChildren: () => import('./modules/callback/callback.module').then(m => m.CallbackModule)},
   { path: 'staff-info', component: StaffInfoComponent},
-  { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent}
+  { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
+  { path: 'news', loadChildren: () => import('./modules/news/news.module').then(m => m.NewsModule) }
 ];
 
 @NgModule({
