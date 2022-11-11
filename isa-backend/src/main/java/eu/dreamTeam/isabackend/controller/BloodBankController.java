@@ -63,4 +63,15 @@ public class BloodBankController {
             throw new FailedUpdateException();
         return new ResponseEntity<>(updateBloodBankDTO, HttpStatus.OK);
     }
+    @PostMapping
+    public ResponseEntity<BloodBankDTO> createCenter(
+            @RequestBody @Valid BloodBankDTO createBloodBankDTO) {
+        if(createBloodBankDTO.getEndTime().isBefore(createBloodBankDTO.getStartTime()))
+            throw new WrongTimeRangeException();
+        BloodBank bloodBank = bloodBankService.create(createBloodBankDTO);
+        if (bloodBank == null)
+            throw new FailedUpdateException();
+        return new ResponseEntity<>(createBloodBankDTO, HttpStatus.OK);
+    }
+
 }
