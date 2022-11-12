@@ -5,5 +5,6 @@ export enum Route {
   HOME = '',
   CALLBACK = 'callback',
   CREATE_CENTER = 'createc',
+  CREATE_STAFF = 'new-staff',
 
 }

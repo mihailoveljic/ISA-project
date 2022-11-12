@@ -30,4 +30,9 @@ export class StaffInfoService {
   public updatePassword(updatePassword: UpdatePassword): Observable<UpdatePassword> {
     return this.http.put<UpdatePassword>(this.apiUrlExtended, updatePassword, httpOptions);
   }
+
+  public create(staffInfo: StaffInfo): Observable<StaffInfo> {
+    return this.http.post<StaffInfo>(this.apiUrl, staffInfo, httpOptions);
+  }
+
 }

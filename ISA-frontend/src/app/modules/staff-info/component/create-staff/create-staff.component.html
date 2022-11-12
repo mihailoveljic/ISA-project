@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+
+<div class="staff-info-div">
+    <span class="mat-display-1">Create staff account</span>
+    <div>
+    <div class="column">
+        <form class="staff-info-form" [formGroup]="formGroup1">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Name:</mat-label>
+            <input matInput type="text" name="name" formControlName="name" [(ngModel)]="staffInfo.name">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Surname:</mat-label>
+            <input matInput type="text" name="surname" formControlName="surname" [(ngModel)]="staffInfo.surname">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>JMBG:</mat-label>
+            <input matInput type="text" name="jmbg" formControlName="jmbg" [(ngModel)]="staffInfo.jmbg">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Email:</mat-label>
+            <input matInput type="email" name="email" formControlName="email" [(ngModel)]="staffInfo.email">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Phone number:</mat-label>
+            <input matInput type="text" name="phone" formControlName="phone" [(ngModel)]="staffInfo.phoneNumber">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <select matNativeControl formControlName="gender" [(ngModel)]="staffInfo.gender">
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+            </select>
+          </mat-form-field><br>
+        </form>
+    </div>
+    <div class="column">
+        <form class="staff-info-form" [formGroup]="formGroup2">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Profession:</mat-label>
+            <input matInput type="text" name="profession" formControlName="profession" [(ngModel)]="staffInfo.profession">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Profession info:</mat-label>
+            <input matInput type="text" name="proinfo" formControlName="proinfo" [(ngModel)]="staffInfo.professionInfo">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Number:</mat-label>
+            <input matInput type="text" name="num" formControlName="num" [(ngModel)]="staffInfo.number">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Street:</mat-label>
+            <input matInput type="text" name="street" formControlName="street" [(ngModel)]="staffInfo.street">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>City:</mat-label>
+            <input matInput type="text" name="city" formControlName="city" [(ngModel)]="staffInfo.city">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Country:</mat-label>
+            <input matInput type="text" name="country" formControlName="country" [(ngModel)]="staffInfo.country">
+        </mat-form-field>
+    </form>
+    </div>
+    </div>
+        <button class="button" mat-raised-button color="primary" (click)="createStaffAccount()" [disabled]="!formGroup1.valid || !formGroup2.valid">Create</button>
+        
+</div>
+<br>
+

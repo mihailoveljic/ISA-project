@@ -59,6 +59,19 @@ public class StaffController {
         return new ResponseEntity<>(updateStaffDTO, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<StaffDTO> create(
+            @RequestBody @Valid StaffDTO createStaffDTO) {
+        if (accountService.check(createStaffDTO.getEmail()))
+            throw new NotUniqueEmailException();
+        if(staffService.checkStaffByJmbg(createStaffDTO.getJmbg()))
+            throw new NotUniqueJmbgException();
+        Staff staff = staffService.create(createStaffDTO);
+        if (staff == null)
+            throw new FailedUpdateException(); //TODO
+        return new ResponseEntity<>(createStaffDTO, HttpStatus.OK);
+    }
+
     @PutMapping("/password")
     public ResponseEntity<UpdatePasswordDTO> updatePassword(
             @RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {
