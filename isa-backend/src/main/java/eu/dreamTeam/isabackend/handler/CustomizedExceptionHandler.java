@@ -103,4 +103,22 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         errorResponse.setMessage("New password doesn't contain number.");
         return errorResponse;
     }
+    @ExceptionHandler(NotUniqueEmailException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleNotUniqueEmailException(NotUniqueEmailException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Account with entered email already exists.");
+        return errorResponse;
+    }
+
+    @ExceptionHandler(NotUniqueJmbgException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleNotUniqueJmbgException(NotUniqueJmbgException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Staff with entered jmbg already exists.");
+        return errorResponse;
+    }
+
 }

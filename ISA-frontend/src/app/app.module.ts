@@ -18,10 +18,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {CentersModule} from './modules/centers/centers.module';
+import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 
 
 @NgModule({
-  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent],
+  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
