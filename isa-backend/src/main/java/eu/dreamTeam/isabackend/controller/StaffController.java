@@ -1,6 +1,7 @@
 package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.StaffDTO;
+import eu.dreamTeam.isabackend.dto.StaffWithCenterDTO;
 import eu.dreamTeam.isabackend.dto.UpdatePasswordDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.*;
 import eu.dreamTeam.isabackend.model.Account;
@@ -60,8 +61,8 @@ public class StaffController {
     }
 
     @PostMapping
-    public ResponseEntity<StaffDTO> create(
-            @RequestBody @Valid StaffDTO createStaffDTO) {
+    public ResponseEntity<StaffWithCenterDTO> create(
+            @RequestBody @Valid StaffWithCenterDTO createStaffDTO) {
         if (accountService.check(createStaffDTO.getEmail()))
             throw new NotUniqueEmailException();
         if(staffService.checkStaffByJmbg(createStaffDTO.getJmbg()))

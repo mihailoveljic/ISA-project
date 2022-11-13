@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/blood-bank")
@@ -72,6 +74,16 @@ public class BloodBankController {
         if (bloodBank == null)
             throw new FailedUpdateException();
         return new ResponseEntity<>(createBloodBankDTO, HttpStatus.OK);
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<List<BloodBankDTO>> getAllBloodBanks(){
+        List<BloodBank> banks = bloodBankService.getAllBloodBanks();
+        List <BloodBankDTO>  bankDTOS = new ArrayList<BloodBankDTO>();
+        for (BloodBank bank: banks){
+            BloodBankDTO bankDTO = modelMapper.map(bank, BloodBankDTO.class);
+            bankDTOS.add(bankDTO);
+        }
+        return new ResponseEntity<>(bankDTOS, HttpStatus.OK);
     }
 
 }

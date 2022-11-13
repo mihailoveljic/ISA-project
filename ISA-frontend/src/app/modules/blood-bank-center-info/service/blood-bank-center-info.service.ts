@@ -14,6 +14,7 @@ const httpOptions = {
 })
 export class BloodBankCenterInfoService {
   private apiUrl = 'http://localhost:8080/api/blood-bank'
+  private getAllBlodBanksUrl = 'http://localhost:8080/api/blood-bank/get-all'
 
 
   constructor(private http: HttpClient) { }
@@ -28,5 +29,9 @@ export class BloodBankCenterInfoService {
 
   public create(centerInfo: CenterInfo): Observable<CenterInfo> {
     return this.http.post<CenterInfo>(this.apiUrl, centerInfo, httpOptions);
+  }
+
+  public getAllBloodBanks(): Observable<CenterInfo[]>{
+      return this.http.get<CenterInfo[]>(this.getAllBlodBanksUrl);
   }
 }
