@@ -59,7 +59,13 @@
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Country:</mat-label>
             <input matInput type="text" name="country" formControlName="country" [(ngModel)]="staffInfo.country">
-        </mat-form-field>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Blood Bank</mat-label>
+            <select matNativeControl formControlName="center" [(ngModel)]="selectedValue">
+                <option *ngFor="let c of centers" [ngValue]="c">{{c.name}}</option>
+            </select>
+          </mat-form-field>
     </form>
     </div>
     </div>

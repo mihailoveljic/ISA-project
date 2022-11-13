@@ -2,12 +2,15 @@ package eu.dreamTeam.isabackend.service;
 
 
 import eu.dreamTeam.isabackend.dto.StaffDTO;
+import eu.dreamTeam.isabackend.dto.StaffWithCenterDTO;
 import eu.dreamTeam.isabackend.model.Account;
 import eu.dreamTeam.isabackend.model.Address;
+import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.enums.Gender;
 import eu.dreamTeam.isabackend.repository.AccountRepository;
 import eu.dreamTeam.isabackend.repository.AddressRepository;
+import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +19,14 @@ public class StaffService {
     private final StaffRepository staffRepository;
     private final AddressRepository addressRepository;
     private final AccountRepository accountRepository;
+    private final BloodBankRepository bloodBankRepository;
 
     public StaffService(StaffRepository staffRepository, AddressRepository addressRepository,
-                        AccountRepository accountRepository) {
+                        AccountRepository accountRepository, BloodBankRepository bloodBankRepository) {
         this.staffRepository = staffRepository;
         this.addressRepository = addressRepository;
         this.accountRepository = accountRepository;
+        this.bloodBankRepository = bloodBankRepository;
     }
 
     public Staff update(StaffDTO staff) {
@@ -38,7 +43,7 @@ public class StaffService {
         return staffRepository.save(staffToUpdate);
     }
 
-    public Staff create(StaffDTO staff) {
+    public Staff create(StaffWithCenterDTO staff) {
         Staff new_staff = new Staff();
         Address address = new Address();
         address.setNumber(staff.getNumber());
@@ -63,6 +68,10 @@ public class StaffService {
         else
             new_staff.setGender(Gender.FEMALE);
         new_staff.setJmbg(staff.getJmbg());
+        Long bbId = staff.getBloodBankId();
+        BloodBank bb = bloodBankRepository.getBloodBankById(bbId);
+        if (bb != null)
+            new_staff.setBloodBank(bb);
         return staffRepository.save(new_staff);
     }
 

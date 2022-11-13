@@ -8,6 +8,9 @@ import eu.dreamTeam.isabackend.repository.StaffRepository;
 import eu.dreamTeam.isabackend.repository.WorkTimeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BloodBankService {
 
@@ -62,6 +65,10 @@ public class BloodBankService {
         newBloodBank.setWorkTime(workTime);
 
         return bloodBankRepository.save(newBloodBank);
+    }
+
+    public List<BloodBank> getAllBloodBanks(){
+        return bloodBankRepository.findAll();
     }
 
 }

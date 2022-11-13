@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StaffInfo } from '../model/StaffInfo';
 import { UpdatePassword } from '../model/UpdatePassword';
+import { StaffWithCenter } from '../model/StaffWithCenter';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
 export class StaffInfoService {
   private apiUrl = 'http://localhost:8080/api/staff'
   private apiUrlExtended = 'http://localhost:8080/api/staff/password'
-
+  
   constructor(private http: HttpClient) { }
 
   public get(email: any): Observable<StaffInfo> {
@@ -31,8 +32,9 @@ export class StaffInfoService {
     return this.http.put<UpdatePassword>(this.apiUrlExtended, updatePassword, httpOptions);
   }
 
-  public create(staffInfo: StaffInfo): Observable<StaffInfo> {
-    return this.http.post<StaffInfo>(this.apiUrl, staffInfo, httpOptions);
+  public create(staffWithCenter: StaffWithCenter): Observable<StaffWithCenter> {
+    return this.http.post<StaffWithCenter>(this.apiUrl, staffWithCenter, httpOptions);
   }
+
 
 }
