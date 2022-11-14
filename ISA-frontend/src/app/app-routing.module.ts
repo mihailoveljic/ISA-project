@@ -4,6 +4,7 @@ import { Route } from './utils/routes';
 import { StaffInfoComponent } from './modules/staff-info/component/staff-info/staff-info.component';
 import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
+import { UserReviewComponent } from './modules/user-review/user-review.component';
 
 const routes: Routes = [
   //{ path: Route.APPOINTMENTS, loadChildren: () => import('./modules/appointments/appointments.module').then(m => m.AppointmentsModule)},
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: Route.CALLBACK, loadChildren: () => import('./modules/callback/callback.module').then(m => m.CallbackModule)},
   { path: 'staff-info', component: StaffInfoComponent},
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
-  { path: Route.CREATE_STAFF, component: CreateStaffComponent}
+  { path: Route.CREATE_STAFF, component: CreateStaffComponent},
+  {path: Route.USER_REVIEW, component: UserReviewComponent}
 ];
 
 @NgModule({

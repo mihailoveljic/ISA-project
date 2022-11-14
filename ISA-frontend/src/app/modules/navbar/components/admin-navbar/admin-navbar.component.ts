@@ -26,5 +26,8 @@ export class AdminNavbarComponent implements OnInit {
   navigateToCreateStaff(){
     this.router.navigate([Route.CREATE_STAFF]);
   }
+  navigateToUsersPreview(){
+    this.router.navigate([Route.USER_REVIEW]);
+  }
 
 }
