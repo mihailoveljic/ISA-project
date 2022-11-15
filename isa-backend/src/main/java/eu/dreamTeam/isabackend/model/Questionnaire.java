@@ -21,8 +21,10 @@ public class Questionnaire {
     private Long id;
     @Column
     private String title;
-    @ManyToMany(mappedBy = "questionnaires")
-    private Set<User> users;
+    @OneToOne(targetEntity=User.class)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "questionnaire")
-    private Set<Question> questions;
+    private Set<QuestionnaireAnswer> questionnaireAnswers;
 }

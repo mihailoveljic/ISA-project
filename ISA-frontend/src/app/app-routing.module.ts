@@ -14,7 +14,8 @@ const routes: Routes = [
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
   { path: Route.CREATE_STAFF, component: CreateStaffComponent},
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },
-  {path: Route.USER_REVIEW, component: UserReviewComponent}
+  {path: Route.USER_REVIEW, component: UserReviewComponent},
+  { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) }
 ];
 
 @NgModule({

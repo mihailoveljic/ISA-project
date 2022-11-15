@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.model;
 
+import eu.dreamTeam.isabackend.model.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,9 @@ public class Question {
     private Long id;
     @Column
     private String text;
-    @ManyToOne
-    @JoinColumn(name = "questionnaire_id")
-    private Questionnaire questionnaire;
-    @OneToMany(mappedBy = "question")
-    private Set<Answer> answers;
+    @Column
+    private boolean acceptableAnswer;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "for_gender")
+    private Gender forGender;
 }

@@ -20,11 +20,7 @@ public class User extends Person{
     private int collectedPoints;
     @Column
     private UserType userType;
-    @ManyToMany
-    @JoinTable(
-            name = "user_questionnaire",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "questionnaire_id")
-    )
-    private Set<Questionnaire> questionnaires;
+    @OneToOne(targetEntity=Questionnaire.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "questionnaire_id")
+    private Questionnaire questionnaire;
 }

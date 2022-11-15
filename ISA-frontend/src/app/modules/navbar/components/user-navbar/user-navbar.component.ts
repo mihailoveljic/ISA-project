@@ -26,7 +26,9 @@ export class UserNavbarComponent implements OnInit {
   navigateToCenters(){
     this.router.navigate([Route.CENTERS]);
   }
-  
+  navigateToQuestionnaire(){
+    this.router.navigate([Route.QUESTIONNAIRE]);
+  }
   logout() {
     this.authService.logout();
   }
