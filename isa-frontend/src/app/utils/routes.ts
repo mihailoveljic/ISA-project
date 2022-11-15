@@ -7,6 +7,7 @@ export enum Route {
   CREATE_CENTER = 'createc',
   CREATE_STAFF = 'new-staff',
   CENTERS = 'centers',
-  USER_REVIEW = 'user-review'
+  USER_REVIEW = 'user-review',
+  USER_INFO = 'user-info',
 
 }

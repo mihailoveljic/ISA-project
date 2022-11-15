@@ -5,6 +5,7 @@ import { StaffInfoComponent } from './modules/staff-info/component/staff-info/st
 import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 import { UserReviewComponent } from './modules/user-review/user-review.component';
+import { UserInfoComponent } from './modules/user-info/components/user-info/user-info.component';
 
 const routes: Routes = [
   //{ path: Route.APPOINTMENTS, loadChildren: () => import('./modules/appointments/appointments.module').then(m => m.AppointmentsModule)},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
   { path: Route.CREATE_STAFF, component: CreateStaffComponent},
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },
-  {path: Route.USER_REVIEW, component: UserReviewComponent}
+  {path: Route.USER_REVIEW, component: UserReviewComponent},
+  {path: Route.USER_INFO, component: UserInfoComponent}
 ];
 
 @NgModule({

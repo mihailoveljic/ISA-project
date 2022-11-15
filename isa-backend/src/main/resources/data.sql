@@ -50,4 +50,10 @@ INSERT INTO public.blood_bank(
 	id, average_rating, description, is_deleted, name, address_id, worktime_id)
 	VALUES (5, 1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
 
+INSERT INTO public.account(
+	id, email, password, required_password_change)
+	VALUES (1, 'mihailoveljic3010@gmail.com', null, false);
 
+INSERT INTO public.users(
+	id, gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
+	VALUES (1, null, null, null, null, null, null, null, 50, 1, 1, null);

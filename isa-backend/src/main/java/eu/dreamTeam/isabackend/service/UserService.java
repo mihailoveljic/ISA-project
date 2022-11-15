@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.service;
 
+import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.User;
 import eu.dreamTeam.isabackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,8 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+    public User getByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 }

@@ -19,6 +19,9 @@ export class UserNavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  navigateToUserInfo() {
+    this.router.navigate([Route.USER_INFO]);
+  }
   navigateToScheduleAppointment() {
     this.router.navigate([Route.SCHEDULE_APPOINTMENT]);
   }
