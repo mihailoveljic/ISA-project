@@ -11,6 +11,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatToolbarModule, } from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -27,6 +30,9 @@ import {MatToolbarModule, } from '@angular/material/toolbar';
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     MatToolbarModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [MatDatepickerModule],
   exports: [
@@ -39,6 +45,9 @@ import {MatToolbarModule, } from '@angular/material/toolbar';
     MatTooltipModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
 })
 export class MaterialModule {}

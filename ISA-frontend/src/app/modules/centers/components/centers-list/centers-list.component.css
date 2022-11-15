@@ -1,0 +1,49 @@
+.button{
+  width: 180px;
+  height: 48px;
+  border-radius: 15px;
+}
+
+.commands{
+  display: flex;
+  justify-content: center;
+}
+
+.center-card{
+  border: 1px solid indigo;
+  border-radius: 15px;
+  max-width: 600px;
+  margin-top: 5%;
+}
+
+
+.centers-list{
+  text-align: center;
+  margin: auto;
+  width: 600px;
+}
+/* .column{
+  text-align: center;
+} */
+
+table {
+  width: 100%;
+}
+
+.mat-sort-header-container{
+  text-align: center !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.search-bar{
+  width: 250px;
+}
+.table-container{
+  margin: auto;
+  margin-top: 2.5%;
+  width: 80%;
+}

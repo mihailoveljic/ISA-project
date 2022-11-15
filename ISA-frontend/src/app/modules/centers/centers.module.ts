@@ -8,11 +8,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatTableModule } from '@angular/material/table';
+import { CentersComponent } from './centers.component';
+import { CentersListComponent } from './components/centers-list/centers-list.component';
 
 
 @NgModule({
   declarations: [
     CreateCenterComponent,
+    CentersComponent,
+    CentersListComponent,
   ],
   imports: [
     CentersRoutingModule,
@@ -24,6 +28,6 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule, 
     NgxMaterialTimepickerModule,
     MatTableModule,
-  ]
+  ],
 })
 export class CentersModule { }

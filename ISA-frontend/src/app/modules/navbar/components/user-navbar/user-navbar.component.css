@@ -1,0 +1,16 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  height: 72px;
+  width: 100vw;
+}
+
+.logo{
+  font-size: x-large;
+}
+
+
+.button{
+  width: 180px;
+  height: 72px;
+}

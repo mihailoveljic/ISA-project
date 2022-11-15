@@ -71,4 +71,8 @@ public class BloodBankService {
         return bloodBankRepository.findAll();
     }
 
+
+    public List<BloodBank> getAll() {
+        return bloodBankRepository.findAll();
+    }
 }

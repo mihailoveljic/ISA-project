@@ -1,1 +1,12 @@
-<button mat-button color="secondary" (click)="login()">Login</button>
+<div class="navbar">
+  <div>
+    <button class="logo button" mat-button color="secondary" routerLink="/">Krv+</button>
+  </div>
+  <div>
+    <button class="button" mat-button color="secondary" (click)="navigateToCenters()">Centers</button>
+  </div>
+  <div class="logout">
+    <button class="button" mat-button color="secondary" (click)="login()">Login</button>
+  </div>
+</div>
+

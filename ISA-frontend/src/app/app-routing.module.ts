@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: Route.CALLBACK, loadChildren: () => import('./modules/callback/callback.module').then(m => m.CallbackModule)},
   { path: 'staff-info', component: StaffInfoComponent},
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
-  { path: Route.CREATE_STAFF, component: CreateStaffComponent}
+  { path: Route.CREATE_STAFF, component: CreateStaffComponent},
+  { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) }
 ];
 
 @NgModule({

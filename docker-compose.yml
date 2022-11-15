@@ -4,7 +4,7 @@ services:
   blood_bank_db_isa:
     image: postgres
     container_name: blood_bank_db_isa
-    restart: always
+    restart: on-failure
     expose:
       - "54321"
     ports:
@@ -20,7 +20,7 @@ services:
   pgadmin_isa:
     image: dpage/pgadmin4
     container_name: pgadmin_isa
-    restart: always
+    restart: on-failure
     ports:
       - "5050:80"
     environment:
@@ -32,6 +32,7 @@ services:
   keycloak_db_isa:
     image: postgres
     container_name: keycloak_db_isa
+    restart: on-failure
     volumes:
       - keycloak_isa_data:/var/lib/postgresql/data
     environment:
@@ -41,6 +42,7 @@ services:
   keycloak_isa:
     image: quay.io/keycloak/keycloak:legacy
     container_name: keycloak_isa
+    restart: on-failure
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: keycloak_db_isa
@@ -59,3 +61,4 @@ volumes:
   pgadmin_data_isa:
   blood_bank_data_isa:
   keycloak_isa_data:
+#----------------------------------------------------------------

@@ -2,6 +2,12 @@ package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.*;
+import eu.dreamTeam.isabackend.dto.BloodBankDTOs;
+import eu.dreamTeam.isabackend.dto.StaffDTO;
+import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
+import eu.dreamTeam.isabackend.handler.exceptions.BankNotExistedException;
+import eu.dreamTeam.isabackend.handler.exceptions.FailedUpdateException;
+import eu.dreamTeam.isabackend.handler.exceptions.WrongTimeRangeException;
 import eu.dreamTeam.isabackend.model.BloodBank;
 
 import java.nio.file.*;
@@ -109,6 +115,17 @@ public class BloodBankController {
             bankDTOS.add(bankDTO);
         }
         return new ResponseEntity<>(bankDTOS, HttpStatus.OK);
+
+    @GetMapping("/getAll")
+    public ResponseEntity<BloodBankDTOs> getAll(){
+        List<BloodBank> bloodbanks = this.bloodBankService.getAll();
+
+        List<BloodBankDTO> bloodBankDTOs = bloodbanks.stream().map(bloodBank -> modelMapper.map(bloodBank, BloodBankDTO.class)).toList();
+
+        BloodBankDTOs response = BloodBankDTOs.builder()
+                                        .bloodBanks(bloodBankDTOs)
+                                        .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

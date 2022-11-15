@@ -1,5 +1,6 @@
+import { Route } from 'src/app/utils/routes';
+import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -10,9 +11,16 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class GuestNavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToCenters(){
+    this.router.navigate([Route.CENTERS]);
   }
 
   login() {

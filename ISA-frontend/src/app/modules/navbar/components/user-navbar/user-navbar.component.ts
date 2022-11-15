@@ -23,6 +23,10 @@ export class UserNavbarComponent implements OnInit {
     this.router.navigate([Route.SCHEDULE_APPOINTMENT]);
   }
 
+  navigateToCenters(){
+    this.router.navigate([Route.CENTERS]);
+  }
+  
   logout() {
     this.authService.logout();
   }
