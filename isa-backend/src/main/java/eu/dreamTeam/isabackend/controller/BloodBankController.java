@@ -107,14 +107,15 @@ public class BloodBankController {
         return new ResponseEntity<>(createBloodBankDTO, HttpStatus.OK);
     }
     @GetMapping("/get-all")
-    public ResponseEntity<List<BloodBankDTO>> getAllBloodBanks(){
+    public ResponseEntity<List<BloodBankDTO>> getAllBloodBanks() {
         List<BloodBank> banks = bloodBankService.getAllBloodBanks();
-        List <BloodBankDTO>  bankDTOS = new ArrayList<BloodBankDTO>();
-        for (BloodBank bank: banks){
+        List<BloodBankDTO> bankDTOS = new ArrayList<BloodBankDTO>();
+        for (BloodBank bank : banks) {
             BloodBankDTO bankDTO = modelMapper.map(bank, BloodBankDTO.class);
             bankDTOS.add(bankDTO);
         }
         return new ResponseEntity<>(bankDTOS, HttpStatus.OK);
+    }
 
     @GetMapping("/getAll")
     public ResponseEntity<BloodBankDTOs> getAll(){
