@@ -19,10 +19,11 @@ import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/c
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {CentersModule} from './modules/centers/centers.module';
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
+import { UserReviewComponent } from './modules/user-review/user-review.component';
 
 
 @NgModule({
-  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent],
+  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

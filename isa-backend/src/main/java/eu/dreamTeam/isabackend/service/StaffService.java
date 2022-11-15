@@ -14,6 +14,8 @@ import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffService {
     private final StaffRepository staffRepository;
@@ -80,4 +82,6 @@ public class StaffService {
     public Staff getByEmail(String email) {
         return staffRepository.getStaffByEmail(email);
     }
+
+    public List<Staff> getAllStaff(){ return staffRepository.findAll(); }
 }
