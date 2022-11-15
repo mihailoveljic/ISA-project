@@ -55,6 +55,7 @@ export class UserInfoComponent implements OnInit {
     this.user = this.authService.getUser();
     this.userInfoService.get(this.user?.email).subscribe({
       next: (ui: any) => {
+        console.log(ui);
         this.userInfo = this.user;
         this.userInfoCopy = Object.assign({}, this.userInfo);
         this.formGroup1 = new FormGroup({

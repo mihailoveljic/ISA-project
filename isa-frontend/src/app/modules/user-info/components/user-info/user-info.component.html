@@ -15,11 +15,11 @@
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>JMBG(read only):</mat-label>
-            <input matInput type="text" name="jmbg" formControlName="jmbg" readonly>
+            <input matInput type="text" name="jmbg" formControlName="jmbg"  [(ngModel)]="user.jmbg" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Email(read only):</mat-label>
-            <input matInput type="email" name="email" formControlName="email" readonly>
+            <input matInput type="email" name="email" formControlName="email" [(ngModel)]="user.email" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Phone number:</mat-label>

@@ -56,4 +56,4 @@ INSERT INTO public.account(
 
 INSERT INTO public.users(
 	id, gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
-	VALUES (1, null, null, null, null, null, null, null, 50, 1, 1, null);
+	VALUES (1, null, null, null, null, null, null, null, 50, 0, 1, null);
