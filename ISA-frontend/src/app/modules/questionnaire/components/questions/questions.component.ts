@@ -21,8 +21,8 @@ export class QuestionsComponent implements OnInit {
   user?: User;
 
   allQuestionsAnswered: boolean = false;
-
-  userAnswers = new Array();
+  progress: number = 0;
+  numberOfQuestions: number = 0
   questionnaire: Questionnaire;
 
   constructor(
@@ -55,8 +55,11 @@ export class QuestionsComponent implements OnInit {
         return false;
       } )
       this.questions = this.questions.reverse();
+      
+      this.numberOfQuestions = this.questions.length;
       this.nextQuestion = this.questions.pop();
       this.nextQuestionNumber = 1;
+      this.progress = this.nextQuestionNumber / this.numberOfQuestions;
     });
   }
 
@@ -76,6 +79,7 @@ export class QuestionsComponent implements OnInit {
     if(this.questions.length){
       this.nextQuestion = this.questions.pop();
       this.nextQuestionNumber++;
+      this.progress = this.nextQuestionNumber / this.numberOfQuestions * 100;
     }else{
       this.allQuestionsAnswered = true;
       this.saveQuestionnaire();

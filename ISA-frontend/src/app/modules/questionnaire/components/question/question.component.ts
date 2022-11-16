@@ -15,6 +15,9 @@ export class QuestionComponent implements OnInit {
   @Input()
   questionNumber!: number;
 
+  @Input()
+  progress!: number;
+
   @Output()
   onAnswer = new EventEmitter<boolean>();
 

@@ -1,5 +1,5 @@
-<div *ngIf="nextQuestion && nextQuestionNumber && !allQuestionsAnswered">
-  <app-question [question]="nextQuestion" [questionNumber]="nextQuestionNumber" (onAnswer)="saveAnswer($event)"></app-question>
+<div *ngIf="nextQuestion && nextQuestionNumber && !allQuestionsAnswered" class="question-container">
+  <app-question [question]="nextQuestion" [questionNumber]="nextQuestionNumber" [progress]="progress" (onAnswer)="saveAnswer($event)"></app-question>
 </div>
 <div *ngIf="allQuestionsAnswered">
   <app-thank-you></app-thank-you>

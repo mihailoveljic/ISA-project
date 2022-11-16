@@ -9,4 +9,7 @@
     <button (click)="yes()" class="button" mat-button>YES</button>
     <button (click)="no()" class="button" mat-button>NO</button>
   </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar color="primary" style="height: 10px;" mode="determinate" [value]="progress"></mat-progress-bar>
+  </mat-card-footer>
 </mat-card>
