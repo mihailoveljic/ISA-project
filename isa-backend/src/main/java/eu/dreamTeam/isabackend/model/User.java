@@ -20,7 +20,4 @@ public class User extends Person{
     private int collectedPoints;
     @Column
     private UserType userType;
-    @OneToOne(targetEntity=Questionnaire.class, cascade=CascadeType.ALL)
-    @JoinColumn(name = "questionnaire_id")
-    private Questionnaire questionnaire;
 }

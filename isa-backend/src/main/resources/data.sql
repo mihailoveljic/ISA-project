@@ -13,10 +13,16 @@ INSERT INTO public.address(
 INSERT INTO public.address(
 	id, city, country, number, street)
 	VALUES (5, 'Novi Sad', 'Srbija', '21', 'Novosadska ulica');
+INSERT INTO public.address(
+	id, city, country, number, street)
+	VALUES (6, 'Novi Sad', 'Srbija', '21', 'Nasa ulica');
 
 INSERT INTO public.account(
     id, email, password, required_password_change)
 VALUES (1, 'holja2208@gmail.com', '$2a$10$LEXs7TjyqHnCgD3uzEv6rOo9BDizvIVzCksQ6Rhf.aJH7eV2wni7C', false);
+INSERT INTO public.account(
+    id, email, password, required_password_change)
+VALUES (2, 'miloszeljko00@gmail.com', '$2a$10$LEXs7TjyqHnCgD3uzEv6rOo9BDizvIVzCksQ6Rhf.aJH7eV2wni7C', false);
 
 INSERT INTO public.work_time(
 	id, end_time, start_time)
@@ -59,10 +65,10 @@ INSERT INTO public.question(
 	VALUES (1, false, 'Are you under 50kg?', NULL);
 INSERT INTO public.question(
 	id, acceptable_answer, text, for_gender)
-	VALUES (2, false, 'Do you have symptoms of a cold, some illness or just not feeling well?', 'BOTH');
+	VALUES (2, false, 'Do you have symptoms of a cold, some illness or just not feeling well?', NULL);
 INSERT INTO public.question(
 	id, acceptable_answer, text, for_gender)
-	VALUES (3, false, 'Have you noticed any changes in your skin (infections, rashes, fungal diseases)?', 'BOTH');
+	VALUES (3, false, 'Have you noticed any changes in your skin (infections, rashes, fungal diseases)?', NULL);
 INSERT INTO public.question(
 	id, acceptable_answer, text, for_gender)
 	VALUES (4, false, 'Do you suffer from high blood pressure?', NULL);
@@ -94,6 +100,11 @@ INSERT INTO public.question(
 INSERT INTO public.staff(
     id, gender, jmbg, name , phone_number, profession, profession_info, surname, account_id, address_id, blood_bank_id)
 VALUES (1, 'MALE', '0123456789666', 'Nikola', '061/12-34-567','Administrator centra', 'Menadzer', 'Holjevac', 1, 5, 1);
+
+INSERT INTO public.users(
+	id, gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
+	VALUES (2, 'MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 50, 3, 2, 6);
+
 
 INSERT INTO public.api_key(
     id, api_key_code, is_valid)

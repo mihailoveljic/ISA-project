@@ -6,9 +6,9 @@ services:
     container_name: blood_bank_db_isa
     restart: on-failure
     expose:
-      - "54321"
+      - "54323"
     ports:
-      - "54321:5432"
+      - "54323:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_DB: blood_bank

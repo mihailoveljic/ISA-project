@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './../angular-material/angular-material.module';
 import { NavbarModule } from './../navbar/navbar.module';
 import { NavbarComponent } from './../navbar/navbar.component';

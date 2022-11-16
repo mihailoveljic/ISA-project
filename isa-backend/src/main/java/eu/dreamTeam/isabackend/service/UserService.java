@@ -16,4 +16,18 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+    public User getUserByEmail(String email){
+        var users = getAllUsers();
+
+        User response = null;
+        for(var user : users){
+            if(user.getAccount().getEmail().equals(email)){
+                response = user;
+                break;
+            }
+        }
+        return response;
+    }
+
 }
