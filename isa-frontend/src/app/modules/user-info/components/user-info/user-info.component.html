@@ -1,10 +1,21 @@
 <app-navbar></app-navbar>
 
-<div class="staff-info-div" *ngIf="user">
-    <span class="mat-display-1">Staff info</span>
+<div class="user-type-info" *ngIf="userFromOurDbWithAdditionalFields">
+    <mat-card>
+        <mat-card-title>User type - {{userFromOurDbWithAdditionalFields.userType}}</mat-card-title>
+        <mat-card-content>
+          <p>{{userFromOurDbWithAdditionalFields.collectedPoints}} / 200 collected points</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">See details about user types</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+<div class="user-info-div" *ngIf="user">
+    <span class="mat-display-1">User info</span>
     <div>
     <div class="column">
-        <form class="staff-info-form" [formGroup]="formGroup1">
+        <form class="user-info-form" [formGroup]="formGroup1">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Name:</mat-label>
             <input matInput type="text" name="name" formControlName="name" [(ngModel)]="user.firstName">
@@ -32,7 +43,7 @@
         </form>
     </div>
     <div class="column">
-        <form class="staff-info-form" [formGroup]="formGroup2">
+        <form class="user-info-form" [formGroup]="formGroup2">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Profession:</mat-label>
             <input matInput type="text" name="profession" formControlName="profession" [(ngModel)]="user.profession">
@@ -60,13 +71,13 @@
     </form>
     </div>
     </div>
-        <a href="http://localhost:28080/auth/realms/blood-bank/account/"><button class="button" mat-raised-button color="primary" [disabled]="!formGroup1.valid || !formGroup2.valid">Save changes</button></a>
-        <button class="button" mat-raised-button color="primary" (click)="undoChanges()">Undo changes</button>
+        <a href="http://localhost:28080/auth/realms/blood-bank/account/" target="_blank"><button class="button" mat-raised-button color="primary" [disabled]="!formGroup1.valid || !formGroup2.valid">Change personal data</button></a>
+        <button class="button" mat-raised-button color="primary" (click)="undoChanges()" [disabled]="true">Undo changes</button>
 </div>
 <br>
-<div class="staff-info-div">
+<div class="user-info-div">
     <span class="mat-display-1">Update password</span>
-    <form class="staff-info-form" [formGroup]="formGroupPassword">
+    <form class="user-info-form" [formGroup]="formGroupPassword">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Current password:</mat-label>
             <input matInput #password [type]="hideCur ? 'password' : 'text'" name="curPassword" formControlName="curPassword" [(ngModel)]="curPassword">

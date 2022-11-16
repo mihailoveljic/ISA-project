@@ -17,6 +17,7 @@ export class UserInfoComponent implements OnInit {
   formGroup1!: FormGroup;
   formGroup2!: FormGroup;
   formGroupPassword!: FormGroup;
+  userFromOurDbWithAdditionalFields: any;
   user?: User;
   userInfo: any;
   userInfoCopy: any;
@@ -55,7 +56,7 @@ export class UserInfoComponent implements OnInit {
     this.user = this.authService.getUser();
     this.userInfoService.get(this.user?.email).subscribe({
       next: (ui: any) => {
-        console.log(ui);
+        this.userFromOurDbWithAdditionalFields = ui;
         this.userInfo = this.user;
         this.userInfoCopy = Object.assign({}, this.userInfo);
         this.formGroup1 = new FormGroup({

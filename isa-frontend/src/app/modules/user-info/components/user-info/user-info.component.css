@@ -1,10 +1,10 @@
-.staff-info-div {
+.user-info-div {
     margin-top: 2%;
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
 }
-.staff-info-form {
+.user-info-form {
     margin-top: 1%;
 }
 .button {
@@ -14,3 +14,12 @@
     float: left;
     width: 50%;
   }
+
+.user-type-info {
+    margin-top: 2%;
+    margin-right: 2%;
+    display: flex;
+    justify-content: flex-end;
+    left: 80%;
+    position: absolute;
+}
