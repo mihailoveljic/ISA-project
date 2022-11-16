@@ -44,7 +44,7 @@ export class BloodBankCenterInfoComponent implements OnInit {
         this.formGroup1 = new FormGroup({
           name: new FormControl(this.centerInfo.name, [Validators.required]),
           description: new FormControl(this.centerInfo.description, [Validators.required]),
-          rating: new FormControl(this.centerInfo.averageRating, [Validators.required, Validators.min(5), Validators.max(10)]),
+          rating: new FormControl(this.centerInfo.averageRating, [Validators.required, Validators.min(1), Validators.max(5)]),
           start: new FormControl(this.centerInfo.startTime, [Validators.required]),
           end: new FormControl(this.centerInfo.endTime, [Validators.required])});
           this.formGroup2 = new FormGroup({ 

@@ -14,6 +14,10 @@ INSERT INTO public.address(
 	id, city, country, number, street)
 	VALUES (5, 'Novi Sad', 'Srbija', '21', 'Novosadska ulica');
 
+INSERT INTO public.account(
+    id, email, password, required_password_change)
+VALUES (1, 'holja2208@gmail.com', '$2a$10$LEXs7TjyqHnCgD3uzEv6rOo9BDizvIVzCksQ6Rhf.aJH7eV2wni7C', false);
+
 INSERT INTO public.work_time(
 	id, end_time, start_time)
 	VALUES (1, '21:00', '08:00');
@@ -49,8 +53,6 @@ INSERT INTO public.blood_bank(
 INSERT INTO public.blood_bank(
 	id, average_rating, description, is_deleted, name, address_id, worktime_id)
 	VALUES (5, 1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-
-
 
 INSERT INTO public.question(
 	id, acceptable_answer, text, for_gender)
@@ -88,3 +90,21 @@ INSERT INTO public.question(
 INSERT INTO public.question(
 	id, acceptable_answer, text, for_gender)
 	VALUES (12, false, 'Have you had a surgical intervention or blood transfusion in the last 6 months?', NULL);
+
+INSERT INTO public.staff(
+    id, gender, jmbg, name , phone_number, profession, profession_info, surname, account_id, address_id, blood_bank_id)
+VALUES (1, 'MALE', '0123456789666', 'Nikola', '061/12-34-567','Administrator centra', 'Menadzer', 'Holjevac', 1, 5, 1);
+
+INSERT INTO public.api_key(
+    id, api_key_code, is_valid)
+VALUES (1, 'e67553a6-1b8e-48af-a393-cd9603ac1b29', 'true');
+
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (1, 500, 'A_POSITIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (2, 200, 'A_NEGATIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (3, 300, 'A_POSITIVE', 2, null);

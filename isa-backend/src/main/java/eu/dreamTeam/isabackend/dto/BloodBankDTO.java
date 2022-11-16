@@ -29,7 +29,7 @@ public class BloodBankDTO {
     private String name;
     @NotBlank
     private String description;
-    @Min(5)
-    @Max(10)
+    @Min(1)
+    @Max(5)
     private double averageRating;
 }

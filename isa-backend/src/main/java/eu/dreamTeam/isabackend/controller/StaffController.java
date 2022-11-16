@@ -25,7 +25,7 @@ public class StaffController {
     private final ModelMapper modelMapper;
     private final String numRegex   = ".*[0-9].*";
     private final String bigAlphaRegex = ".*[A-Z].*";
-    private final String smallAlphaRegex = ".*[A-Z].*";
+    private final String smallAlphaRegex = ".*[a-z].*";
 
     public StaffController(StaffService staffService, AccountService accountService, ModelMapper modelMapper) {
         this.staffService = staffService;
@@ -83,7 +83,7 @@ public class StaffController {
             throw new TooShortPasswordException();
         if (!updatePasswordDTO.getNewPassword().matches(numRegex))
             throw new PasswordDoesntContainNumberException();
-        if(!updatePasswordDTO.getNewPassword().matches(bigAlphaRegex) || !updatePasswordDTO.getNewPassword().matches(smallAlphaRegex))
+        if(!(updatePasswordDTO.getNewPassword().matches(bigAlphaRegex) || updatePasswordDTO.getNewPassword().matches(smallAlphaRegex)))
             throw new PasswordDoesntContainLetterException();
         Account account = accountService.updatePassword(currentAccount, updatePasswordDTO.getNewPassword());
         if (account == null)
