@@ -119,3 +119,10 @@ VALUES (2, 200, 'A_NEGATIVE', 1, null);
 INSERT INTO public.blood_sample(
     id, amount, blood_type, blood_bank_id, delivery_id)
 VALUES (3, 300, 'A_POSITIVE', 2, null);
+INSERT INTO public.account(
+	id, email, password, required_password_change)
+	VALUES (1, 'mihailoveljic3010@gmail.com', null, false);
+
+INSERT INTO public.users(
+	id, gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
+	VALUES (1, null, null, null, null, null, null, null, 50, 0, 1, null);

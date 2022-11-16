@@ -43,7 +43,18 @@ table {
   width: 250px;
 }
 .table-container{
-  margin: auto;
-  margin-top: 2.5%;
-  width: 80%;
+  margin-left: 5%;
+  width: 70%;
+}
+.time-pickers {
+  margin-top: 3%;
+  margin-right: 6%;
+}
+.container {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+.star-rating-div {
+  margin-top: 10%;
 }

@@ -8,6 +8,7 @@ export enum Route {
   CREATE_STAFF = 'new-staff',
   CENTERS = 'centers',
   USER_REVIEW = 'user-review',
-  QUESTIONNAIRE = 'questionnaire'
+  QUESTIONNAIRE = 'questionnaire',
+  USER_INFO = 'user-info',
 
 }

@@ -20,6 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {CentersModule} from './modules/centers/centers.module';
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 import { UserReviewComponent } from './modules/user-review/user-review.component';
+import { UserInfoModule } from './modules/user-info/user-info.module';
+import { StarRatingModule } from 'angular-star-rating';
 
 
 @NgModule({
@@ -42,11 +44,13 @@ import { UserReviewComponent } from './modules/user-review/user-review.component
     NgxMaterialTimepickerModule, 
     HttpClientModule,
     NgxMaterialTimepickerModule,
+    UserInfoModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
     }),
     CentersModule,
+    StarRatingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
