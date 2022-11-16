@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: Route.CREATE_STAFF, component: CreateStaffComponent},
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },
   {path: Route.USER_REVIEW, component: UserReviewComponent},
-  { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) }
+  { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) },
   {path: Route.USER_INFO, component: UserInfoComponent}
 ];
 
