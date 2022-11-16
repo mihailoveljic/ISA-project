@@ -38,7 +38,6 @@ export class AuthService {
   public getUser(): User | undefined {
     if(!this.authenticated()) return undefined;
     const accessToken: any = jwt_decode(this.oauthService.getAccessToken());
-    console.log(accessToken);
     return accessToken.user;
   }
 

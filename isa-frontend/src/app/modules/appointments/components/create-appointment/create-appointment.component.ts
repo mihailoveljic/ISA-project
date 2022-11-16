@@ -30,7 +30,6 @@ export class CreateAppointmentComponent implements OnInit {
       description: new FormControl(this.description, [Validators.required]),
       price: new FormControl(this.price, [Validators.required]),
     });
-    console.log(this.timeOfAppointment);
   }
 
   createAppointment() {

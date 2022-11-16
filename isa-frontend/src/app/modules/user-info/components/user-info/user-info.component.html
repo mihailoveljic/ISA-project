@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
 
 <div class="user-type-info" *ngIf="userFromOurDbWithAdditionalFields">
-    <mat-card>
-        <mat-card-title>User type - {{userFromOurDbWithAdditionalFields.userType}}</mat-card-title>
-        <mat-card-content>
+    <mat-card class="user-type-info-container">
+        <mat-card-title class="centered">User type - {{userFromOurDbWithAdditionalFields.userType}}</mat-card-title>
+        <mat-card-content class="centered">
           <p>{{userFromOurDbWithAdditionalFields.collectedPoints}} / 200 collected points</p>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary">See details about user types</button>
+        <mat-card-actions class="centered">
+            <div class="user-type-details-button">
+                <button  mat-raised-button color="primary">See details about user types</button>
+            </div>
         </mat-card-actions>
       </mat-card>
 </div>
@@ -18,11 +20,11 @@
         <form class="user-info-form" [formGroup]="formGroup1">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Name:</mat-label>
-            <input matInput type="text" name="name" formControlName="name" [(ngModel)]="user.firstName">
+            <input matInput type="text" name="name" formControlName="name" [(ngModel)]="user.firstName" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Surname:</mat-label>
-            <input matInput type="text" name="surname" formControlName="surname" [(ngModel)]="user.lastName">
+            <input matInput type="text" name="surname" formControlName="surname" [(ngModel)]="user.lastName" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>JMBG(read only):</mat-label>
@@ -34,11 +36,11 @@
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Phone number:</mat-label>
-            <input matInput type="text" name="phone" formControlName="phone" [(ngModel)]="user.phoneNumber">
+            <input matInput type="text" name="phone" formControlName="phone" [(ngModel)]="user.phoneNumber" readonly>
         </mat-form-field><br>
-        <mat-form-field appearance="outline" color="primary">
+        <mat-form-field appearance="outline" color="primary" readonly>
             <mat-label>Gender(read only):</mat-label>
-            <input matInput type="text" name="gender" formControlName="gender" readonly>
+            <input matInput type="text" name="gender" formControlName="gender" [(ngModel)]="user.gender" readonly>
         </mat-form-field>
         </form>
     </div>
@@ -46,36 +48,36 @@
         <form class="user-info-form" [formGroup]="formGroup2">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Profession:</mat-label>
-            <input matInput type="text" name="profession" formControlName="profession" [(ngModel)]="user.profession">
+            <input matInput type="text" name="profession" formControlName="profession" [(ngModel)]="user.profession" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Profession info:</mat-label>
-            <input matInput type="text" name="proinfo" formControlName="proinfo" [(ngModel)]="user.professionInfo">
+            <input matInput type="text" name="proinfo" formControlName="proinfo" [(ngModel)]="user.professionInfo" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Number:</mat-label>
-            <input matInput type="text" name="num" formControlName="num">
+            <input matInput type="text" name="num" formControlName="num" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Street:</mat-label>
-            <input matInput type="text" name="street" formControlName="street" [(ngModel)]="user.address.street">
+            <input matInput type="text" name="street" formControlName="street" [(ngModel)]="user.address.street" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>City:</mat-label>
-            <input matInput type="text" name="city" formControlName="city" [(ngModel)]="user.address.city">
+            <input matInput type="text" name="city" formControlName="city" [(ngModel)]="user.address.city" readonly>
         </mat-form-field><br>
         <mat-form-field appearance="outline" color="primary">
             <mat-label>Country:</mat-label>
-            <input matInput type="text" name="country" formControlName="country" [(ngModel)]="user.address.country">
+            <input matInput type="text" name="country" formControlName="country" [(ngModel)]="user.address.country" readonly>
         </mat-form-field>
     </form>
     </div>
     </div>
         <a href="http://localhost:28080/auth/realms/blood-bank/account/" target="_blank"><button class="button" mat-raised-button color="primary" [disabled]="!formGroup1.valid || !formGroup2.valid">Change personal data</button></a>
-        <button class="button" mat-raised-button color="primary" (click)="undoChanges()" [disabled]="true">Undo changes</button>
+        <button *ngIf="false" class="button" mat-raised-button color="primary" (click)="undoChanges()" [disabled]="true">Undo changes</button>
 </div>
 <br>
-<div class="user-info-div">
+<div class="user-info-div" *ngIf="false">
     <span class="mat-display-1">Update password</span>
     <form class="user-info-form" [formGroup]="formGroupPassword">
         <mat-form-field appearance="outline" color="primary">

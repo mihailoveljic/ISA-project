@@ -10,6 +10,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatTableModule } from '@angular/material/table';
 import { CentersComponent } from './centers.component';
 import { CentersListComponent } from './components/centers-list/centers-list.component';
+import { StarRatingModule } from 'angular-star-rating';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { CentersListComponent } from './components/centers-list/centers-list.com
     MatInputModule, 
     NgxMaterialTimepickerModule,
     MatTableModule,
+    StarRatingModule,
+    MatSelectModule
   ],
 })
 export class CentersModule { }

@@ -23,3 +23,13 @@
     left: 80%;
     position: absolute;
 }
+
+.centered{
+    display: flex;
+    justify-content: center;
+}
+
+
+.user-type-details-button{
+    margin-bottom: 5%;
+}
