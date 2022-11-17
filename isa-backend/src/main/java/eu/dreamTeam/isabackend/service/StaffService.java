@@ -15,6 +15,7 @@ import eu.dreamTeam.isabackend.repository.StaffRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StaffService {
@@ -53,18 +54,22 @@ public class StaffService {
         address.setCountry(staff.getCountry());
         address.setCity(staff.getCity());
         address = addressRepository.save(address);
+
         new_staff.setAddress(address);
         Account account = new Account();
         account.setEmail(staff.getEmail());
-        account.setPassword("asdasd"); //TODO
-        account.setRequiredPasswordChange(false);
+        UUID uuid = UUID.randomUUID();
+        account.setPassword(uuid.toString());
+        account.setRequiredPasswordChange(true);
         account = accountRepository.save(account);
+
         new_staff.setAccount(account);
         new_staff.setName(staff.getName());
         new_staff.setSurname(staff.getSurname());
         new_staff.setProfession(staff.getProfession());
         new_staff.setProfessionInfo(staff.getProfessionInfo());
         new_staff.setPhoneNumber(staff.getPhoneNumber());
+
         if (staff.getGender().equals("MALE"))
             new_staff.setGender(Gender.MALE);
         else
