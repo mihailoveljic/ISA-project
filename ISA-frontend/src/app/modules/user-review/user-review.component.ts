@@ -10,7 +10,7 @@ import { UserReviewService } from './service/user-review.service';
 })
 export class UserReviewComponent implements OnInit {
   public dataSource = new MatTableDataSource<PersonInfo>();
-  public displayedColumns = ['name', 'surname', 'jmbg'];
+  public displayedColumns = ['name', 'surname', 'jmbg', 'phoneNumber', 'email'];
   public users: PersonInfo[] = [];
   public users_filtered: PersonInfo[] = [];
   public user: PersonInfo | undefined = undefined;
@@ -21,6 +21,7 @@ export class UserReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.userReviewService.getAllPersons().subscribe(res => {
+      console.log(res)
       this.users = res;
       this.users_filtered = res;
       this.dataSource.data = this.users_filtered;
@@ -28,10 +29,19 @@ export class UserReviewComponent implements OnInit {
   }
 
   search(){
-    this.users_filtered = this.users.filter(u => {return (u.name.toLowerCase().includes(this.name.toLowerCase()) &&
+    this.users_filtered = this.users.filter(u => {
+      if(u.name == null || u.surname == null)
+        return false
+      return (u.name.toLowerCase().includes(this.name.toLowerCase()) &&
                    u.surname.toLowerCase().includes(this.surname.toLowerCase())); } )
-    //this.treninziSaDatumom.filter(o => o.treninzi.price >= minCena && o.treninzi.price <= maxCena);
     this.dataSource.data = this.users_filtered 
+  }
+
+  cancel(){
+    this.name = ''
+    this.surname = ''
+    this.users_filtered = this.users
+    this.dataSource.data = this.users_filtered
   }
 
 }

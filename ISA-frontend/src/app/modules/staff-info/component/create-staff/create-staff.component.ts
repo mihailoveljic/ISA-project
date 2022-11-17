@@ -48,6 +48,7 @@ export class CreateStaffComponent implements OnInit {
     });
     this.centerService.getAllBloodBanks().subscribe({
       next: (si) => {
+        
           this.centers = si
       }});
   }

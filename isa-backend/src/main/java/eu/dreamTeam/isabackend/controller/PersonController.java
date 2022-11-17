@@ -36,12 +36,26 @@ public class PersonController {
         this.userService = userservice;
         this.systemAdminService = systemAdminService;
         this.modelMapper = modelMapper;
-        TypeMap<Person, PersonDTO> propertyMapper = modelMapper.createTypeMap(Person.class, PersonDTO.class);
+        TypeMap<Staff, PersonDTO> propertyMapper = modelMapper.createTypeMap(Staff.class, PersonDTO.class);
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCity(), PersonDTO::setCity));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getStreet(), PersonDTO::setStreet));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCountry(), PersonDTO::setCountry));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), PersonDTO::setNumber));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), PersonDTO::setEmail));
+
+        TypeMap<User, PersonDTO> propertyMapper2 = modelMapper.createTypeMap(User.class, PersonDTO.class);
+        propertyMapper2.addMappings(mapper -> mapper.map(src -> src.getAddress().getCity(), PersonDTO::setCity));
+        propertyMapper2.addMappings(mapper -> mapper.map(src -> src.getAddress().getStreet(), PersonDTO::setStreet));
+        propertyMapper2.addMappings(mapper -> mapper.map(src -> src.getAddress().getCountry(), PersonDTO::setCountry));
+        propertyMapper2.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), PersonDTO::setNumber));
+        propertyMapper2.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), PersonDTO::setEmail));
+
+        TypeMap<SystemAdmin, PersonDTO> propertyMapper3 = modelMapper.createTypeMap(SystemAdmin.class, PersonDTO.class);
+        propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getCity(), PersonDTO::setCity));
+        propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getStreet(), PersonDTO::setStreet));
+        propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getCountry(), PersonDTO::setCountry));
+        propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), PersonDTO::setNumber));
+        propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), PersonDTO::setEmail));
     }
 
     @GetMapping

@@ -146,4 +146,4 @@ INSERT INTO public.account(
 
 INSERT INTO public.users(
 	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
-	VALUES ( null, null, null, null, null, null, null, 50, 0, 3, null);
+	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 3, null);

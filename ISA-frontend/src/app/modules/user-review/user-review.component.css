@@ -41,18 +41,23 @@ table td {
 
 .table-header {
     display: flex;
+    float: left;
+    margin-left: 0%;
 }
 
 p {
     float: left;
-    margin-right: auto;
+    margin-left: 0%;
 }
 
 button {
+    margin-top: 2%;
     background-color: #04AA6D;
     border: none;
     color: white;
     text-transform: uppercase;
+    width: 15%;
+    
 }
 
 .info-form {
@@ -60,5 +65,6 @@ button {
 }
 .column {
     float: left;
-    width: 50%;
+    width: 40%;
+    margin-left: 1%;
   }
