@@ -147,3 +147,10 @@ INSERT INTO public.account(
 INSERT INTO public.users(
 	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
 	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 3, null);
+
+INSERT INTO public.appointment(
+	date, description, duration, price, status, blood_bank_id)
+	VALUES ('2022-12-12', 'Test termin 1', 30, 5000, 'FREE', 1);
+INSERT INTO public.appointment(
+	date, description, duration, price, status, blood_bank_id)
+	VALUES ('2022-12-22', 'Test termin 2', 60, 10000, 'FREE', 2);
