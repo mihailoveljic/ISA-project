@@ -31,4 +31,7 @@ export class StaffNavbarComponent implements OnInit {
   navigateToCenterInfo() {
     this.router.navigate(['blood-bank-center-info']);
   }
+  navigateToUsersPreview(){
+    this.router.navigate([Route.USER_REVIEW]);
+  }
 }

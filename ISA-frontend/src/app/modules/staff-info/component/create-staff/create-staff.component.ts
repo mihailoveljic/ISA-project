@@ -32,7 +32,7 @@ export class CreateStaffComponent implements OnInit {
     this.formGroup1 = new FormGroup({
       name: new FormControl(),
       surname: new FormControl(),
-      jmbg: new FormControl(this.staffInfo.jmbg, [Validators.minLength(8)]),
+      jmbg: new FormControl(this.staffInfo.jmbg, [Validators.minLength(13)]),
       email: new FormControl(),
       phone: new FormControl(),
       gender: new FormControl()
@@ -48,6 +48,7 @@ export class CreateStaffComponent implements OnInit {
     });
     this.centerService.getAllBloodBanks().subscribe({
       next: (si) => {
+        
           this.centers = si
       }});
   }
@@ -60,7 +61,7 @@ export class CreateStaffComponent implements OnInit {
       next: (si) => {
         this.showSuccess('Successfully created staff account');
       },
-      error: (e) => this.showError(e.error)
+      error: (e) => this.showError(e.error.message)
     })
   }
 
