@@ -1,6 +1,7 @@
 package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.StaffDTO;
+import eu.dreamTeam.isabackend.dto.StaffMainInfoDTO;
 import eu.dreamTeam.isabackend.dto.StaffWithCenterDTO;
 import eu.dreamTeam.isabackend.dto.UpdatePasswordDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.*;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/staff")
@@ -49,6 +52,23 @@ public class StaffController {
         if (staff == null)
             throw new StaffNotExistedException();
         return new ResponseEntity<>(staffDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/colleagues")
+    public ResponseEntity<List<StaffMainInfoDTO>> getStaffForCenter(
+            @RequestParam String email) {
+        if(!accountService.check(email))
+            throw new AccountNotExistedException();
+        Staff staff = staffService.getByEmail(email);
+        if (staff == null)
+            throw new StaffNotExistedException();
+        List<Staff> staffList = staffService.getStaffFromSameCenter(staff.getId(),staff.getBloodBank().getId());
+        List<StaffMainInfoDTO> staffMainInfoDTOS = new ArrayList<>();
+        for(Staff s: staffList){
+            StaffMainInfoDTO staffMainInfoDTO = modelMapper.map(s, StaffMainInfoDTO.class);
+            staffMainInfoDTOS.add(staffMainInfoDTO);
+        }
+        return new ResponseEntity<>(staffMainInfoDTOS, HttpStatus.OK);
     }
 
     @PutMapping

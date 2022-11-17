@@ -84,4 +84,8 @@ public class StaffService {
     }
 
     public List<Staff> getAllStaff(){ return staffRepository.findAll(); }
+
+    public List<Staff> getStaffFromSameCenter(Long staffId, Long bankId) {
+        return staffRepository.getStaffFromSameCenter(staffId, bankId);
+    }
 }

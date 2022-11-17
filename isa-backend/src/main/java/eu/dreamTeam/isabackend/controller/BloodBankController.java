@@ -3,7 +3,6 @@ package eu.dreamTeam.isabackend.controller;
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.*;
 import eu.dreamTeam.isabackend.dto.BloodBankDTOs;
-import eu.dreamTeam.isabackend.dto.StaffDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.BankNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.FailedUpdateException;
@@ -14,7 +13,6 @@ import java.nio.file.*;
 import eu.dreamTeam.isabackend.service.AccountService;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
 import eu.dreamTeam.isabackend.service.BloodBankService;
-//import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,7 @@ import javax.validation.Valid;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/blood-bank")
@@ -70,22 +69,22 @@ public class BloodBankController {
         return new ResponseEntity<>(bloodBankDTO, HttpStatus.OK);
     }
 
-//    @PostMapping(value = "/notification", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<String> receiveNotification(
-//            HttpServletRequest httpServletRequest,
-//            @RequestPart("pdf") @Valid MultipartFile f) {
-//        var apiKey = httpServletRequest.getHeader("Authorization");
-//        if (!apiKeyService.ValidateApiKey(apiKey)){
-//            throw new InvalidApiKeyException();
-//        }
-//        try {
-//            Files.copy(f.getInputStream(), this.root.resolve("report_" +
-//                    RandomStringUtils.randomAlphanumeric(10) + ".pdf"));
-//        } catch (Exception e) {
-//            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
-//        }
-//        return new ResponseEntity<>("RECEIVED SUCCESSFULLY", HttpStatus.OK);
-//    }
+    @PostMapping(value = "/notification", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> receiveNotification(
+            HttpServletRequest httpServletRequest,
+            @RequestPart("pdf") @Valid MultipartFile f) {
+        var apiKey = httpServletRequest.getHeader("Authorization");
+        if (!apiKeyService.ValidateApiKey(apiKey)){
+            throw new InvalidApiKeyException();
+        }
+        try {
+            Files.copy(f.getInputStream(), this.root.resolve("report_" +
+                    UUID.randomUUID().toString().substring(0, 6) + ".pdf"));
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+        return new ResponseEntity<>("RECEIVED SUCCESSFULLY", HttpStatus.OK);
+    }
     @PutMapping
     public ResponseEntity<BloodBankDTO> updateInfo(
             @RequestBody @Valid BloodBankDTO updateBloodBankDTO) {
@@ -109,7 +108,7 @@ public class BloodBankController {
     @GetMapping("/get-all")
     public ResponseEntity<List<BloodBankDTO>> getAllBloodBanks() {
         List<BloodBank> banks = bloodBankService.getAllBloodBanks();
-        List<BloodBankDTO> bankDTOS = new ArrayList<BloodBankDTO>();
+        List<BloodBankDTO> bankDTOS = new ArrayList<>();
         for (BloodBank bank : banks) {
             BloodBankDTO bankDTO = modelMapper.map(bank, BloodBankDTO.class);
             bankDTOS.add(bankDTO);

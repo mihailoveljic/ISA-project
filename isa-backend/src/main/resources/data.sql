@@ -100,6 +100,14 @@ INSERT INTO public.question(
 INSERT INTO public.staff(
     id, gender, jmbg, name , phone_number, profession, profession_info, surname, account_id, address_id, blood_bank_id)
 VALUES (1, 'MALE', '0123456789666', 'Nikola', '061/12-34-567','Administrator centra', 'Menadzer', 'Holjevac', 1, 5, 1);
+INSERT INTO public.staff(
+    id, gender, jmbg, name , phone_number, profession, profession_info, surname, account_id, address_id, blood_bank_id)
+VALUES (2, 'MALE', '0011223344556', 'Pera', '069/11-22-333','Zdravstveni radnik', 'Medicinski brat', 'Peric', null, 4, 1);
+INSERT INTO public.staff(
+    id, gender, jmbg, name , phone_number, profession, profession_info, surname, account_id, address_id, blood_bank_id)
+VALUES (3, 'FEMALE', '1357902468007', 'Marija', '061/11-29-222','Doktor', 'Specijalista', 'Maric', null, 3, 1);
+
+
 
 INSERT INTO public.users(
 	id, gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
@@ -115,10 +123,23 @@ INSERT INTO public.blood_sample(
 VALUES (1, 500, 'A_POSITIVE', 1, null);
 INSERT INTO public.blood_sample(
     id, amount, blood_type, blood_bank_id, delivery_id)
-VALUES (2, 200, 'A_NEGATIVE', 1, null);
+VALUES (2, 1200, 'A_NEGATIVE', 1, null);
 INSERT INTO public.blood_sample(
     id, amount, blood_type, blood_bank_id, delivery_id)
-VALUES (3, 300, 'A_POSITIVE', 2, null);
+VALUES (3, 2500, 'B_POSITIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (4, 2000, 'B_NEGATIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (5, 1500, 'AB_POSITIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (6, 700, 'O_NEGATIVE', 1, null);
+INSERT INTO public.blood_sample(
+    id, amount, blood_type, blood_bank_id, delivery_id)
+VALUES (7, 300, 'A_POSITIVE', 2, null);
+
 INSERT INTO public.account(
 	id, email, password, required_password_change)
 	VALUES (3, 'mihailoveljic3010@gmail.com', null, false);

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Service
 public class BloodSampleService {
 
@@ -22,6 +24,10 @@ public class BloodSampleService {
 
     public double getBloodSampleAmount(String bloodType){
         return bloodSampleRepository.getBloodSampleAmount(bloodType);
+    }
+
+    public List<BloodSample> getBloodSamplesForCenter(Long centerId){
+        return bloodSampleRepository.getBloodSamplesByBloodBankId(centerId);
     }
 
 }

@@ -4,6 +4,8 @@ import eu.dreamTeam.isabackend.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface StaffRepository  extends JpaRepository<Staff, Long> {
     Staff getStaffById(Long id);
     @Query(value = "SELECT * FROM public.staff " +
@@ -14,4 +16,7 @@ public interface StaffRepository  extends JpaRepository<Staff, Long> {
     Staff getStaffByAccount_Email(String email);
 
     Staff getStaffByJmbg(String jmbg);
+    @Query(value = "SELECT * FROM public.staff " +
+            "WHERE staff.id != ?1 and staff.blood_bank_id = ?2", nativeQuery = true)
+    List<Staff> getStaffFromSameCenter(Long staffId, Long bankId);
 }

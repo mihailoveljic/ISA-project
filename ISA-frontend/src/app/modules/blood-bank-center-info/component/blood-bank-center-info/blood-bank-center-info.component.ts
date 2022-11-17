@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { BloodSample } from '../../model/BloodSample';
 import { CenterInfo } from '../../model/CenterInfo';
+import { StaffMainInfo } from '../../model/StaffMainInfo';
 import { BloodBankCenterInfoService } from '../../service/blood-bank-center-info.service';
 
 @Component({
@@ -19,6 +22,14 @@ export class BloodBankCenterInfoComponent implements OnInit {
   centerInfo: CenterInfo = {name: '', id: 0, description: '', averageRating: 0, startTime: '', endTime: '', 
                           number: '', street: '', city: '', country: ''};
   centerInfoCopy!: CenterInfo;
+  dataSourceStaff = new MatTableDataSource<StaffMainInfo>();
+  displayedColumnsStaff = ['name', 'surname', 'phoneNumber', 'profession'];
+  staffList: StaffMainInfo[] = [];
+  staff!: StaffMainInfo;
+  dataSourceSamples = new MatTableDataSource<BloodSample>();
+  displayedColumnsSamples = ['bloodType', 'amount'];
+  sampleList: BloodSample[] = [];
+  sample!: BloodSample;
 
   constructor(private toastr : ToastrService, private authService: AuthService, private centerInfoService: BloodBankCenterInfoService) { }
 
@@ -37,6 +48,14 @@ export class BloodBankCenterInfoComponent implements OnInit {
       country: new FormControl(),
     });
     this.user = this.authService.getUser();
+    this.centerInfoService.getColleagues(this.user?.email).subscribe(res => {
+      this.staffList = res;
+      this.dataSourceStaff.data = this.staffList;
+    })
+    this.centerInfoService.getSamples(this.user?.email).subscribe(res => {
+      this.sampleList = res;
+      this.dataSourceSamples.data = this.sampleList;
+    })
     this.centerInfoService.get(this.user?.email).subscribe({
       next: (ci) => {
         this.centerInfo = ci;
