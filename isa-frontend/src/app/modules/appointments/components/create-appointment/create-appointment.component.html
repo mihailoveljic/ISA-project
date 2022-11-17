@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="create-appointment-div">
+    <span class="mat-display-1">Create new appointment</span>
+    <form class="create-appointment-form" [formGroup]="formGroup">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Enter duration:</mat-label>
+            <input matInput type="number" name="duration" formControlName="duration">
+            <mat-hint>in minutes</mat-hint>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Description:</mat-label>
+            <input matInput type="text" name="description" formControlName="description">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Price:</mat-label>
+            <input matInput type="number" name="price" formControlName="price">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <input matInput type="date" name="dateOfAppointment" formControlName="dateOfAppointment">
+        </mat-form-field><br>
+    </form>
+        <div class="time-picker-div">
+            <ngx-timepicker-field [(ngModel)]="timeOfAppointment"></ngx-timepicker-field><br>
+            <mat-hint>If you dont choose time it will be 12:00 AM</mat-hint>
+        </div><br>
+        <button mat-raised-button color="primary" (click)="createAppointment()" [disabled]="timeOfAppointment=='' || timeOfAppointment=='12:00 PM' || !formGroup.valid">Create</button>
+</div>

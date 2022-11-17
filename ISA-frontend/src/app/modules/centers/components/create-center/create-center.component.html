@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="center-div">
+    <span class="mat-display-1">Create blood bank center</span>
+    <div>
+    <div class="column">
+        <form class="center-info-form" [formGroup]="formGroup1">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Name:</mat-label>
+            <input matInput type="text" name="name" formControlName="name" [(ngModel)]="centerInfo.name">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Description:</mat-label>
+            <input matInput type="text" name="description" formControlName="description" [(ngModel)]="centerInfo.description">
+        </mat-form-field><br>
+        
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Start of working hours:</mat-label>
+            <input matInput [format]="24" [ngxTimepicker]="pickerStart" name="start" formControlName="start" [(ngModel)]="centerInfo.startTime">
+            <ngx-material-timepicker #pickerStart></ngx-material-timepicker>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>End of working hours:</mat-label>
+            <input matInput [format]="24" [ngxTimepicker]="pickerEnd" name="end" formControlName="end" [(ngModel)]="centerInfo.endTime">
+            <ngx-material-timepicker #pickerEnd></ngx-material-timepicker>
+        </mat-form-field>
+        </form>
+    </div>
+    <div class="column">
+        <form class="center-info-form" [formGroup]="formGroup2">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Number:</mat-label>
+            <input matInput type="text" name="num" formControlName="num" [(ngModel)]="centerInfo.number">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Street:</mat-label>
+            <input matInput type="text" name="street" formControlName="street" [(ngModel)]="centerInfo.street">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>City:</mat-label>
+            <input matInput type="text" name="city" formControlName="city" [(ngModel)]="centerInfo.city">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Country:</mat-label>
+            <input matInput type="text" name="country" formControlName="country" [(ngModel)]="centerInfo.country">
+        </mat-form-field>
+    </form>
+    </div>
+    
+    </div>
+    <button class="button" mat-raised-button color="primary" (click)="createCenter()" [disabled]="!formGroup1.valid || !formGroup2.valid">Create center</button>
+    
+</div>

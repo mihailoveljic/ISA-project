@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row *ngIf="!user">
+      <app-guest-navbar></app-guest-navbar>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="user && user.roles.includes('user')">
+      <app-user-navbar></app-user-navbar>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="user && user.roles.includes('staff')">
+      <app-staff-navbar></app-staff-navbar>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="user && user.roles.includes('admin')">
+      <app-admin-navbar></app-admin-navbar>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+    

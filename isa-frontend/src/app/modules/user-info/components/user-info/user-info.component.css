@@ -1,0 +1,35 @@
+.user-info-div {
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+}
+.user-info-form {
+    margin-top: 1%;
+}
+.button {
+    margin: 1%;
+}
+.column {
+    float: left;
+    width: 50%;
+  }
+
+.user-type-info {
+    margin-top: 2%;
+    margin-right: 2%;
+    display: flex;
+    justify-content: flex-end;
+    left: 80%;
+    position: absolute;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+}
+
+
+.user-type-details-button{
+    margin-bottom: 5%;
+}

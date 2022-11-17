@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+
+<div class="center-info-div">
+    <span class="mat-display-1">Blood bank center info</span>
+    <div>
+    <div class="column">
+        <form class="center-info-form" [formGroup]="formGroup1">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Name:</mat-label>
+            <input matInput type="text" name="name" formControlName="name" [(ngModel)]="centerInfo.name">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Description:</mat-label>
+            <input matInput type="text" name="description" formControlName="description" [(ngModel)]="centerInfo.description">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Average rating:</mat-label>
+            <input matInput type="number" min="1" max="5" name="rating" formControlName="rating" [(ngModel)]="centerInfo.averageRating">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Start of working hours:</mat-label>
+            <input matInput [format]="24" [ngxTimepicker]="pickerStart" name="start" formControlName="start" [(ngModel)]="centerInfo.startTime">
+            <ngx-material-timepicker #pickerStart></ngx-material-timepicker>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>End of working hours:</mat-label>
+            <input matInput [format]="24" [ngxTimepicker]="pickerEnd" name="end" formControlName="end" [(ngModel)]="centerInfo.endTime">
+            <ngx-material-timepicker #pickerEnd></ngx-material-timepicker>
+        </mat-form-field>
+        </form>
+    </div>
+    <div class="column">
+        <form class="center-info-form" [formGroup]="formGroup2">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Number:</mat-label>
+            <input matInput type="text" name="num" formControlName="num" [(ngModel)]="centerInfo.number">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Street:</mat-label>
+            <input matInput type="text" name="street" formControlName="street" [(ngModel)]="centerInfo.street">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>City:</mat-label>
+            <input matInput type="text" name="city" formControlName="city" [(ngModel)]="centerInfo.city">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Country:</mat-label>
+            <input matInput type="text" name="country" formControlName="country" [(ngModel)]="centerInfo.country">
+        </mat-form-field>
+    </form>
+    </div>
+    </div>
+    <button class="button" mat-raised-button color="primary" (click)="updateCenterInfo()" [disabled]="!formGroup1.valid || !formGroup2.valid">Save changes</button>
+    <button class="button" mat-raised-button color="primary" (click)="undoChanges()">Undo changes</button>
+</div>
+<div class="container">
+    <div class="table-header">
+        <p class="table-title">Other staff of the blood bank center</p>
+    </div>
+    <table mat-table [dataSource]="dataSourceStaff">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Surname </th>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.surname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Phone number </th>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.phoneNumber}}</td>
+        </ng-container>
+        <ng-container matColumnDef="profession">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Profession </th>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.profession}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsStaff; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsStaff;"></tr>
+    </table>
+</div>
+
+<div class="container">
+    <div class="table-header">
+        <p class="table-title">Available blood suply</p>
+    </div>
+    <table mat-table [dataSource]="dataSourceSamples">
+        <ng-container matColumnDef="bloodType">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Blood type </th>
+            <td mat-cell *matCellDef="let sample" class="cell-center">{{sample.bloodType}}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Amount </th>
+            <td mat-cell *matCellDef="let sample" class="cell-center">{{sample.amount}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSamples; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSamples;"></tr>
+    </table>
+</div>

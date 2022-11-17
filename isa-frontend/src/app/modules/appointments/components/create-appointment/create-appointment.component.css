@@ -1,0 +1,11 @@
+.create-appointment-div {
+    margin: 10%;
+    text-align: center;
+}
+.create-appointment-form {
+    margin-top: 10%;
+}
+.time-picker-div {
+    width: 220px;
+    margin: auto;
+}

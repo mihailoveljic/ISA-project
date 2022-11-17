@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+  <mat-card-title class="question"><h2>{{ questionNumber }}. {{question.text }}</h2></mat-card-title>
+  <mat-card-content>
+    <br>
+    <br>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions class="commands">
+    <button (click)="yes()" class="button" mat-button>YES</button>
+    <button (click)="no()" class="button" mat-button>NO</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar color="primary" style="height: 10px;" mode="determinate" [value]="progress"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
