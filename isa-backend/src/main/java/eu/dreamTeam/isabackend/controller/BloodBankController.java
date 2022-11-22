@@ -41,7 +41,7 @@ public class BloodBankController {
     private final ModelMapper modelMapper;
 
     //private final Path root = Paths.get("pdfs");
-    private final Path root = Paths.get("ISA-project/isa-backend/src/main/resources/pdfs");
+    private final Path root = Paths.get("isa-backend/src/main/resources/pdfs");
 
 
     public BloodBankController(ModelMapper modelMapper, ApiKeyService apiKeyService) {

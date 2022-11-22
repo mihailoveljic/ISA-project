@@ -10,6 +10,11 @@
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field><br>
+  <mat-form-field class="date-field" appearance="outline" color="primary" >
+    <mat-label>Start Time:</mat-label>
+    <input matInput [format]="24" [ngxTimepicker]="pickerStart" name="start" [(ngModel)]="news.startTime">
+    <ngx-material-timepicker #pickerStart></ngx-material-timepicker>
   </mat-form-field>
   <br>
   <mat-form-field class="message-field" appearance="fill">

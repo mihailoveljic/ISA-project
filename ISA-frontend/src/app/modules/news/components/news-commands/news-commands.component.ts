@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog'
 import { AddNewsDialogComponent } from '../add-news-dialog/add-news-dialog.component';
 
@@ -9,6 +9,9 @@ import { AddNewsDialogComponent } from '../add-news-dialog/add-news-dialog.compo
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsCommandsComponent implements OnInit {
+
+@Output()
+onAdd = new EventEmitter<any>();
 
   constructor(
     private dialog: MatDialog
@@ -23,6 +26,7 @@ export class NewsCommandsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.onAdd.emit(result.data)
       console.log('The dialog was closed');
     });
   }

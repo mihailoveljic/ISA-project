@@ -1,3 +1,4 @@
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +11,7 @@ import { AddNewsDialogComponent } from './components/add-news-dialog/add-news-di
 import { NewsRoutingModule } from './news-routing.module';
 import { MaterialElevationDirective } from '../../utils/directives/material-elevation.directive';
 import { ViewNewsDialogComponent } from './components/view-news-dialog/view-news-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,10 @@ import { FormsModule } from '@angular/forms';
     NewsRoutingModule,
     NavbarModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    NgxMaterialTimepickerModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class NewsModule { }
