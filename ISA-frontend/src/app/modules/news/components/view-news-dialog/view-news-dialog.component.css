@@ -1,0 +1,15 @@
+.commands{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button{
+    margin-top: 5%;
+    width: 100px;
+    height: 48px;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+}

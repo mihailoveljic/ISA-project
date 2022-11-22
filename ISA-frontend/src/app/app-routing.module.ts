@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },
   {path: Route.USER_REVIEW, component: UserReviewComponent},
   { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) },
-  {path: Route.USER_INFO, component: UserInfoComponent}
+  {path: Route.USER_INFO, component: UserInfoComponent},
+  { path: 'news', loadChildren: () => import('./modules/news/news.module').then(m => m.NewsModule) }
 ];
 
 @NgModule({

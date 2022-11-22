@@ -15,6 +15,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -34,6 +36,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     MatPaginatorModule,
     MatSortModule,
     MatProgressBarModule,
+    MatDialogModule,
   ],
   providers: [MatDatepickerModule],
   exports: [
@@ -50,6 +53,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     MatPaginatorModule,
     MatSortModule,
     MatProgressBarModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

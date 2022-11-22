@@ -40,7 +40,8 @@ public class BloodBankController {
     private final ApiKeyService apiKeyService;
     private final ModelMapper modelMapper;
 
-    private final Path root = Paths.get("src/main/resources/pdfs");
+    //private final Path root = Paths.get("pdfs");
+    private final Path root = Paths.get("isa-backend/src/main/resources/pdfs");
 
 
     public BloodBankController(ModelMapper modelMapper, ApiKeyService apiKeyService) {
@@ -78,8 +79,8 @@ public class BloodBankController {
             throw new InvalidApiKeyException();
         }
         try {
-            Files.copy(f.getInputStream(), this.root.resolve("report_" +
-                    UUID.randomUUID().toString().substring(0, 6) + ".pdf"));
+            Files.copy(f.getInputStream(), this.root.toAbsolutePath().resolve("report_" +
+                    UUID.randomUUID().toString() + ".pdf"));
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
