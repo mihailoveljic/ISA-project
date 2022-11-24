@@ -6,6 +6,10 @@ import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
 import eu.dreamTeam.isabackend.repository.WorkTimeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,5 +78,19 @@ public class BloodBankService {
 
     public List<BloodBank> getAll() {
         return bloodBankRepository.findAll();
+    }
+    public Page<BloodBank> getAllWithPageable(int page, int size, String order, String field) {
+        Pageable pageable = getPageable(page,size,order, field);
+        return bloodBankRepository.findAll(pageable);
+    }
+    private Pageable getPageable(int page, int size, String order, String field) {
+        Pageable pageable = null;
+        if (order.equals("none"))
+            pageable = PageRequest.of(page, size, Sort.unsorted());
+        else if (order.equals("asc"))
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc(field)));
+        if (order.equals("desc"))
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc(field)));
+        return pageable;
     }
 }

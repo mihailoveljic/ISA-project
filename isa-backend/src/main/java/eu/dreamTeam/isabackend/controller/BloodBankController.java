@@ -16,6 +16,7 @@ import eu.dreamTeam.isabackend.service.BloodBankService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -126,6 +127,18 @@ public class BloodBankController {
         BloodBankDTOs response = BloodBankDTOs.builder()
                                         .bloodBanks(bloodBankDTOs)
                                         .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @GetMapping("/getAll/{page}/{size}/{order}/{field}")
+    public ResponseEntity<BloodBankDTOs> getAllWithPageable(@PathVariable int page, @PathVariable int size,
+                                                @PathVariable String order, @PathVariable String field){
+        Page<BloodBank> bloodbanks = this.bloodBankService.getAllWithPageable(page,size,order,field);
+
+        List<BloodBankDTO> bloodBankDTOs = bloodbanks.stream().map(bloodBank -> modelMapper.map(bloodBank, BloodBankDTO.class)).toList();
+
+        BloodBankDTOs response = BloodBankDTOs.builder()
+                .bloodBanks(bloodBankDTOs)
+                .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
