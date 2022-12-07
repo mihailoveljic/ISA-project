@@ -22,6 +22,16 @@ public class BloodSampleService {
         return bloodSampleRepository.getBloodSample(bloodType);
     }
 
+    public boolean getBloodSampleForPurchase(String bloodType, double amount){
+        for(BloodSample bs : bloodSampleRepository.getBloodSamplesByBanks(bloodType))
+            if(bs.getAmount() >= amount){
+                bs.setAmount(bs.getAmount() - amount);
+                bloodSampleRepository.save(bs);
+                return true;
+            }
+        return false;
+    }
+
     public double getBloodSampleAmount(String bloodType){
         return bloodSampleRepository.getBloodSampleAmount(bloodType);
     }

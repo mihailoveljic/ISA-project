@@ -256,25 +256,25 @@ VALUES ('e67553a6-1b8e-48af-a393-cd9603ac1b29', 'true');
 
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 500, 'A_POSITIVE', 1, null);
+VALUES ( 500, 'A_POS', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES (1200, 'A_NEGATIVE', 1, null);
+VALUES (1200, 'A_NEG', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES (2500, 'B_POSITIVE', 1, null);
+VALUES (2500, 'B_POS', 1, null);
 INSERT INTO public.blood_sample(
      amount, blood_type, blood_bank_id, delivery_id)
-VALUES (2000, 'B_NEGATIVE', 1, null);
+VALUES (2000, 'B_NEG', 1, null);
 INSERT INTO public.blood_sample(
      amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 1500, 'AB_POSITIVE', 1, null);
+VALUES ( 1500, 'AB_POS', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES (700, 'O_NEGATIVE', 1, null);
+VALUES (700, 'ZERO_NEG', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 300, 'A_POSITIVE', 2, null);
+VALUES ( 300, 'A_POS', 2, null);
 
 INSERT INTO public.account(
 	email, password, required_password_change)
