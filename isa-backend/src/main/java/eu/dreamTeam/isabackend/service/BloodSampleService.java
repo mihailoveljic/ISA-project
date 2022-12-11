@@ -39,5 +39,8 @@ public class BloodSampleService {
     public List<BloodSample> getBloodSamplesForCenter(Long centerId){
         return bloodSampleRepository.getBloodSamplesByBloodBankId(centerId);
     }
+    public List<BloodSample> getAll(){
+        return bloodSampleRepository.findAll();
+    }
 
 }
