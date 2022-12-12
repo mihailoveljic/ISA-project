@@ -89,7 +89,7 @@ public class StaffController {
             throw new NotUniqueJmbgException();
         Staff staff = staffService.create(createStaffDTO);
         if (staff == null)
-            throw new FailedUpdateException(); //TODO
+            throw new FailedUpdateException();
         return new ResponseEntity<>(createStaffDTO, HttpStatus.OK);
     }
 

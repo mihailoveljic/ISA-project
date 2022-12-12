@@ -29,6 +29,7 @@ public class RabbitMqConfig {
     public Queue register_queue(){
         return new Queue(Constants.REGISTER_QUEUE);
     }
+
     @Bean
     public Queue delivery_queue(){
         return new Queue(Constants.DELIVERY_QUEUE);
@@ -58,6 +59,31 @@ public class RabbitMqConfig {
     public Binding delivery_binding(Queue delivery_queue, TopicExchange delivery_exchange){
         return BindingBuilder.bind(delivery_queue).to(delivery_exchange).with(Constants.DELIVERY_ROUTING_KEY);
     }
+    @Bean
+    public Queue tendersQueue(){
+        return new Queue(Constants.TENDERS_QUEUE);
+    }
+    @Bean
+    public TopicExchange tendersExchange(){
+        return new TopicExchange(Constants.TENDERS_EXCHANGE);
+    }
+    @Bean
+    public Binding tendersBinding(Queue tendersQueue, TopicExchange tendersExchange){
+        return BindingBuilder.bind(tendersQueue).to(tendersExchange).with(Constants.TENDERS_ROUTING_KEY);
+    }
+    @Bean
+    public Queue tenderOfferConfirmationsQueue(){
+        return new Queue(Constants.TENDER_OFFER_CONFIRMATIONS_QUEUE);
+    }
+    @Bean
+    public TopicExchange tenderOfferConfirmationsExchange(){
+        return new TopicExchange(Constants.TENDER_OFFER_CONFIRMATIONS_EXCHANGE);
+    }
+    @Bean
+    public Binding tenderOfferConfirmationsBinding(Queue tenderOfferConfirmationsQueue, TopicExchange tenderOfferConfirmationsExchange){
+        return BindingBuilder.bind(tenderOfferConfirmationsQueue).to(tenderOfferConfirmationsExchange).with(Constants.TENDER_OFFER_CONFIRMATIONS_ROUTING_KEY);
+    }
+
     @Bean
     public MessageConverter converter() {
         return new Jackson2JsonMessageConverter();

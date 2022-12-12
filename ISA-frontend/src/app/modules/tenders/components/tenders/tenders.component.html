@@ -1,0 +1,36 @@
+<div class="news-container">
+  <mat-card class="news-card" *ngFor="let tenderMessage of tenderMessages" appMaterialElevation>
+      <mat-card-header>
+          <mat-card-title *ngIf="tenderMessage.AcceptedTenderOffer.Email == user?.email">Tender Won!</mat-card-title>
+          <mat-card-title *ngIf="tenderMessage.AcceptedTenderOffer.Email != user?.email">Tender Lost!</mat-card-title>
+          <mat-card-subtitle>{{ tenderMessage.Tender.FromDate | date: 'dd/MM/yyy' }} - {{ tenderMessage.Tender.ToDate | date: 'dd/MM/yyy' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content >
+        <table class="demmands-table">
+          <tr>
+            <th width="50%" style="border: 1px solid gray;">BloodType</th>
+            <th width="50%" style="border: 1px solid gray;">Amount</th>
+          </tr>
+          <tr *ngFor="let bid of tenderMessage.AcceptedTenderOffer.Bids">
+            <td width="50%" style="border: 1px solid gray;">{{bid.BloodRequest.BloodType | transformBloodType}}</td>
+            <td width="50%" style="border: 1px solid gray;">{{bid.BloodRequest.Quantity}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+      <mat-card-actions>
+        <div *ngIf="tenderMessage.AcceptedTenderOffer.Email == user?.email">
+          <button mat-raised-button (click)="confirmTenderOffer(tenderMessage)" >
+            <mat-icon fontIcon="check"></mat-icon>
+          </button>
+          <button mat-raised-button (click)="revokeTenderOffer(tenderMessage)">
+            <mat-icon fontIcon="close"></mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tenderMessage.AcceptedTenderOffer.Email != user?.email">
+          <button mat-raised-button (click)="deleteTenderMessage(tenderMessage)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+  </mat-card>
+</div>
