@@ -17,8 +17,8 @@ public class MonthlyDeliveryPublisher {
     /*@Value("${myServerAddress}")
     private String serverAddress;*/
 
-    public String send(@RequestBody MonthlyDeliveryDTO monthlyDeliveryDTO){
-        template.convertAndSend(Constants.DELIVERY_EXCHANGE, monthlyDeliveryDTO);
+    public String send(@RequestBody MonthlyDeliveryDTO monthlyDeliveryDTO){ //
+        template.convertAndSend(Constants.DELIVERY_EXCHANGE,Constants.DELIVERY_ROUTING_KEY, monthlyDeliveryDTO);
         return "Message sent to rabbitMQ";
     }
 }

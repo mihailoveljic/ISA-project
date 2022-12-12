@@ -39,8 +39,8 @@ public class RabbitMqConfig {
         return new TopicExchange(Constants.EXCHANGE);
     }*/
     @Bean
-    public FanoutExchange delivery_exchange() {
-        return new FanoutExchange(Constants.DELIVERY_EXCHANGE);
+    public TopicExchange delivery_exchange() {
+        return new TopicExchange(Constants.DELIVERY_EXCHANGE);
     }
     @Bean
     public FanoutExchange register_exchange() {
@@ -55,8 +55,8 @@ public class RabbitMqConfig {
         return BindingBuilder.bind(register_queue()).to(register_exchange());
     }
     @Bean
-    public Binding delivery_binding(){
-        return BindingBuilder.bind(delivery_queue()).to(delivery_exchange());
+    public Binding delivery_binding(Queue delivery_queue, TopicExchange delivery_exchange){
+        return BindingBuilder.bind(delivery_queue).to(delivery_exchange).with(Constants.DELIVERY_ROUTING_KEY);
     }
     @Bean
     public MessageConverter converter() {

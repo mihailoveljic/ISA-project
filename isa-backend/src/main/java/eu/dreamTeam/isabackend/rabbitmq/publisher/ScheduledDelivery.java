@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 @Component
+@EnableScheduling
 public class ScheduledDelivery {
     private final MonthlyDeliveryPublisher monthlyDeliveryPublisher;
     private final HospitalService hospitalService;
@@ -30,7 +31,7 @@ public class ScheduledDelivery {
         this.bloodSampleService = bloodSampleService;
     }
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 60*3000)
     public void sendMessage() {
         List<Hospital> hospitals = hospitalService.getAll();
         List<BloodSample> samples = bloodSampleService.getAll();
@@ -52,7 +53,7 @@ public class ScheduledDelivery {
         MonthlyDeliveryDTO mdDTO = new MonthlyDeliveryDTO();
         mdDTO.setMessage(message);
         mdDTO.setBloodSamples(dtos);
-        monthlyDeliveryPublisher.send(mdDTO);
+        monthlyDeliveryPublisher.send(mdDTO); //
         System.out.println("Sent :" + message.toString());
     }
 }
