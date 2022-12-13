@@ -1,12 +1,12 @@
-<div class="news-container">
-  <mat-card class="news-card" *ngFor="let tenderMessage of tenderMessages" appMaterialElevation>
+<app-navbar></app-navbar>
+  <mat-card class="news-card" style="width: 10%; margin: auto; text-align: center;" *ngFor="let tenderMessage of tenderMessages" appMaterialElevation >
       <mat-card-header>
           <mat-card-title *ngIf="tenderMessage.AcceptedTenderOffer.Email == user?.email">Tender Won!</mat-card-title>
           <mat-card-title *ngIf="tenderMessage.AcceptedTenderOffer.Email != user?.email">Tender Lost!</mat-card-title>
           <mat-card-subtitle>{{ tenderMessage.Tender.FromDate | date: 'dd/MM/yyy' }} - {{ tenderMessage.Tender.ToDate | date: 'dd/MM/yyy' }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content >
-        <table class="demmands-table">
+      <mat-card-content style="display: flex; justify-content: center;">
+        <table>
           <tr>
             <th width="50%" style="border: 1px solid gray;">BloodType</th>
             <th width="50%" style="border: 1px solid gray;">Amount</th>
@@ -33,4 +33,3 @@
         </div>
       </mat-card-actions>
   </mat-card>
-</div>

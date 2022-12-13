@@ -4,6 +4,7 @@ import eu.dreamTeam.isabackend.dto.message.TenderOfferConfirmationMessage;
 import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.rabbitmq.publisher.TenderOfferConfirmationMessagePublisher;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
+import eu.dreamTeam.isabackend.service.BloodSampleService;
 import eu.dreamTeam.isabackend.service.TenderMessageService;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class TenderMessageController {
 
     @Autowired
     private TenderMessageService tenderMessageService;
+    @Autowired
+    private BloodSampleService bloodSampleService;
+
 
     @Autowired
     private TenderOfferConfirmationMessagePublisher tenderOfferConfirmationMessagePublisher;
@@ -39,18 +43,31 @@ public class TenderMessageController {
         var tenderOffer = tenderMessageService.getTenderOfferById(tenderOfferId);
         if(tenderOffer == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        var tenderOfferConfirmationMessage = TenderOfferConfirmationMessage.builder()
+        var bids = tenderOffer.getBids();
+        boolean canSubstract = true;
+        for(var bid: bids) {
+            var result = bloodSampleService.canSubstractBloodSamples(bid.getBloodRequest().getBloodType(), bid.getBloodRequest().getQuantity());
+            if(!result) canSubstract = false;
+        }
+        if(canSubstract) {
+            for(var bid: bids) {
+                bloodSampleService.substractBloodSamples(bid.getBloodRequest().getBloodType(), bid.getBloodRequest().getQuantity());
+            }
+            var tenderOfferConfirmationMessage = TenderOfferConfirmationMessage.builder()
                     .tenderOfferId(tenderOffer.getId())
                     .tenderId(tenderOffer.getTenderId())
                     .confirmed(true)
-                .build();
+                    .build();
 
-        tenderOfferConfirmationMessagePublisher.sendMessage(tenderOfferConfirmationMessage);
-        tenderMessageService.deleteTenderMessage(tenderOfferId);
+            tenderOfferConfirmationMessagePublisher.sendMessage(tenderOfferConfirmationMessage);
+            tenderMessageService.deleteTenderMessage(tenderOfferId);
 
-        // TODO obrisati stavke iz tenderOffer.bids iz baze na ISA strani
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+
+
     }
 
     @GetMapping(value = "/revoke/{tenderOfferId}")
