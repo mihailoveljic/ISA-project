@@ -1,6 +1,7 @@
 package eu.dreamTeam.isabackend.service;
 
 import eu.dreamTeam.isabackend.model.BloodSample;
+import eu.dreamTeam.isabackend.model.enums.BloodType;
 import eu.dreamTeam.isabackend.repository.BloodSampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,4 +41,15 @@ public class BloodSampleService {
         return bloodSampleRepository.getBloodSamplesByBloodBankId(centerId);
     }
 
+    public void substractBloodSamples(BloodType bloodType, double quantity) {
+        var bloodSampleFromDb = bloodSampleRepository.findByBloodType(bloodType);
+        if(canSubstractBloodSamples(bloodType, quantity)){
+            bloodSampleFromDb.setAmount(bloodSampleFromDb.getAmount() - quantity);
+            bloodSampleRepository.save(bloodSampleFromDb);
+        }
+    }
+    public boolean canSubstractBloodSamples(BloodType bloodType, double quantity) {
+        var bloodSampleFromDb = bloodSampleRepository.findByBloodType(bloodType);
+        return !(bloodSampleFromDb.getAmount() - quantity < 0);
+    }
 }

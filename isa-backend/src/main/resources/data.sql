@@ -244,7 +244,6 @@ INSERT INTO public.staff(
 VALUES ('FEMALE', '1357902468007', 'Marija', '061/11-29-222','Doktor', 'Specijalista', 'Maric', null, 3, 1);
 
 
-
 INSERT INTO public.users(
 	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
 	VALUES ('MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 50, 3, 2, 6);
@@ -256,7 +255,7 @@ VALUES ('e67553a6-1b8e-48af-a393-cd9603ac1b29', 'true');
 
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 100, 'A_POS', 1, null);
+VALUES ( 0, 'A_POS', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
 VALUES (2000, 'A_NEG', 1, null);
@@ -278,9 +277,7 @@ VALUES (2000, 'ZERO_NEG', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
 VALUES (2000, 'ZERO_POS', 1, null);
-INSERT INTO public.blood_sample(
-    amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 3000, 'A_POS', 2, null);
+
 
 INSERT INTO public.account(
 	email, password, required_password_change)

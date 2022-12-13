@@ -30,4 +30,9 @@ export class AdminNavbarComponent implements OnInit {
     this.router.navigate([Route.USER_REVIEW]);
   }
 
+  navigateToTenders(){
+    this.router.navigate([Route.TENDERS]);
+  }
+
+
 }

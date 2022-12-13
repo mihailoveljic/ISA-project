@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { TenderMessageService } from '../../services/tender-message.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
@@ -15,7 +16,8 @@ export class TendersComponent implements OnInit, AfterViewInit {
   
   constructor(
     private tenderMessageService: TenderMessageService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllTenderMessages();
@@ -48,6 +50,10 @@ export class TendersComponent implements OnInit, AfterViewInit {
     this.tenderMessageService.confirmTenderOffer(tenderMessage.AcceptedTenderOffer.Id).subscribe(
       (response: any) =>{
         this.getAllTenderMessages();
+        this.toastrService.success("Tender offer confirmed!");
+      },
+      (error: any) =>{
+        this.toastrService.error("Not enough blood in bank!");
       }
     );
   }

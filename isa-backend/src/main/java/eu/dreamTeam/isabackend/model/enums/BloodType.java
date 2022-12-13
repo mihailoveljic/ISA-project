@@ -1,12 +1,12 @@
 package eu.dreamTeam.isabackend.model.enums;
 
 public enum BloodType  {
-        A_POS,
-        A_NEG,
-        B_POS,
-        B_NEG,
         AB_POS,
-        AB_NEG,
+        A_POS,
+        B_POS,
         ZERO_POS,
+        AB_NEG,
+        A_NEG,
+        B_NEG,
         ZERO_NEG
         }
