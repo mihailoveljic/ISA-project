@@ -26,5 +26,4 @@ public class NewsForHospital {
     private String description;
     private String title;
     private String serverAddress;
-
 }

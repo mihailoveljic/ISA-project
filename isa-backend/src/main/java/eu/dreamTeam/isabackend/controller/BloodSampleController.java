@@ -46,8 +46,8 @@ public class BloodSampleController {
     @GetMapping
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
-            @RequestParam @Pattern(regexp = "^(A|B|AB|O)_(POSITIVE|NEGATIVE)$") String bloodType,
-            @RequestParam @Pattern(regexp = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])$") String amount
+            @RequestParam @Pattern(regexp = "^(A|B|AB|ZERO)_(POS|NEG)$") String bloodType,
+            @RequestParam @Pattern(regexp = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9])$") String amount
     )
         {
             var apiKey = httpServletRequest.getHeader("Authorization");

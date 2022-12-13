@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,7 @@ import { StaffInfoComponent } from './modules/staff-info/component/staff-info/st
 import { MatSelectModule } from '@angular/material/select';
 import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/component/blood-bank-center-info/blood-bank-center-info.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {CentersModule} from './modules/centers/centers.module';
+import { CentersModule } from './modules/centers/centers.module';
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoModule } from './modules/user-info/user-info.module';

@@ -14,4 +14,7 @@ export class BloodBankService {
   getAll(){
     return this.http.get(this.url + '/getAll');
   }
+  getAllWithPageable(page:any,size:any,order:any,field:any) {
+    return this.http.get(this.url + '/getAll/' + page + '/' + size + '/' + order + '/' + field);
+  }
 }

@@ -4,7 +4,7 @@ import { BloodBankService } from './../../services/blood-bank.service';
 import { Center } from './../../../../models/Center';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RatingChangeEvent } from 'angular-star-rating';
 import { ToastrService } from 'ngx-toastr';
@@ -26,6 +26,11 @@ export class CentersListComponent implements OnInit, AfterViewInit {
   closesTime: any;
   closesTimeFilter: any;
 
+  field: string = 'name';
+  order: string = 'desc';
+  page: number = 0;
+  size: number = 10;
+  centersWithPageable: any;
 
   searchbar:string="";
   // constructor(private bloodBankService: BloodBankService,
@@ -60,7 +65,29 @@ export class CentersListComponent implements OnInit, AfterViewInit {
       this.user = this.authService.getUser();
       this.getAllCenters();
   }
-  
+  onSortChange(event: Sort) {
+    if(event.active == 'startTime' || event.active == 'endTime' || event.active == 'street' || event.active == 'number' || event.active == 'city' || event.active == 'country') return;
+    this.order = event.direction;
+    this.field = event.active;
+    this.getAllWithPageable();
+  }
+  onPaginationChange(event: any) {
+    this.page = event.pageIndex;
+    this.size = event.pageSize
+    this.getAllWithPageable();
+  }
+  getAllWithPageable(){
+    if(this.order==''){
+      this.order = 'none';
+    }
+    this.bloodBankService.getAllWithPageable(this.page, this.size,this.order,this.field).subscribe((response: any) =>{
+      this.centersWithPageable = response.bloodBanks;
+      this.getAllCities(this.centersWithPageable);
+      this.dataSource = new MatTableDataSource(this.centers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
   getAllCenters(){
     this.bloodBankService.getAll().subscribe((response: any) =>{
       this.centers = response.bloodBanks;

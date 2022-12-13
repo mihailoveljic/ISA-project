@@ -23,7 +23,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input [(ngModel)] = "searchbar">
     </mat-form-field>
     <div class="mat-elevation-z8 table">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)">
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -78,7 +78,7 @@
         </tr>
       </table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of centers"></mat-paginator>
+      <mat-paginator (page)="onPaginationChange($event)" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of centers"></mat-paginator>
     </div>
   </div>
   <div class="time-pickers">
