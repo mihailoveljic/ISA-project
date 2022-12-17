@@ -1,9 +1,11 @@
 package eu.dreamTeam.isabackend.service.appointment;
 
+import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
 import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTOException;
 import eu.dreamTeam.isabackend.model.Appointment;
+import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.model.Staff;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
 import eu.dreamTeam.isabackend.repository.AppointmentRepository;
@@ -82,10 +84,25 @@ public class AppointmentService {
                 .duration(appointment.getDuration())
                 .description(appointment.getDescription())
                 .price(appointment.getPrice())
-                .bloodBankForAppointment(null)
+                .bloodBankForAppointment(convertFromBloodBankToBloodBankDto(appointment.getBloodBankForAppointment()))
                 .staff(null)
                 .appointmentStatus(appointment.getStatus())
                 .userEmail(appointment.getUserEmail())
+                .build();
+    }
+
+    private BloodBankDTO convertFromBloodBankToBloodBankDto(BloodBank bloodBankForAppointment) {
+        return BloodBankDTO.builder()
+                .id(bloodBankForAppointment.getId())
+                .description(bloodBankForAppointment.getDescription())
+                .averageRating(bloodBankForAppointment.getAverageRating())
+                .name(bloodBankForAppointment.getName())
+                .city(bloodBankForAppointment.getAddress().getCity())
+                .country(bloodBankForAppointment.getAddress().getCountry())
+                .endTime(bloodBankForAppointment.getWorkTime().getEndTime())
+                .startTime(bloodBankForAppointment.getWorkTime().getStartTime())
+                .number(bloodBankForAppointment.getAddress().getNumber())
+                .street(bloodBankForAppointment.getAddress().getStreet())
                 .build();
     }
 
@@ -109,6 +126,23 @@ public class AppointmentService {
         }
     }
 
+
+    public List<ScheduleAppointmentDTO> getAllAppointmentsBySelectedDateTime(String selectedDateTime) {
+        try {
+            var selectedDateTimeConvertedToLocalDateTime = TransformStringToLocalDateTime(selectedDateTime);
+            var allAppointments = appointmentRepository.findAll();
+            List<ScheduleAppointmentDTO> scheduledAppointmentsDTOs = new ArrayList<ScheduleAppointmentDTO>();
+            for(Appointment a : allAppointments) {
+                if(a.getDate().equals(selectedDateTimeConvertedToLocalDateTime)){
+                    scheduledAppointmentsDTOs.add(FromAppointmentToScheduleAppointmentDto(a));
+                }
+            }
+            return scheduledAppointmentsDTOs;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public ScheduleAppointmentDTO unscheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
         Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
         if(appointment == null) return null;
@@ -118,4 +152,17 @@ public class AppointmentService {
         appointmentRepository.save(appointment);
         return scheduleAppointmentDTO;
     }
+//    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
+//        //"dd.MM.yyyy. HH:mm"
+//        String[] parts = selectedDateTime.split("-");
+//        if(Integer.valueOf(parts[4]) == 0) {
+//            String adjustedSelectedDateTime = Integer.valueOf(parts[2]) + "." + Integer.valueOf(parts[1]) + "." +
+//                    Integer.valueOf(parts[0])+ "." + " " + Integer.valueOf(parts[3]) + ":" + "00" + ":" + "00";
+//            return adjustedSelectedDateTime;
+//        } else {
+//            String adjustedSelectedDateTime = Integer.valueOf(parts[2]) + "." + Integer.valueOf(parts[1]) + "." +
+//                    Integer.valueOf(parts[0])+ "." + " " + Integer.valueOf(parts[3]) + ":" + Integer.valueOf(parts[4]) + ":" + "00";
+//            return adjustedSelectedDateTime;
+//        }
+//    }
 }

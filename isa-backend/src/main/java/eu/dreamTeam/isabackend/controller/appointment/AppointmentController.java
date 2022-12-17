@@ -37,6 +37,12 @@ public class AppointmentController {
         return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/allAppointmentsBySelectedDateTime/{selectedDateTime}")
+    public ResponseEntity<ScheduledAppointmentsDTOs> getAllAppointmentsBySelectedDateTime(@PathVariable String selectedDateTime){
+        ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
+        scheduledAppointmentsDTOs.setScheduleAppointmentDTOS(appointmentService.getAllAppointmentsBySelectedDateTime(selectedDateTime));
+        return new ResponseEntity<ScheduledAppointmentsDTOs>(scheduledAppointmentsDTOs ,HttpStatus.OK);
+    }
     @PutMapping(value = "/scheduleAppointment")
     public ResponseEntity<ScheduleAppointmentDTO> scheduleAppointment(@RequestBody ScheduleAppointmentDTO scheduleAppointmentDTO) {
         scheduleAppointmentDTO = appointmentService.scheduleAppointment(scheduleAppointmentDTO);

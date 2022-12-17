@@ -23,7 +23,6 @@ import { UserReviewComponent } from './modules/user-review/user-review.component
 import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
 
-
 @NgModule({
   declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent],
   imports: [
