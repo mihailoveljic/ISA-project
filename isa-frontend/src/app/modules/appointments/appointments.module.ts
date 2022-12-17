@@ -14,6 +14,7 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 import { ScheduleAppointmentByUserPreferencesComponent } from './components/schedule-appointment-by-user-preferences/schedule-appointment-by-user-preferences.component';
 import { AllAppointmentsBySelectedDateTimeComponent } from './components/dialogs/all-appointments-by-selected-date-time/all-appointments-by-selected-date-time.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AllAppointmentsBySelectedDateTimeComponent } from './components/dialogs
     FormsModule,
     NgxMaterialTimepickerModule,
     MatTableModule,
+    StarRatingModule,
     NavbarModule
   ]
 })

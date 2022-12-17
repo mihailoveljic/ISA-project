@@ -47,7 +47,6 @@ export class ScheduleAppointmentByUserPreferencesComponent implements OnInit {
   }
   openDialogAllAppointmentsBySelectedDateTime(allAppointmentsBySelectedDateTime: any) {
     let dialogRef = this.dialog.open(AllAppointmentsBySelectedDateTimeComponent, {
-      disableClose: true,
       data: allAppointmentsBySelectedDateTime
     });
     dialogRef.afterClosed().subscribe({
