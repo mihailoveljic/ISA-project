@@ -1,9 +1,11 @@
+import { AuthService } from './../../../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Route } from 'src/app/utils/routes';
+import { User } from 'src/app/auth/models/user';
 
 @Component({
   selector: 'app-schedule-appointment',
@@ -11,6 +13,7 @@ import { Route } from 'src/app/utils/routes';
   styleUrls: ['./schedule-appointment.component.css'],
 })
 export class ScheduleAppointmentComponent implements OnInit {
+  user: User | undefined;
   dataSource = new MatTableDataSource<any>();
   appointments: any;
   selectedAppointment: any;
@@ -26,10 +29,12 @@ export class ScheduleAppointmentComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
     this.getAllFreeAppointment();
   }
 
@@ -46,6 +51,10 @@ export class ScheduleAppointmentComponent implements OnInit {
     });
   }
   scheduleAppointment(appointment: any) {
+    if(!this.user) return;
+    if(!this.user.email) return;
+    
+    appointment.userEmail = this.user.email;
     this.appointmentService.scheduleAppointment(appointment).subscribe({
       next: (result: any) => {
         console.log(result);

@@ -108,7 +108,9 @@ public class AppointmentService {
 
     public ScheduleAppointmentDTO scheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
         Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
+        if(appointment == null) return null;
         appointment.setStatus(AppointmentStatus.SCHEDULED);
+        appointment.setUserEmail(scheduleAppointmentDTO.getUserEmail());
         appointmentRepository.save(appointment);
         return scheduleAppointmentDTO;
     }
