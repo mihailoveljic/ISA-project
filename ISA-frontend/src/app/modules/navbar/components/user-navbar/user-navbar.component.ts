@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Route } from 'src/app/utils/routes';
 
@@ -11,6 +10,7 @@ import { Route } from 'src/app/utils/routes';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserNavbarComponent implements OnInit {
+
   
   constructor(
     private authService: AuthService,
@@ -32,6 +32,10 @@ export class UserNavbarComponent implements OnInit {
   navigateToQuestionnaire(){
     this.router.navigate([Route.QUESTIONNAIRE]);
   }
+  navigateToMyAppointment() {
+    this.router.navigate([Route.MY_APPOINTMENTS]);
+    }
+
   logout() {
     this.authService.logout();
   }

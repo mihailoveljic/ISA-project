@@ -11,13 +11,15 @@ import { MatTableModule } from '@angular/material/table';
 import { ScheduleAppointmentComponent } from './components/schedule-appointment/schedule-appointment.component';
 import { CreateAppointmentComponent } from './components/create-appointment/create-appointment.component';
 import { NavbarModule } from '../navbar/navbar.module';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 
 @NgModule({
   declarations: [
     AppointmentsComponent,
     ScheduleAppointmentComponent,
-    CreateAppointmentComponent
+    CreateAppointmentComponent,
+    ScheduledAppointmentsComponent
   ],
   imports: [
     CommonModule,

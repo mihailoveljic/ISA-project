@@ -16,4 +16,6 @@ public class ScheduleAppointmentDTO {
     private double price;
     private Long bloodBankForAppointment;
     private Set<Long> staff;
+    private String userEmail;
+    private AppointmentStatus appointmentStatus;
 }

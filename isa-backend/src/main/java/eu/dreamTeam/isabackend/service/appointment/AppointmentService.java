@@ -75,21 +75,46 @@ public class AppointmentService {
         }
     }
 
-    private ScheduleAppointmentDTO FromAppointmentToScheduleAppointmentDto(Appointment freeAppointment) {
+    private ScheduleAppointmentDTO FromAppointmentToScheduleAppointmentDto(Appointment appointment) {
         return ScheduleAppointmentDTO.builder()
-                .id(freeAppointment.getId())
-                .date(freeAppointment.getDate().toString())
-                .duration(freeAppointment.getDuration())
-                .description(freeAppointment.getDescription())
-                .price(freeAppointment.getPrice())
+                .id(appointment.getId())
+                .date(appointment.getDate().toString())
+                .duration(appointment.getDuration())
+                .description(appointment.getDescription())
+                .price(appointment.getPrice())
                 .bloodBankForAppointment(null)
                 .staff(null)
+                .appointmentStatus(appointment.getStatus())
+                .userEmail(appointment.getUserEmail())
                 .build();
     }
 
     public ScheduleAppointmentDTO scheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
         Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
         appointment.setStatus(AppointmentStatus.SCHEDULED);
+        appointmentRepository.save(appointment);
+        return scheduleAppointmentDTO;
+    }
+
+    public List<ScheduleAppointmentDTO> getAllAppointmentsByUserEmail(String userEmail) {
+        try {
+            var appointmentsByUserEmail = appointmentRepository.findAllByUserEmail(userEmail);
+            var scheduledAppointmentsDTOs = new ArrayList<ScheduleAppointmentDTO>();
+            for(Appointment a : appointmentsByUserEmail) {
+                scheduledAppointmentsDTOs.add(FromAppointmentToScheduleAppointmentDto(a));
+            }
+            return scheduledAppointmentsDTOs;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ScheduleAppointmentDTO unscheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
+        Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
+        if(appointment == null) return null;
+
+        appointment.setStatus(AppointmentStatus.FREE);
+        appointment.setUserEmail(null);
         appointmentRepository.save(appointment);
         return scheduleAppointmentDTO;
     }

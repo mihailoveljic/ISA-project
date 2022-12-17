@@ -288,8 +288,17 @@ INSERT INTO public.users(
 	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 3, null);
 
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id)
-	VALUES ('2022-12-12', 'Test termin 1', 30, 5000, 'FREE', 1);
+	date, description, duration, price, status, blood_bank_id, user_email)
+	VALUES ('2022-12-12 12:00:00', 'Test termin 1', 30, 5000, 'FREE', 1, NULL);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id)
-	VALUES ('2022-12-22', 'Test termin 2', 60, 10000, 'FREE', 2);
+	date, description, duration, price, status, blood_bank_id, user_email)
+	VALUES ('2022-12-22 15:00:00', 'Test termin 2', 60, 10000, 'FREE', 2, NULL);
+INSERT INTO public.appointment(
+	date, description, duration, price, status, blood_bank_id, user_email)
+	VALUES ('2022-12-17 17:00:00', 'Moj termin 1', 60, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
+INSERT INTO public.appointment(
+	date, description, duration, price, status, blood_bank_id, user_email)
+	VALUES ('2022-12-06 11:00:00', 'Moj termin 2', 60, 1000, 'DONE', 1, 'mihailoveljic3010@gmail.com');
+INSERT INTO public.appointment(
+	date, description, duration, price, status, blood_bank_id, user_email)
+	VALUES ('2022-12-25 09:00:00', 'Moj termin 3', 60, 8000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api/appointment")
 public class AppointmentController {
@@ -24,11 +26,37 @@ public class AppointmentController {
     public ResponseEntity<ScheduledAppointmentsDTOs> getAllFreeAppointments(){
         ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
         scheduledAppointmentsDTOs.setScheduleAppointmentDTOS(appointmentService.getAllFreeAppointments());
-        return new ResponseEntity<ScheduledAppointmentsDTOs>(scheduledAppointmentsDTOs ,HttpStatus.OK);
+        return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/getAllAppointmentsByUserEmail/{userEmail}")
+    public ResponseEntity<ScheduledAppointmentsDTOs> getAllAppointmentsByUserEmail(@PathVariable String userEmail){
+        ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
+        scheduledAppointmentsDTOs.setScheduleAppointmentDTOS(appointmentService.getAllAppointmentsByUserEmail(userEmail));
+        return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
+    }
+
     @PutMapping(value = "/scheduleAppointment")
     public ResponseEntity<ScheduleAppointmentDTO> scheduleAppointment(@RequestBody ScheduleAppointmentDTO scheduleAppointmentDTO) {
         scheduleAppointmentDTO = appointmentService.scheduleAppointment(scheduleAppointmentDTO);
-        return new ResponseEntity<ScheduleAppointmentDTO>(scheduleAppointmentDTO ,HttpStatus.OK);
+        return new ResponseEntity<>(scheduleAppointmentDTO ,HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/unscheduleAppointment")
+    public ResponseEntity<ScheduleAppointmentDTO> unscheduleAppointment(@RequestBody ScheduleAppointmentDTO scheduleAppointmentDTO) {
+        var now = LocalDateTime.now();
+        now = now.plusDays(1);
+        try {
+            var appointmentDate = LocalDateTime.parse(scheduleAppointmentDTO.getDate());
+            if(appointmentDate.isAfter(now)){
+                scheduleAppointmentDTO = appointmentService.unscheduleAppointment(scheduleAppointmentDTO);
+                return new ResponseEntity<>(scheduleAppointmentDTO ,HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

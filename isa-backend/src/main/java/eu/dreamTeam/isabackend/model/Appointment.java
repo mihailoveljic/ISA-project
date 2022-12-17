@@ -34,4 +34,6 @@ public class Appointment {
     private BloodBank bloodBankForAppointment;
     @ManyToMany(mappedBy = "appointments")
     private Set<Staff> staff;
+    @Column(name = "user_email")
+    private String userEmail;
 }
