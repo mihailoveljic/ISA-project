@@ -10,5 +10,6 @@ export enum Route {
   USER_REVIEW = 'user-review',
   QUESTIONNAIRE = 'questionnaire',
   USER_INFO = 'user-info',
-  TENDERS = 'tenders'
+  TENDERS = 'tenders',
+  PREFERED_APPOINTMENT = "prefered-appointment"
 }

@@ -25,4 +25,9 @@ export class AppointmentService {
       `${environment.bloodBank}/api/appointment/freeAppointments`
     );
   }
+  searchForAppointmentsWithCertainDateTime(selectedDateTime: any):any {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/allAppointmentsBySelectedDateTime/` + selectedDateTime
+    );
+  }
 }

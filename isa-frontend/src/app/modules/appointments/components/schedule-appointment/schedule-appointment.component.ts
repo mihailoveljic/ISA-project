@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Route } from 'src/app/utils/routes';
 
 @Component({
   selector: 'app-schedule-appointment',
@@ -23,7 +25,8 @@ export class ScheduleAppointmentComponent implements OnInit {
   ];
   constructor(
     private appointmentService: AppointmentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class ScheduleAppointmentComponent implements OnInit {
         this.dataSource.data = this.appointments;
       },
       error: (e: any) => {
-        this.showError(e.error.Message, e.error.Title);
+        this.showError(e.message, e.message);
         console.log(e);
       },
     });
@@ -54,7 +57,7 @@ export class ScheduleAppointmentComponent implements OnInit {
         this.showSuccess();
       },
       error: (e: any) => {
-        this.showError(e.error.message, e.error.title);
+        this.showError(e.message, e.title);
         console.log(e);
       },
     });
@@ -67,5 +70,8 @@ export class ScheduleAppointmentComponent implements OnInit {
   }
   showError(message: string, title: string) {
     this.toastr.error(message, title);
+  }
+  goToSchedulePreferedAppointment() {
+    this.router.navigate([Route.PREFERED_APPOINTMENT]);
   }
 }

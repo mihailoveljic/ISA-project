@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AppointmentsRoutingModule } from './appointments-routing.module';
@@ -11,13 +11,17 @@ import { MatTableModule } from '@angular/material/table';
 import { ScheduleAppointmentComponent } from './components/schedule-appointment/schedule-appointment.component';
 import { CreateAppointmentComponent } from './components/create-appointment/create-appointment.component';
 import { NavbarModule } from '../navbar/navbar.module';
+import { ScheduleAppointmentByUserPreferencesComponent } from './components/schedule-appointment-by-user-preferences/schedule-appointment-by-user-preferences.component';
+import { AllAppointmentsBySelectedDateTimeComponent } from './components/dialogs/all-appointments-by-selected-date-time/all-appointments-by-selected-date-time.component';
 
 
 @NgModule({
   declarations: [
     AppointmentsComponent,
     ScheduleAppointmentComponent,
-    CreateAppointmentComponent
+    CreateAppointmentComponent,
+    ScheduleAppointmentByUserPreferencesComponent,
+    AllAppointmentsBySelectedDateTimeComponent
   ],
   imports: [
     CommonModule,

@@ -59,141 +59,6 @@ INSERT INTO public.blood_bank(
 INSERT INTO public.blood_bank(
 	average_rating, description, is_deleted, name, address_id, worktime_id)
 	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
-INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
 
 
 INSERT INTO public.question(
@@ -288,8 +153,8 @@ INSERT INTO public.users(
 	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 3, null);
 
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id)
-	VALUES ('2022-12-12', 'Test termin 1', 30, 5000, 'FREE', 1);
+	date, duration, status, description, price, blood_bank_id)
+	VALUES ('2022-12-12 14:00:00', 30, 'FREE', 'Test termin 1', 5000, 1);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id)
-	VALUES ('2022-12-22', 'Test termin 2', 60, 10000, 'FREE', 2);
+	date, duration, status, description, price, blood_bank_id)
+	VALUES ('2022-12-30 13:00:00', 60, 'FREE', 'Test termin 2', 10000, 2);
