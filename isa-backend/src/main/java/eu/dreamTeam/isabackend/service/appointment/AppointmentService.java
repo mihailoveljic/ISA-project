@@ -3,6 +3,7 @@ package eu.dreamTeam.isabackend.service.appointment;
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
+import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
 import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTOException;
 import eu.dreamTeam.isabackend.model.Appointment;
 import eu.dreamTeam.isabackend.model.BloodBank;
@@ -185,6 +186,19 @@ public class AppointmentService {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    public boolean checkForAppointmentInLast6Months(String userEmail) {
+        ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
+        scheduledAppointmentsDTOs.setScheduleAppointmentDTOS(getAllAppointmentsByUserEmail(userEmail));
+        for(ScheduleAppointmentDTO sad : scheduledAppointmentsDTOs.getScheduleAppointmentDTOS()){
+            if(sad.getAppointmentStatus().equals(AppointmentStatus.DONE)) {
+                if(LocalDateTime.now().minusMonths(6).isBefore(LocalDateTime.parse(sad.getDate()))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 //    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
 //        //"dd.MM.yyyy. HH:mm"
