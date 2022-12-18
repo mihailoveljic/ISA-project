@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Entity
@@ -36,4 +37,15 @@ public class Appointment {
     private Set<Staff> staff;
     @Column(name = "user_email")
     private String userEmail;
+
+
+    @Override
+    public String toString() {
+        return  "Date: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm")) +
+                "\nDuration: " + duration + " min" +
+                "\nDescription: " + description +
+                "\nPrice: " + price + " din" +
+                "\nCenter name: " + bloodBankForAppointment.getName() +
+                "\nPatient Email: " + userEmail;
+    }
 }

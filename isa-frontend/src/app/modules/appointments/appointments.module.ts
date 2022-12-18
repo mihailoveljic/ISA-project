@@ -15,6 +15,7 @@ import { ScheduledAppointmentsComponent } from './components/scheduled-appointme
 import { ScheduleAppointmentByUserPreferencesComponent } from './components/schedule-appointment-by-user-preferences/schedule-appointment-by-user-preferences.component';
 import { AllAppointmentsBySelectedDateTimeComponent } from './components/dialogs/all-appointments-by-selected-date-time/all-appointments-by-selected-date-time.component';
 import { StarRatingModule } from 'angular-star-rating';
+import { CenterAppointmentsComponent } from './components/center-appointments/center-appointments.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { StarRatingModule } from 'angular-star-rating';
     ScheduledAppointmentsComponent,
     ScheduleAppointmentByUserPreferencesComponent,
     AllAppointmentsBySelectedDateTimeComponent,
+    CenterAppointmentsComponent,
   ],
   imports: [
     CommonModule,

@@ -29,6 +29,13 @@ public class AppointmentController {
         return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/freeAppointmentsByBloodBankId/{bloodBankId}")
+    public ResponseEntity<ScheduledAppointmentsDTOs> getAllFreeAppointmentsByBloodBankId(@PathVariable Long bloodBankId){
+        ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
+        scheduledAppointmentsDTOs.setScheduleAppointmentDTOS(appointmentService.getAllFreeAppointmentsByBloodBankId(bloodBankId));
+        return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
+    }
+
     @CrossOrigin
     @GetMapping(value = "/getAllAppointmentsByUserEmail/{userEmail}")
     public ResponseEntity<ScheduledAppointmentsDTOs> getAllAppointmentsByUserEmail(@PathVariable String userEmail){

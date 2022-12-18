@@ -1,12 +1,13 @@
+import { Route } from 'src/app/utils/routes';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/auth/models/user';
 import { BloodBankService } from './../../services/blood-bank.service';
 import { Center } from './../../../../models/Center';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { RatingChangeEvent } from 'angular-star-rating';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./centers-list.component.css'],
 })
 export class CentersListComponent implements OnInit, AfterViewInit {
+
   
   centers: Array<Center> = new Array<Center>();
   user?: User;
@@ -47,7 +49,7 @@ export class CentersListComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-  displayedColumns: string[] = ['name', 'description', 'averageRating', 'startTime', 'endTime', 'street', 'number', 'city', 'country'];
+  displayedColumns: string[] = ['name', 'description', 'averageRating', 'startTime', 'endTime', 'street', 'number', 'city', 'country', 'buttons'];
   dataSource: MatTableDataSource<Center>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -56,7 +58,8 @@ export class CentersListComponent implements OnInit, AfterViewInit {
   constructor(
     private bloodBankService: BloodBankService,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
     ) {
     this.dataSource = new MatTableDataSource(this.centers);
   }
@@ -214,4 +217,8 @@ export class CentersListComponent implements OnInit, AfterViewInit {
     this.openTime = undefined;
     this.closesTime = undefined;
   }
+
+  goToCenterAppointments(bloodBank: any) {
+    this.router.navigate([Route.CENTER_APPOINTMENTS + '/' + bloodBank.id])
+    }
 }

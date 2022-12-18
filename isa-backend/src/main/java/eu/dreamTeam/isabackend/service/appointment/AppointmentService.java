@@ -11,6 +11,9 @@ import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
 import eu.dreamTeam.isabackend.repository.AppointmentRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
+import eu.dreamTeam.isabackend.service.email.EmailService;
+import eu.dreamTeam.isabackend.service.qr_code.QRCodeGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -27,6 +31,9 @@ public class AppointmentService {
     private BloodBankRepository bloodBankRepository;
     @Autowired
     private StaffRepository staffRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public CreateAppointmentDTO createAppointment(CreateAppointmentDTO createAppointmentDTO) {
         try {
@@ -111,7 +118,17 @@ public class AppointmentService {
         if(appointment == null) return null;
         appointment.setStatus(AppointmentStatus.SCHEDULED);
         appointment.setUserEmail(scheduleAppointmentDTO.getUserEmail());
-        appointmentRepository.save(appointment);
+        appointment = appointmentRepository.save(appointment);
+        try{
+            emailService.sendMessageWithAttachment(scheduleAppointmentDTO.getUserEmail(),
+                    "Schedule appointment confirmation",
+                    "You have successfully scheduled appointment.",
+                    QRCodeGenerator.getQRCodeImage(appointment.toString(), 250, 250));
+        }catch (Exception e){
+            log.error("Error occurred during email sending...");
+            log.error(e.getMessage());
+        }
+
         return scheduleAppointmentDTO;
     }
 
@@ -153,6 +170,21 @@ public class AppointmentService {
         appointment.setUserEmail(null);
         appointmentRepository.save(appointment);
         return scheduleAppointmentDTO;
+    }
+
+    public List<ScheduleAppointmentDTO> getAllFreeAppointmentsByBloodBankId(Long bloodBankId) {
+        try {
+            var freeAppointments = appointmentRepository.findAllFreeAppointments();
+            var appointmentsByBloodBank = freeAppointments.stream().filter(
+                    x->x.getBloodBankForAppointment().getId().equals(bloodBankId)).toList();
+            var scheduledAppointmentsDTOs = new ArrayList<ScheduleAppointmentDTO>();
+            for(Appointment a : appointmentsByBloodBank) {
+                scheduledAppointmentsDTOs.add(FromAppointmentToScheduleAppointmentDto(a));
+            }
+            return scheduledAppointmentsDTOs;
+        } catch (Exception e) {
+            return null;
+        }
     }
 //    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
 //        //"dd.MM.yyyy. HH:mm"

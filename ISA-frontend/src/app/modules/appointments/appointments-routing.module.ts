@@ -1,3 +1,4 @@
+import { CenterAppointmentsComponent } from './components/center-appointments/center-appointments.component';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent},
   { path: Route.MY_APPOINTMENTS, component: ScheduledAppointmentsComponent},
   { path: Route.PREFERED_APPOINTMENT, component: ScheduleAppointmentByUserPreferencesComponent},
+  { path: Route.CENTER_APPOINTMENTS+ '/:bloodBankId', component: CenterAppointmentsComponent},
 ];
 
 @NgModule({
