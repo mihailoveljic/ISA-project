@@ -55,17 +55,30 @@ export class AllAppointmentsBySelectedDateTimeComponent implements OnInit {
       this.questionnaireService.checkCompleted(this.user?.email).subscribe({
         next: (result: any) => {
           if(result.completed == true) {
-            this.appointmentService.scheduleAppointment(appointment).subscribe({
-              next: (result:any) => {
-                if(result){
-                  this.showSuccess();
+            if(this.user)
+            this.appointmentService.checkForAppointmentInLast6Months(this.user?.email).subscribe({
+              next: (result: any) => {
+                if(result == false) {
+                  this.appointmentService.scheduleAppointment(appointment).subscribe({
+                    next: (result:any) => {
+                      if(result){
+                        this.showSuccess();
+                      }
+                    },
+                    error: (e:any) => {
+                      this.toastrService.error(e.message);
+                    }
+                  });
+                  this.dialogRef.close();
+                } else{
+                  this.dialogRef.close();
+                  this.toastrService.info("You already gave blood in past 6 months so we are unable to schedule you an appointment. Read more in our Privacy&Policy");
                 }
               },
               error: (e:any) => {
                 this.toastrService.error(e.message);
               }
             });
-            this.dialogRef.close();
           } else {
             var isConfirmed = confirm("You did not fulfill questionnaire, you need to fulfill it so you can schedule appointment. Let's do it right now?")
             if(isConfirmed) {

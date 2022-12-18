@@ -37,6 +37,13 @@ public class AppointmentController {
         return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/checkForAppointmentInLast6Months/{userEmail}")
+    public ResponseEntity checkForAppointmentInLast6Months(@PathVariable String userEmail){
+        var response = appointmentService.checkForAppointmentInLast6Months(userEmail);
+        return new ResponseEntity<>(response ,HttpStatus.OK);
+    }
+
     @GetMapping(value = "/allAppointmentsBySelectedDateTime/{selectedDateTime}")
     public ResponseEntity<ScheduledAppointmentsDTOs> getAllAppointmentsBySelectedDateTime(@PathVariable String selectedDateTime){
         ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();

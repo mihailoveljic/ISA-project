@@ -40,6 +40,11 @@ export class AppointmentService {
       `${environment.bloodBank}/api/appointment/getAllAppointmentsByUserEmail/` + userEmail
     );
   }
+  checkForAppointmentInLast6Months(userEmail: string) {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/checkForAppointmentInLast6Months/` + userEmail
+    );
+  }
 
   searchForAppointmentsWithCertainDateTime(selectedDateTime: any):any {
     return this.http.get<any>(

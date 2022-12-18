@@ -14,6 +14,4 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findAllByUserEmail(String userEmail);
     
-    @Query(value = "select * from appointment where date like ?1", nativeQuery = true)
-    List<Appointment> findAllAppointmentsBySelectedDateTime(LocalDateTime selectedDateTime);
 }
