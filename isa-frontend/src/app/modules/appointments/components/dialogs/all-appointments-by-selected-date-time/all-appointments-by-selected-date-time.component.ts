@@ -47,10 +47,14 @@ export class AllAppointmentsBySelectedDateTimeComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.data);
   }
   closeDialog(appointment: any): any {
+    if(!this.user) return;
+    if(!this.user.email) return;
+    
+    appointment.userEmail = this.user.email;
     if(this.user){
       this.questionnaireService.checkCompleted(this.user?.email).subscribe({
         next: (result: any) => {
-          if(result == true) {
+          if(result.completed == true) {
             this.appointmentService.scheduleAppointment(appointment).subscribe({
               next: (result:any) => {
                 if(result){

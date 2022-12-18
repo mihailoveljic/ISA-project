@@ -56,7 +56,7 @@ public class QuestionnaireController {
             var questionnaireAnswer = QuestionnaireAnswer.builder()
                             .question(question)
                             .answer(questionnaireAnswerDTO.isAnswer())
-                            .questionnaire(questionnaire).build();
+                    .build();
 
             questionnaireAnswers.add(questionnaireAnswer);
         }
