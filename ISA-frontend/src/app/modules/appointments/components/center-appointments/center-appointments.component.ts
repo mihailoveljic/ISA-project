@@ -1,3 +1,5 @@
+import { Route } from 'src/app/utils/routes';
+import { QuestionnaireService } from './../../../questionnaire/services/questionnaire.service';
 import { User } from './../../../../auth/models/user';
 import { AuthService } from './../../../../auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +33,8 @@ export class CenterAppointmentsComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private authService: AuthService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private questionnaireService: QuestionnaireService
   ) {}
 
   ngOnInit(): void {
@@ -60,21 +63,46 @@ export class CenterAppointmentsComponent implements OnInit {
     if(!this.user.email) return;
     
     appointment.userEmail = this.user.email;
-    this.appointmentService.scheduleAppointment(appointment).subscribe({
-      next: (result: any) => {
-        console.log(result);
-        const index = this.appointments.indexOf(appointment);
-        if (index > -1) {
-          this.appointments.splice(index, 1);
-          this.dataSource.data = this.appointments;
+    if(this.user){
+      this.questionnaireService.checkCompleted(this.user.email).subscribe({
+        next: (result: any) => {
+          if(result.completed == true) {
+            if(this.user)
+            this.appointmentService.checkForAppointmentInLast6Months(this.user?.email).subscribe({
+              next: (result: any) => {
+                if(result == false) {
+                  this.appointmentService.scheduleAppointment(appointment).subscribe({
+                    next: (result:any) => {
+                      if(result){
+                        this.showSuccess();
+                      }
+                    },
+                    error: (e:any) => {
+                      this.toastr.error(e.message);
+                    }
+                  });
+                  return;  
+                } else{
+                  this.toastr.info("You already gave blood in past 6 months so we are unable to schedule you an appointment. Read more in our Privacy&Policy");
+                  return;
+                }
+              },
+              error: (e:any) => {
+                this.toastr.error(e.message);
+              }
+            });
+          } else {
+            var isConfirmed = confirm("You did not fulfill questionnaire, you need to fulfill it so you can schedule appointment. Let's do it right now?")
+            if(isConfirmed) {
+              this.router.navigate([Route.QUESTIONNAIRE]);
+            }
+          }
+        },
+        error: (e: any) => {
+          this.toastr.error(e.message);
         }
-        this.showSuccess();
-      },
-      error: (e: any) => {
-        this.showError(e.message, e.title);
-        console.log(e);
-      },
-    });
+      })
+    } else this.toastr.info("Something wrong with logged in user :/")
   }
   showSuccess() {
     this.toastr.success(
