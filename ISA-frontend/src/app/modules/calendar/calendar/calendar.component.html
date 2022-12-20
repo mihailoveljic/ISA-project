@@ -1,7 +1,8 @@
+<app-navbar></app-navbar>
 <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
-        <div
+        <button
           class="btn btn-primary"
           mwlCalendarPreviousView
           [view]="view"
@@ -9,15 +10,15 @@
           (viewDateChange)="closeOpenMonthViewDay()"
         >
           Previous
-        </div>
-        <div
+      </button>
+        <button
           class="btn btn-outline-secondary"
           mwlCalendarToday
           [(viewDate)]="viewDate"
         >
           Today
-        </div>
-        <div
+        </button>
+        <button
           class="btn btn-primary"
           mwlCalendarNextView
           [view]="view"
@@ -25,7 +26,7 @@
           (viewDateChange)="closeOpenMonthViewDay()"
         >
           Next
-        </div>
+      </button>
       </div>
     </div>
     <div class="col-md-4">
@@ -33,27 +34,27 @@
     </div>
     <div class="col-md-4">
       <div class="btn-group">
-        <div
+        <button
           class="btn btn-primary"
           (click)="setView(CalendarView.Month)"
           [class.active]="view === CalendarView.Month"
         >
           Month
-        </div>
-        <div
+      </button>
+        <button
           class="btn btn-primary"
           (click)="setView(CalendarView.Week)"
           [class.active]="view === CalendarView.Week"
         >
           Week
-        </div>
-        <div
+      </button>
+        <button
           class="btn btn-primary"
           (click)="setView(CalendarView.Day)"
           [class.active]="view === CalendarView.Day"
         >
           Day
-        </div>
+    </button>
       </div>
     </div>
   </div>

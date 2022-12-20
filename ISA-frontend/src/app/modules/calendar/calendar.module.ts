@@ -7,9 +7,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarRoutingModule } from './calendar-routing.module';
+import { NavbarModule } from '../navbar/navbar.module';
 
 @NgModule({
   imports: [
+    NavbarModule,
     CalendarRoutingModule,
     CommonModule,
     FormsModule,

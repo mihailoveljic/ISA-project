@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.controller.appointment;
 
+import eu.dreamTeam.isabackend.dto.AppointmentDTO;
 import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
 import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/appointment")
@@ -78,5 +80,10 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
+    }
+   @GetMapping(value = "/allAppointments")
+    public ResponseEntity<List<AppointmentDTO>> getAllAppointments(){
+        List<AppointmentDTO> AppointmentsDTOs = appointmentService.getAllAppointments();
+        return new ResponseEntity<>(AppointmentsDTOs ,HttpStatus.OK);
     }
 }
