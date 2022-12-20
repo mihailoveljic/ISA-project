@@ -34,4 +34,7 @@ export class StaffNavbarComponent implements OnInit {
   navigateToUsersPreview(){
     this.router.navigate([Route.USER_REVIEW]);
   }
+  navigateToCalendar(){
+    this.router.navigate([Route.CALENDAR]);
+  }
 }

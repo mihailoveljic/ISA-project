@@ -1,27 +1,23 @@
 package eu.dreamTeam.isabackend.service.appointment;
 
-import eu.dreamTeam.isabackend.dto.BloodBankDTO;
-import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
-import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
-import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
+import eu.dreamTeam.isabackend.dto.*;
 import eu.dreamTeam.isabackend.handler.exceptions.InvalidCreateAppointmentDTOException;
 import eu.dreamTeam.isabackend.model.Appointment;
 import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.model.Staff;
+import eu.dreamTeam.isabackend.model.User;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
 import eu.dreamTeam.isabackend.repository.AppointmentRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
+import eu.dreamTeam.isabackend.repository.UserRepository;
 import eu.dreamTeam.isabackend.service.email.EmailService;
 import eu.dreamTeam.isabackend.service.qr_code.QRCodeGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -35,6 +31,9 @@ public class AppointmentService {
 
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private UserRepository userRepository;
+
 
     public CreateAppointmentDTO createAppointment(CreateAppointmentDTO createAppointmentDTO) {
         try {
@@ -199,6 +198,28 @@ public class AppointmentService {
             }
         }
         return false;
+    }
+
+    public List<AppointmentDTO> getAllAppointments(){
+        var appointments = appointmentRepository.findAll();
+        List<AppointmentDTO> dtos = new ArrayList<AppointmentDTO>();
+        for(Appointment appointment: appointments){
+            AppointmentDTO dto = new AppointmentDTO();
+            dto.setAppointmentStatus(appointment.getStatus());
+            dto.setId(appointment.getId());
+            dto.setDate(appointment.getDate().toString()); //vidi
+            dto.setDuration(appointment.getDuration());
+            dto.setUser("");
+            dto.setDescription(appointment.getDescription());
+            if(appointment.getStatus() != AppointmentStatus.FREE && appointment.getStatus() !=
+                    AppointmentStatus.CANCELED && appointment.getUserEmail()!=null){
+                User user = userRepository.getUserByEmail(appointment.getUserEmail());
+                dto.setUser(user.getName() + " " + user.getSurname());
+            }
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 //    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
 //        //"dd.MM.yyyy. HH:mm"

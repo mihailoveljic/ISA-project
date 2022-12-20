@@ -22,6 +22,7 @@ import { CreateStaffComponent } from './modules/staff-info/component/create-staf
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
+import {Calendar1Module} from './modules/calendar/calendar.module';
 
 @NgModule({
   declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent],
@@ -50,6 +51,7 @@ import { StarRatingModule } from 'angular-star-rating';
     }),
     CentersModule,
     StarRatingModule.forRoot(),
+    Calendar1Module,
   ],
   providers: [],
   bootstrap: [AppComponent],

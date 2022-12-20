@@ -13,5 +13,6 @@ export enum Route {
   TENDERS = 'tenders',
   MY_APPOINTMENTS = 'my-appointments',
   PREFERED_APPOINTMENT = "prefered-appointment",
-  CENTER_APPOINTMENTS = "center_appointments"
+  CENTER_APPOINTMENTS = "center_appointments",
+  CALENDAR = "calendar"
 }

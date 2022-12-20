@@ -1,4 +1,4 @@
-package eu.dreamTeam.isabackend.rabbitmq.config;
+/*package eu.dreamTeam.isabackend.rabbitmq.config;
 
 import eu.dreamTeam.isabackend.rabbitmq.constants.Constants;
 import eu.dreamTeam.isabackend.rabbitmq.consumer.RabbitMQListener;
@@ -21,10 +21,10 @@ public class RabbitMqConfig {
         this.hospitalService = hospitalService;
     }
 
-    /*@Bean
+    @Bean
     public Queue queue(){
         return new Queue(Constants.QUEUE);
-    }*/
+    }
     @Bean
     public Queue register_queue(){
         return new Queue(Constants.REGISTER_QUEUE);
@@ -35,10 +35,10 @@ public class RabbitMqConfig {
         return new Queue(Constants.DELIVERY_QUEUE);
     }
 
-    /*@Bean
+    @Bean
     public TopicExchange exchange(){
         return new TopicExchange(Constants.EXCHANGE);
-    }*/
+    }
     @Bean
     public TopicExchange delivery_exchange() {
         return new TopicExchange(Constants.DELIVERY_EXCHANGE);
@@ -47,10 +47,10 @@ public class RabbitMqConfig {
     public FanoutExchange register_exchange() {
         return new FanoutExchange(Constants.REGISTER_EXCHANGE);
     }
-    /*@Bean
+    @Bean
     public Binding binding(Queue queue, TopicExchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with(Constants.ROUTING_KEY);
-    }*/
+    }
    @Bean
     public Binding register_binding(){
         return BindingBuilder.bind(register_queue()).to(register_exchange());
@@ -105,3 +105,4 @@ public class RabbitMqConfig {
 
     }
 }
+*/
