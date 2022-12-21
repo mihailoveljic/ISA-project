@@ -87,7 +87,7 @@ INSERT INTO public.question(
 	VALUES (false, 'Are you pregnant?', 'FEMALE');
 INSERT INTO public.question(
 	acceptable_answer, text, for_gender)
-	VALUES (true, 'Has it been at least 7 days since the last tooth extraction and minor dental interventions?', NULL);
+	VALUES (false, 'Has it been less than 7 days since the last tooth extraction and minor dental interventions?', NULL);
 INSERT INTO public.question(
 	acceptable_answer, text, for_gender)
 	VALUES (false, 'Have you had a tattoo in the past 6 months?', NULL);
@@ -110,8 +110,8 @@ VALUES ('FEMALE', '1357902468007', 'Marija', '061/11-29-222','Doktor', 'Specijal
 
 
 INSERT INTO public.users(
-	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
-	VALUES ('MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 50, 3, 2, 6);
+	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, penalties, user_type, account_id, address_id)
+	VALUES ('MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 50, 0, 3, 2, 6);
 
 
 INSERT INTO public.api_key(
@@ -120,7 +120,7 @@ VALUES ('e67553a6-1b8e-48af-a393-cd9603ac1b29', 'true');
 
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
-VALUES ( 0, 'A_POS', 1, null);
+VALUES ( 2000, 'A_POS', 1, null);
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
 VALUES (2000, 'A_NEG', 1, null);
@@ -149,8 +149,8 @@ INSERT INTO public.account(
 	VALUES ( 'mihailoveljic3010@gmail.com', null, false);
 
 INSERT INTO public.users(
-	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, user_type, account_id, address_id)
-	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 3, null);
+	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, penalties, user_type, account_id, address_id)
+	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 0, 3, null);
 
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
@@ -160,10 +160,10 @@ INSERT INTO public.appointment(
 	VALUES ('2022-12-22 15:00:00', 'Test termin 2', 60, 10000, 'FREE', 2, NULL);
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-17 17:00:00', 'Moj termin 1', 60, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
+	VALUES ('2022-12-21 17:00:00', 'Moj termin 1', 60, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-06 11:00:00', 'Moj termin 2', 60, 1000, 'DONE', 1, 'mihailoveljic3010@gmail.com');
+	VALUES ('2022-12-21 11:00:00', 'Moj termin 2', 60, 1000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
 	VALUES ('2022-12-25 09:00:00', 'Moj termin 3', 60, 8000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');

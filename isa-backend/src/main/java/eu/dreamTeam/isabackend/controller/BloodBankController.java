@@ -62,8 +62,6 @@ public class BloodBankController {
     @GetMapping
     public ResponseEntity<BloodBankDTO> getInfoByStaffEmail(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         BloodBank bloodBank = bloodBankService.getByStaffEmail(email);
         if (bloodBank == null)
             throw new BankNotExistedException();

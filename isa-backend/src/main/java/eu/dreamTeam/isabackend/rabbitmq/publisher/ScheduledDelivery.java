@@ -33,7 +33,7 @@ public class ScheduledDelivery {
 
     @Scheduled(fixedRate = 60*3000)
     public void sendMessage() {
-       /* List<Hospital> hospitals = hospitalService.getAll();
+       List<Hospital> hospitals = hospitalService.getAll();
         List<BloodSample> samples = bloodSampleService.getAll();
         List<BloodSampleDTO> dtos = new ArrayList<BloodSampleDTO>() ;
         String message = "Nabavka uspesno obavljena";
@@ -54,6 +54,6 @@ public class ScheduledDelivery {
         mdDTO.setMessage(message);
         mdDTO.setBloodSamples(dtos);
         monthlyDeliveryPublisher.send(mdDTO); //
-        System.out.println("Sent :" + message.toString());*/
+        System.out.println("Sent :" + message.toString());
     }
 }

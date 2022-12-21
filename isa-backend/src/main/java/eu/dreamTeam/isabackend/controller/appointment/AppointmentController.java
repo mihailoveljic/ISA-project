@@ -1,9 +1,8 @@
 package eu.dreamTeam.isabackend.controller.appointment;
 
-import eu.dreamTeam.isabackend.dto.AppointmentDTO;
-import eu.dreamTeam.isabackend.dto.CreateAppointmentDTO;
-import eu.dreamTeam.isabackend.dto.ScheduleAppointmentDTO;
-import eu.dreamTeam.isabackend.dto.ScheduledAppointmentsDTOs;
+import eu.dreamTeam.isabackend.dto.*;
+import eu.dreamTeam.isabackend.model.enums.BloodType;
+import eu.dreamTeam.isabackend.service.BloodSampleService;
 import eu.dreamTeam.isabackend.service.appointment.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,8 @@ import java.util.List;
 public class AppointmentController {
     @Autowired
     public AppointmentService appointmentService;
+    @Autowired
+    public BloodSampleService bloodSampleService;
 
     @PostMapping
     public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) {
@@ -85,5 +86,39 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentDTO>> getAllAppointments(){
         List<AppointmentDTO> AppointmentsDTOs = appointmentService.getAllAppointments();
         return new ResponseEntity<>(AppointmentsDTOs ,HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/cancel")
+    public ResponseEntity<StringDTO> cancel(@RequestParam Long id){
+        StringDTO string = new StringDTO();
+        appointmentService.cancel(id);
+        return new ResponseEntity<>(string, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/finish")
+    public ResponseEntity<StringDTO> finish(
+            @RequestParam Long id,
+            @RequestParam String text,
+            @RequestParam String bloodType,
+            @RequestParam double amount){
+        StringDTO string = new StringDTO();
+        if(bloodSampleService.getBloodSample(bloodType) < 1){
+            string.setText("Blood type doesn't exist");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
+        if(bloodSampleService.getBloodSampleAmount(bloodType)<amount){
+            string.setText("Blood type doesn't exist in needed amount");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
+        bloodSampleService.substractBloodSamples(BloodType.valueOf(bloodType), amount);
+        appointmentService.finish(id, text);
+        return new ResponseEntity<>(string, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/didnt-appear")
+    public ResponseEntity<StringDTO> didntAppear(@RequestParam Long id, @RequestParam String email){
+        StringDTO string = new StringDTO();
+        appointmentService.didntAppear(id, email);
+        return new ResponseEntity<>(string, HttpStatus.OK);
     }
 }

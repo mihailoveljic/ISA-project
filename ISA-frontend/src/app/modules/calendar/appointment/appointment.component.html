@@ -1,0 +1,54 @@
+<br/>
+<div class="appointment-div">
+    <span class="mat-display-1">Appointment</span>
+    <br/><br/>
+    <div *ngIf = "check">
+        <div>
+            <form class="appointment-form">
+                <mat-label>{{check}}</mat-label>
+            </form>
+        </div>
+        <br/>
+        <button class="button" mat-raised-button color="primary" (click)="cancelAppointment()">Cancel appointment</button>
+    </div>
+    <div *ngIf = "!check">
+        <div>
+            <form class="appointment-form">
+                <mat-label>Has the user appeared for appointment?</mat-label>
+            </form>
+        </div>
+        <br/>
+        <button class="button" mat-raised-button color="primary" (click)="affirmativeAnswer()">Yes</button>
+        <button [disabled] = "nextStep" class="button" mat-raised-button color="primary" (click)="negativeAnswer()">No</button>
+    </div>
+    <br />
+    <div *ngIf = "nextStep">
+        <div>
+            <form class="appointment-form" [formGroup]="formGroup">
+                <mat-form-field appearance="fill">
+                    <mat-label>Aditional details:</mat-label>
+                    <input matNativeControl type="text" name="text" formControlName="text" [(ngModel)]="text">
+                </mat-form-field><br/>
+                <mat-form-field appearance="fill">
+                    <mat-label>Used blood type:</mat-label>
+                    <select matNativeControl name="bloodType" formControlName="bloodType" [(ngModel)]="bloodType">
+                      <option value="A_POS">A_POS</option>
+                      <option value="A_NEG">A_NEG</option>
+                      <option value="AB_POS">AB_POS</option>
+                      <option value="AB_NEG">AB_NEG</option>
+                      <option value="B_POS">B_POS</option>
+                      <option value="B_NEG">B_NEG</option>
+                      <option value="ZERO_POS">ZERO_POS</option>
+                      <option value="ZERO_NEG">ZERO_NEG</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of blood:</mat-label>
+                      <input matNativeControl type="number" name="amount" formControlName="amount" [(ngModel)]="amount">
+                  </mat-form-field>
+            </form>
+        </div>
+        <br/>
+        <button [disabled]="!formGroup.valid" class="button" mat-raised-button color="primary" (click)="finishAppointment()">Finish appointment</button>
+    </div>
+</div>
