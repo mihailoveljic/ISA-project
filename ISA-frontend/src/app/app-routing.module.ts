@@ -6,12 +6,14 @@ import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/c
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoComponent } from './modules/user-info/components/user-info/user-info.component';
+import { AppointmentComponent } from './modules/calendar/appointment/appointment.component';
 
 const routes: Routes = [
   //{ path: Route.APPOINTMENTS, loadChildren: () => import('./modules/appointments/appointments.module').then(m => m.AppointmentsModule)},
   { path: Route.HOME, loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)},
   { path: Route.CALLBACK, loadChildren: () => import('./modules/callback/callback.module').then(m => m.CallbackModule)},
   { path: 'staff-info', component: StaffInfoComponent},
+  { path: 'appointment', component: AppointmentComponent },
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
   { path: Route.CREATE_STAFF, component: CreateStaffComponent},
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },

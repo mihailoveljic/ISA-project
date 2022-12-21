@@ -172,6 +172,31 @@ public class AppointmentService {
         return scheduleAppointmentDTO;
     }
 
+    public void cancel(Long id) {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        if(appointment == null) return;
+        appointment.setStatus(AppointmentStatus.CANCELED);
+        appointmentRepository.save(appointment);
+    }
+
+    public void finish(Long id, String text) {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        if(appointment == null) return;
+        appointment.setStatus(AppointmentStatus.DONE);
+        appointment.setDescription(text);
+        appointmentRepository.save(appointment);
+    }
+
+    public void didntAppear(Long id, String email) {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        if(appointment == null) return;
+        appointment.setStatus(AppointmentStatus.CANCELED);
+        appointmentRepository.save(appointment);
+        User user = userRepository.getUserByEmail(email);
+        user.setPenalties(user.getPenalties() + 1);
+        userRepository.save(user);
+    }
+
     public List<ScheduleAppointmentDTO> getAllFreeAppointmentsByBloodBankId(Long bloodBankId) {
         try {
             var freeAppointments = appointmentRepository.findAllFreeAppointments();
@@ -209,6 +234,7 @@ public class AppointmentService {
             dto.setId(appointment.getId());
             dto.setDate(appointment.getDate().toString()); //vidi
             dto.setDuration(appointment.getDuration());
+            dto.setEmail(appointment.getUserEmail());
             dto.setUser("");
             dto.setDescription(appointment.getDescription());
             if(appointment.getStatus() != AppointmentStatus.FREE && appointment.getStatus() !=

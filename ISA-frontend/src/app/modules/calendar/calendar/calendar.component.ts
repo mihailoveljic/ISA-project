@@ -27,6 +27,7 @@ import {
 import { EventColor } from 'calendar-utils';
 import {CalendarService} from '../calendar.service'
 import {AppointmentDTO} from './appointmentDTO'
+import { Router } from '@angular/router';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -39,6 +40,10 @@ const colors: Record<string, EventColor> = {
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA',
+  },
+  green: {
+    primary: '#00ff00',
+    secondary: '#aaffaa',
   },
 };
 
@@ -89,7 +94,7 @@ export class CalendarComponent implements OnInit{
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private calendarService: CalendarService) {
+  constructor(private modal: NgbModal, private calendarService: CalendarService, private router: Router) {
   }
   
   ngOnInit(): void {
@@ -107,12 +112,19 @@ export class CalendarComponent implements OnInit{
   addNewAppointmentToCalendar(appointment: AppointmentDTO): void{
     let title: string = "Free appointment: " + appointment.description;
     let color = { ...colors['blue'] };
-    if (appointment.appointmentStatus != 'FREE' && appointment.appointmentStatus != 'CANCELED'){
-       title = appointment.user + ': ' + appointment.description 
-       color = { ...colors['red'] }
+    if (appointment.appointmentStatus == 'CANCELED'){
+      color = { ...colors['red'] }
     }
     if (appointment.appointmentStatus == 'FREE'){
       color = { ...colors['yellow'] } 
+    }
+    if (appointment.appointmentStatus == 'SCHEDULED'){
+      title = appointment.user + ": " + appointment.description;
+      color = { ...colors['blue'] } 
+    }
+    if (appointment.appointmentStatus == 'DONE'){
+      title = appointment.user + ": " + appointment.description;
+      color = { ...colors['green'] } 
     }
 
     let date: Date = new Date(appointment.date)
@@ -163,6 +175,16 @@ export class CalendarComponent implements OnInit{
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
+    if(event.start.getDate() === new Date().getDate() && event.color?.primary == colors['blue'].primary){
+      var id = 0;
+      var email = '';
+      for(let i=0; i<this.res.length; i++){  
+        if(event.title.split(":")[1] === " " + this.res[i].description)
+        id = this.res[i].id;
+        email = this.res[i].email;
+      }
+      this.router.navigate(['/appointment'], {queryParams : {'appointment-id': id, 'email': email}})
+    }
   }
 
   addEvent(): void {

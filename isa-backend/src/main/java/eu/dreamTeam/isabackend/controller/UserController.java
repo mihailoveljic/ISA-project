@@ -22,8 +22,6 @@ public class UserController {
     @GetMapping
     public ResponseEntity<User> getInfoByEmail(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         User user = userService.getByEmail(email);
         if (user == null)
             throw new StaffNotExistedException();

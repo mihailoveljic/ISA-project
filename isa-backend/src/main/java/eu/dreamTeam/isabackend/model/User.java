@@ -19,5 +19,7 @@ public class User extends Person{
     @Column
     private int collectedPoints;
     @Column
+    private int penalties;
+    @Column
     private UserType userType;
 }

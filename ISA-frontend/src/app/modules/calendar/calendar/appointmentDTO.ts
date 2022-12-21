@@ -4,5 +4,6 @@ export interface AppointmentDTO{
   duration: number;
   description: string;
   user: string;
+  email: string;
   appointmentStatus: string;
 }

@@ -67,8 +67,6 @@ public class BloodSampleController {
     @GetMapping("/supplies")
     public ResponseEntity<List<SampleDTO>> getBloodSample(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         Staff staff = staffService.getByEmail(email);
         if (staff == null)
             throw new StaffNotExistedException();

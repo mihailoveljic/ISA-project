@@ -1,9 +1,6 @@
 package eu.dreamTeam.isabackend.controller.questionnaire;
 
-import eu.dreamTeam.isabackend.dto.BloodBankDTO;
-import eu.dreamTeam.isabackend.dto.QuestionnaireAnswerDTO;
-import eu.dreamTeam.isabackend.dto.QuestionnaireCompletedDTO;
-import eu.dreamTeam.isabackend.dto.QuestionnaireDTO;
+import eu.dreamTeam.isabackend.dto.*;
 import eu.dreamTeam.isabackend.model.*;
 import eu.dreamTeam.isabackend.service.UserService;
 import eu.dreamTeam.isabackend.service.questionnaire.QuestionService;
@@ -37,6 +34,16 @@ public class QuestionnaireController {
                 .completed(questionnaireService.checkIfUserCompletedQuestionnaire(userEmail))
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<StringDTO> check(@RequestParam String email){
+        StringDTO string = new StringDTO();
+        if(!questionnaireService.check(email)) {
+            string.setText("The user does not meet the requirements for donating blood");
+            return new ResponseEntity<>(string, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(string, HttpStatus.OK);
     }
 
     @PostMapping("/create")

@@ -13,5 +13,6 @@ public class AppointmentDTO {
     private int duration;
     private String description;
     private String user;
+    private String email;
     private AppointmentStatus appointmentStatus;
 }

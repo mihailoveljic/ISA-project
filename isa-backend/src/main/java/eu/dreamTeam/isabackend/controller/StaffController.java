@@ -45,8 +45,6 @@ public class StaffController {
     @GetMapping
     public ResponseEntity<StaffDTO> getInfoByEmail(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         Staff staff = staffService.getByEmail(email);
         StaffDTO staffDTO = modelMapper.map(staff, StaffDTO.class);
         if (staff == null)
@@ -57,8 +55,6 @@ public class StaffController {
     @GetMapping("/colleagues")
     public ResponseEntity<List<StaffMainInfoDTO>> getStaffForCenter(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         Staff staff = staffService.getByEmail(email);
         if (staff == null)
             throw new StaffNotExistedException();
