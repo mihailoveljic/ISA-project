@@ -1,4 +1,4 @@
-/*package eu.dreamTeam.isabackend.rabbitmq.config;
+package eu.dreamTeam.isabackend.rabbitmq.config;
 
 import eu.dreamTeam.isabackend.rabbitmq.constants.Constants;
 import eu.dreamTeam.isabackend.rabbitmq.consumer.RabbitMQListener;
@@ -105,4 +105,3 @@ public class RabbitMqConfig {
 
     }
 }
-*/
