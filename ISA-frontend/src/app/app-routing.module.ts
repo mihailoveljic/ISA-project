@@ -6,7 +6,10 @@ import { BloodBankCenterInfoComponent } from './modules/blood-bank-center-info/c
 import { CreateStaffComponent } from './modules/staff-info/component/create-staff/create-staff.component';
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoComponent } from './modules/user-info/components/user-info/user-info.component';
+
+import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
 import { AppointmentComponent } from './modules/calendar/appointment/appointment.component';
+
 
 const routes: Routes = [
   //{ path: Route.APPOINTMENTS, loadChildren: () => import('./modules/appointments/appointments.module').then(m => m.AppointmentsModule)},
@@ -21,7 +24,8 @@ const routes: Routes = [
   { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) },
   {path: Route.USER_INFO, component: UserInfoComponent},
   { path: 'news', loadChildren: () => import('./modules/news/news.module').then(m => m.NewsModule) },
-  { path: 'tenders', loadChildren: () => import('./modules/tenders/tenders.module').then(m => m.TendersModule) }
+  { path: 'tenders', loadChildren: () => import('./modules/tenders/tenders.module').then(m => m.TendersModule) },
+  { path: Route.CREATE_ADMIN, component: CreateAdminComponent},
 ];
 
 @NgModule({
