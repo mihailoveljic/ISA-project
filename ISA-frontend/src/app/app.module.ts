@@ -23,9 +23,10 @@ import { UserReviewComponent } from './modules/user-review/user-review.component
 import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
 import {Calendar1Module} from './modules/calendar/calendar.module';
+import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
 
 @NgModule({
-  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent],
+  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent, CreateAdminComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
