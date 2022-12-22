@@ -68,3 +68,7 @@ button {
     width: 40%;
     margin-left: 1%;
   }
+
+  .row-is-clicked {
+    font-weight: bold;
+  }

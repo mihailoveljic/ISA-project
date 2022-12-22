@@ -121,4 +121,10 @@ public class AppointmentController {
         appointmentService.didntAppear(id, email);
         return new ResponseEntity<>(string, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/user-appointments/{email}")
+    public ResponseEntity<List<AppointmentDTO>> getUserAppointments(@PathVariable String email){
+        List<AppointmentDTO> AppointmentsDTOs = appointmentService.getUserAppointments(email);
+        return new ResponseEntity<>(AppointmentsDTOs ,HttpStatus.OK);
+    }
 }

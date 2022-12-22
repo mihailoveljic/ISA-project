@@ -24,7 +24,7 @@
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
-            <td mat-cell *matCellDef="let user" class="clickable cell-center">{{user.name}}</td>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.name}}</td>
         </ng-container>
         <ng-container matColumnDef="surname">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Surname </th>
@@ -40,9 +40,45 @@
         </ng-container>
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> E-mail </th>
-            <td mat-cell *matCellDef="let user" class="cell-center">{{user.email}}</td>
+            <td  style="width: 30%;" mat-cell *matCellDef="let user" class="cell-center">{{user.email}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Type </th>
+            <td mat-cell *matCellDef="let user" class="cell-center">{{user.type}}</td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row (click)="addSelectedUser(row)"
+        [class.row-is-clicked]="isSelectedUser(row)"
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class ="table-header">
+        <p class="table-title">Selected user: {{selectedUser.name}} {{selectedUser.surname}}</p>
+    </div>
+    <table *ngIf="selectedUser.name != ''" mat-table [dataSource]="dataSourceAppointment">
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Date </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.date}}</td>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Duration </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.duration}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Description </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="appointmentStatus">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Status </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.appointmentStatus}}</td>
+        </ng-container>
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Start </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">
+                <button style="width: 100%;" class="button" mat-raised-button color="primary" [disabled]="check(appointment)" (click)="select(appointment)">Select</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsAppointment; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsAppointment;"></tr>
     </table>
 </div>

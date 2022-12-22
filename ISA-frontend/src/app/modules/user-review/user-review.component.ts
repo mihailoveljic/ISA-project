@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
+import { Router } from '@angular/router';
+import { AppointmentDTO } from '../calendar/calendar/appointmentDTO';
 import { AdminNavbarComponent } from '../navbar/components/admin-navbar/admin-navbar.component';
 import { PersonInfo } from '../staff-info/model/PersonInfo';
 import { UserReviewService } from './service/user-review.service';
@@ -10,18 +12,21 @@ import { UserReviewService } from './service/user-review.service';
 })
 export class UserReviewComponent implements OnInit {
   public dataSource = new MatTableDataSource<PersonInfo>();
-  public displayedColumns = ['name', 'surname', 'jmbg', 'phoneNumber', 'email'];
+  public displayedColumns = ['name', 'surname', 'jmbg', 'phoneNumber', 'email', 'type'];
+  public dataSourceAppointment = new MatTableDataSource<AppointmentDTO>();
+  public displayedColumnsAppointment = ['date', 'duration', 'description', 'appointmentStatus', 'start'];
+  public appointments:AppointmentDTO[] = [];
   public users: PersonInfo[] = [];
   public users_filtered: PersonInfo[] = [];
   public user: PersonInfo | undefined = undefined;
   public name: string = ''
   public surname: string = ''
+  public selectedUser:PersonInfo = {id:0, email:'', surname:'', name:'', jmbg:'', phoneNumber:'', country:'', street:'', city:'', number:'', type:''}
 
-  constructor(private userReviewService: UserReviewService) { }
+  constructor(private router: Router, private userReviewService: UserReviewService) { }
 
   ngOnInit(): void {
     this.userReviewService.getAllPersons().subscribe(res => {
-      console.log(res)
       this.users = res;
       this.users_filtered = res;
       this.dataSource.data = this.users_filtered;
@@ -42,6 +47,30 @@ export class UserReviewComponent implements OnInit {
     this.surname = ''
     this.users_filtered = this.users
     this.dataSource.data = this.users_filtered
+  }
+
+  addSelectedUser(row:PersonInfo){
+    if (row.type === 'User')
+      this.selectedUser = row
+      this.userReviewService.getUserAppointments(this.selectedUser.email).subscribe(res => {
+        this.appointments = res;
+        this.appointments.forEach(app => app.date = app.date.replace('T', ' '))
+        this.dataSourceAppointment.data = this.appointments;
+      })
+  }
+
+  isSelectedUser(row:PersonInfo){
+    return row == this.selectedUser
+  }
+
+  check(appointment:AppointmentDTO){
+    return !(new Date(appointment.date).getDate() === new Date().getDate() && appointment.appointmentStatus === 'SCHEDULED')
+  }
+
+  select(appointment:AppointmentDTO){
+    if(new Date(appointment.date).getDate() === new Date().getDate() && appointment.appointmentStatus === 'SCHEDULED'){
+      this.router.navigate(['/appointment'], {queryParams : {'appointment-id': appointment.id, 'email': this.selectedUser.email}})
+    }
   }
 
 }

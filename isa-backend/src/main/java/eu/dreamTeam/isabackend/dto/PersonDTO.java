@@ -26,4 +26,6 @@ public class PersonDTO {
     private String city;
     @NotBlank
     private String country;
+    @NotBlank
+    private String type;
 }

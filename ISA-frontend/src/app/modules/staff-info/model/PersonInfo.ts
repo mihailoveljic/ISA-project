@@ -9,4 +9,5 @@ export interface PersonInfo{
     number: string;
     city: string;
     country: string;
+    type:string;
 }

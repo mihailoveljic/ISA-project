@@ -64,16 +64,19 @@ public class PersonController {
         List <PersonDTO>  personDTOS = new ArrayList<PersonDTO>();
         for (User user: users){
             PersonDTO personDTO = modelMapper.map(user, PersonDTO.class);
+            personDTO.setType("User");
             personDTOS.add(personDTO);
         }
         List<SystemAdmin> admins = systemAdminService.getAllAdmins();
         for (SystemAdmin admin: admins){
             PersonDTO personDTO = modelMapper.map(admin, PersonDTO.class);
+            personDTO.setType("System admin");
             personDTOS.add(personDTO);
         }
         List<Staff> staff = staffService.getAllStaff();
         for (Staff s: staff){
             PersonDTO personDTO = modelMapper.map(s, PersonDTO.class);
+            personDTO.setType("Staff");
             personDTOS.add(personDTO);
         }
         return new ResponseEntity<>(personDTOS, HttpStatus.OK);

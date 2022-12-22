@@ -225,8 +225,12 @@ public class AppointmentService {
         return false;
     }
 
-    public List<AppointmentDTO> getAllAppointments(){
-        var appointments = appointmentRepository.findAll();
+    public List<AppointmentDTO> getUserAppointments(String email){
+        var appointments = appointmentRepository.findAllByUserEmail(email);
+        return getAppointmentDTOS(appointments);
+    }
+
+    private List<AppointmentDTO> getAppointmentDTOS(List<Appointment> appointments) {
         List<AppointmentDTO> dtos = new ArrayList<AppointmentDTO>();
         for(Appointment appointment: appointments){
             AppointmentDTO dto = new AppointmentDTO();
@@ -246,6 +250,11 @@ public class AppointmentService {
         }
 
         return dtos;
+    }
+
+    public List<AppointmentDTO> getAllAppointments(){
+        var appointments = appointmentRepository.findAll();
+        return getAppointmentDTOS(appointments);
     }
 //    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
 //        //"dd.MM.yyyy. HH:mm"
