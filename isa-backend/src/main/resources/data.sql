@@ -118,6 +118,26 @@ INSERT INTO public.api_key(
     api_key_code, is_valid)
 VALUES ('e67553a6-1b8e-48af-a393-cd9603ac1b29', 'true');
 
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 500, 'VIALS', 1);
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 1000, 'BLOOD_GROUPING_REAGENTS', 1);
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 500, 'BLOOD_BAGS', 1);
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 1000, 'BLOOD_COLLECTION_TUBES', 1);
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 1000, 'BLOOD_FILTERS', 1);
+INSERT INTO public.equipment(
+    amount, equipment_type, blood_bank_id)
+VALUES ( 1000, 'BLOOD_COLLECTION_NEEDLES', 1);
+
+
 INSERT INTO public.blood_sample(
     amount, blood_type, blood_bank_id, delivery_id)
 VALUES ( 2000, 'A_POS', 1, null);

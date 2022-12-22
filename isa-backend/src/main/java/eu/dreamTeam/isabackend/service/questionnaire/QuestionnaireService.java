@@ -25,6 +25,8 @@ public class QuestionnaireService {
 
     public List<QuestionnaireReviewDTO> getQuestionnaireByUser(String email) {
         List<QuestionnaireReviewDTO> questionnaireReviewDTOS = new ArrayList<>();
+        if (questionnaireRepository.findAllByUserEmail(email) == null)
+            return questionnaireReviewDTOS;
         for(QuestionnaireAnswer qa : questionnaireRepository.findAllByUserEmail(email).get(0).getQuestionnaireAnswers()){
             QuestionnaireReviewDTO questionnaireReviewDTO = new QuestionnaireReviewDTO();
             questionnaireReviewDTO.setQuestion(qa.getQuestion().getText());

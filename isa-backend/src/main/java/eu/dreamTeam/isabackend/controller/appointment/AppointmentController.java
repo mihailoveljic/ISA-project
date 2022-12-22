@@ -2,7 +2,9 @@ package eu.dreamTeam.isabackend.controller.appointment;
 
 import eu.dreamTeam.isabackend.dto.*;
 import eu.dreamTeam.isabackend.model.enums.BloodType;
+import eu.dreamTeam.isabackend.model.enums.EquipmentType;
 import eu.dreamTeam.isabackend.service.BloodSampleService;
+import eu.dreamTeam.isabackend.service.EquipmentService;
 import eu.dreamTeam.isabackend.service.appointment.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,8 @@ public class AppointmentController {
     public AppointmentService appointmentService;
     @Autowired
     public BloodSampleService bloodSampleService;
-
+    @Autowired
+    public EquipmentService equipmentService;
     @PostMapping
     public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) {
         appointmentService.createAppointment(createAppointmentDTO);
@@ -100,7 +103,11 @@ public class AppointmentController {
             @RequestParam Long id,
             @RequestParam String text,
             @RequestParam String bloodType,
-            @RequestParam double amount){
+            @RequestParam double amount,
+            @RequestParam String equipmentType1,
+            @RequestParam double equipmentAmount1,
+            @RequestParam String equipmentType2,
+            @RequestParam double equipmentAmount2){
         StringDTO string = new StringDTO();
         if(bloodSampleService.getBloodSample(bloodType) < 1){
             string.setText("Blood type doesn't exist");
@@ -110,7 +117,25 @@ public class AppointmentController {
             string.setText("Blood type doesn't exist in needed amount");
             return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
         }
+        if(equipmentService.getEquipment(equipmentType1) < 1){
+            string.setText("Equipment 1 doesn't exist");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
+        if(equipmentService.getEquipmentAmount(equipmentType1)<equipmentAmount1){
+            string.setText("Equipment 1 doesn't exist in needed amount");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
+        if(equipmentService.getEquipment(equipmentType2) < 1){
+            string.setText("Equipment 2 doesn't exist");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
+        if(equipmentService.getEquipmentAmount(equipmentType2)<equipmentAmount2){
+            string.setText("Equipment 2 doesn't exist in needed amount");
+            return new ResponseEntity<>(string, HttpStatus.NOT_FOUND);
+        }
         bloodSampleService.substractBloodSamples(BloodType.valueOf(bloodType), amount);
+        equipmentService.substractEquipment(EquipmentType.valueOf(equipmentType1), equipmentAmount1);
+        equipmentService.substractEquipment(EquipmentType.valueOf(equipmentType2), equipmentAmount2);
         appointmentService.finish(id, text);
         return new ResponseEntity<>(string, HttpStatus.OK);
     }

@@ -38,8 +38,11 @@ export class CalendarService {
       return this.http.get<QuestionnaireDTO[]>(this.apiUrlUserAnswers + '/' + email);
     }
 
-    public finish(id: number, text:string, bloodType:string, amount:number): Observable<StringDTO>{
-      return this.http.get<StringDTO>(this.apiUrlFinish, { params: new HttpParams().set('id', id).set('text', text).set('bloodType', bloodType).set('amount',amount)});
+    public finish(id: number, text:string, bloodType:string, amount:number,
+      equipmentType1: string, equipmentAmount1:number, equipmentType2: string, equipmentAmount2:number): Observable<StringDTO>{
+      return this.http.get<StringDTO>(this.apiUrlFinish, { params: new HttpParams().set('id', id).set('text', text)
+      .set('bloodType', bloodType).set('amount',amount).set('equipmentType1',equipmentType1).set('equipmentAmount1', equipmentAmount1)
+      .set('equipmentType2',equipmentType2).set('equipmentAmount2', equipmentAmount2)});
     }
   
 }

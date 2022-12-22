@@ -2,11 +2,12 @@
 <div style="text-align: center;">
     <div style="display: inline-block; text-align: left;">
         <h1 style="text-align: center;">Questionnaire review</h1>
-    <ul>
+    <ul *ngIf="answers.length > 0">
         <li [ngClass]="answer.acceptableAnswer == answer.answer ? 'green_li' : 'red_li'" *ngFor="let answer of answers">
             {{answer.question}}
         </li>
     </ul>
+    <p *ngIf="answers.length == 0">User didn't fill questionnaire correctly</p>
     </div>
 </div>
 <div class="appointment-div">
@@ -54,6 +55,40 @@
                   <mat-form-field appearance="fill">
                       <mat-label>Used amount of blood:</mat-label>
                       <input matNativeControl type="number" name="amount" formControlName="amount" [(ngModel)]="amount">
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Used equipment type(1):</mat-label>
+                    <select matNativeControl name="equipmentType1" formControlName="equipmentType1" [(ngModel)]="equipmentType1">
+                      <option value="BLOOD_LANCETS">BLOOD_LANCETS</option>
+                      <option value="VIALS">VIALS</option>
+                      <option value="MICROSCOPIC_SLIDES">MICROSCOPIC_SLIDES</option>
+                      <option value="BLOOD_GROUPING_REAGENTS">BLOOD_GROUPING_REAGENTS</option>
+                      <option value="BLOOD_BAGS">BLOOD_BAGS</option>
+                      <option value="BLOOD_COLLECTION_TUBES">BLOOD_COLLECTION_TUBES</option>
+                      <option value="BLOOD_FILTERS">BLOOD_FILTERS</option>
+                      <option value="BLOOD_COLLECTION_NEEDLES">BLOOD_COLLECTION_NEEDLES</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of equipment(1):</mat-label>
+                      <input matNativeControl type="number" name="equipmentAmount1" formControlName="equipmentAmount1" [(ngModel)]="equipmentAmount1">
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Used equipment type(2):</mat-label>
+                    <select matNativeControl name="equipmentType2" formControlName="equipmentType2" [(ngModel)]="equipmentType2">
+                      <option value="BLOOD_LANCETS">BLOOD_LANCETS</option>
+                      <option value="VIALS">VIALS</option>
+                      <option value="MICROSCOPIC_SLIDES">MICROSCOPIC_SLIDES</option>
+                      <option value="BLOOD_GROUPING_REAGENTS">BLOOD_GROUPING_REAGENTS</option>
+                      <option value="BLOOD_BAGS">BLOOD_BAGS</option>
+                      <option value="BLOOD_COLLECTION_TUBES">BLOOD_COLLECTION_TUBES</option>
+                      <option value="BLOOD_FILTERS">BLOOD_FILTERS</option>
+                      <option value="BLOOD_COLLECTION_NEEDLES">BLOOD_COLLECTION_NEEDLES</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of equipment(2):</mat-label>
+                      <input matNativeControl type="number" name="equipmentAmount2" formControlName="equipmentAmount2" [(ngModel)]="equipmentAmount2">
                   </mat-form-field>
             </form>
         </div>

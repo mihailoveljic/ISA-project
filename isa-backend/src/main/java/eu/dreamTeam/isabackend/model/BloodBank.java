@@ -27,6 +27,8 @@ public class BloodBank {
     private boolean isDeleted;
     @OneToMany(mappedBy = "bloodBank")
     private Set<BloodSample> bloodSamples;
+    @OneToMany(mappedBy = "bloodBank")
+    private Set<Equipment> equipment;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "worktime_id")
     private WorkTime workTime;

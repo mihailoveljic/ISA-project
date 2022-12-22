@@ -21,6 +21,10 @@ export class AppointmentComponent {
   check:string = '';
   amount:number = 0;
   bloodType: string = '';
+  equipmentAmount1:number = 0;
+  equipmentType1: string = '';
+  equipmentAmount2:number = 0;
+  equipmentType2: string = '';
   text:string = '';
 
   constructor(private toastr: ToastrService,private router: Router, private route: ActivatedRoute, private calendarService: CalendarService, private authService: AuthService) { }
@@ -29,12 +33,20 @@ export class AppointmentComponent {
     this.formGroup = new FormGroup({
       text: new FormControl(),
       bloodType: new FormControl(),
-      amount: new FormControl()
+      amount: new FormControl(),
+      equipmentType1: new FormControl(),
+      equipmentAmount1: new FormControl(),
+      equipmentType2: new FormControl(),
+      equipmentAmount2: new FormControl()
     });
     this.formGroup = new FormGroup({
       text: new FormControl(this.text, [Validators.required]),
       bloodType: new FormControl(this.bloodType, [Validators.required]),
-      amount: new FormControl(this.amount, [Validators.required, Validators.min(1)])
+      amount: new FormControl(this.amount, [Validators.required, Validators.min(1)]),
+      equipmentType1: new FormControl(this.equipmentType1, [Validators.required]),
+      equipmentAmount1: new FormControl(this.equipmentAmount1, [Validators.required, Validators.min(1)]),
+      equipmentType2: new FormControl(this.equipmentType2, [Validators.required]),
+      equipmentAmount2: new FormControl(this.equipmentAmount2, [Validators.required, Validators.min(1)])
     });
     this.route.queryParams
       .subscribe(params => {
@@ -50,7 +62,6 @@ export class AppointmentComponent {
   }
 
   cancelAppointment(){
-    console.log(this.appointmentId)
     this.calendarService.cancelAppointment(this.appointmentId).subscribe(() => {
       this.showSuccess('Successfully cancelled appointment');
       this.router.navigate(['/calendar'])
@@ -69,7 +80,12 @@ export class AppointmentComponent {
   }
 
   finishAppointment(){
-    this.calendarService.finish(this.appointmentId, this.text, this.bloodType, this.amount).subscribe({
+    if(this.equipmentType1 === this.equipmentType2){
+      this.showError('Same equpiment chosen multiple times')
+      return
+    }
+    this.calendarService.finish(this.appointmentId, this.text, this.bloodType, this.amount, 
+      this.equipmentType1, this.equipmentAmount1, this.equipmentType2, this.equipmentAmount2).subscribe({
       next: () => {
         this.showSuccess('Successfully finished appointment');
         this.router.navigate(['/calendar']);
