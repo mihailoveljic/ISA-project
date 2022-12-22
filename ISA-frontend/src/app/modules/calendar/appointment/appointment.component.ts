@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CalendarService } from '../calendar.service';
+import { QuestionnaireDTO } from './QuestionnaireDTO';
 import { StringDTO } from './StringDTO';
 
 @Component({
@@ -13,6 +14,7 @@ import { StringDTO } from './StringDTO';
 })
 export class AppointmentComponent {
   formGroup!: FormGroup;
+  answers: QuestionnaireDTO[] = [];
   appointmentId: number = 0;
   email:string = '';
   nextStep:boolean = false;
@@ -41,8 +43,10 @@ export class AppointmentComponent {
         });
     this.calendarService.checkQuestionnaire(this.email).subscribe((res) =>{
       this.check = res.text
-    }
-    )
+    })
+    this.calendarService.getAnswers(this.email).subscribe((res) => {
+      this.answers = res;
+    })
   }
 
   cancelAppointment(){

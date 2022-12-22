@@ -1,7 +1,16 @@
 <br/>
+<div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+        <h1 style="text-align: center;">Questionnaire review</h1>
+    <ul>
+        <li [ngClass]="answer.acceptableAnswer == answer.answer ? 'green_li' : 'red_li'" *ngFor="let answer of answers">
+            {{answer.question}}
+        </li>
+    </ul>
+    </div>
+</div>
 <div class="appointment-div">
-    <span class="mat-display-1">Appointment</span>
-    <br/><br/>
+    <h1>Appointment</h1>
     <div *ngIf = "check">
         <div>
             <form class="appointment-form">

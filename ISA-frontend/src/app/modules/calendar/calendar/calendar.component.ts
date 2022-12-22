@@ -110,12 +110,14 @@ export class CalendarComponent implements OnInit{
 }
 
   addNewAppointmentToCalendar(appointment: AppointmentDTO): void{
-    let title: string = "Free appointment: " + appointment.description;
+    let title: string = " appointment: " + appointment.description;
     let color = { ...colors['blue'] };
     if (appointment.appointmentStatus == 'CANCELED'){
+      title = 'Canceled' + title
       color = { ...colors['red'] }
     }
     if (appointment.appointmentStatus == 'FREE'){
+      title = 'Free' + title
       color = { ...colors['yellow'] } 
     }
     if (appointment.appointmentStatus == 'SCHEDULED'){

@@ -160,7 +160,7 @@ INSERT INTO public.appointment(
 	VALUES ('2022-12-22 15:00:00', 'Test termin 2', 60, 10000, 'FREE', 2, NULL);
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-21 17:00:00', 'Moj termin 1', 60, 750, 'FREE', 1, 'mihailoveljic3010@gmail.com');
+	VALUES ('2022-12-23 17:00:00', 'Moj termin 1', 60, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
 INSERT INTO public.appointment(
 	date, description, duration, price, status, blood_bank_id, user_email)
 	VALUES ('2022-12-22 11:00:00', 'Moj termin 2', 60, 1000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');

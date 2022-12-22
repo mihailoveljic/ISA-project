@@ -46,6 +46,11 @@ public class QuestionnaireController {
         return new ResponseEntity<>(string, HttpStatus.OK);
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<List<QuestionnaireReviewDTO>> getQuestionnaireByUser(@PathVariable String email){
+        return new ResponseEntity<>(questionnaireService.getQuestionnaireByUser(email), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody QuestionnaireDTO questionnaireDTO){
         User user = userService.getUserByEmail(questionnaireDTO.getUserEmail());
