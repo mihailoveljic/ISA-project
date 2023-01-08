@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class = container>
+<h3>Upload qr code</h3>
+<input type="file" accept="image/*" (change)="uploadQRCode($event)">
+<form class="create-appointment-form" [formGroup]="formGroup" *ngIf="isVisible">
+    <mat-form-field appearance="outline" color="primary">
+        <mat-label>User:</mat-label>
+        <input matInput type="text" name="user" formControlName="user" >
+    </mat-form-field><br>
+    <mat-form-field appearance="outline" color="primary">
+        <mat-label>Duration:</mat-label>
+        <input matInput type="text" name="duration" formControlName="duration" >
+    </mat-form-field><br>
+    
+    <mat-form-field appearance="outline" color="primary">
+        <mat-label>Date:</mat-label>
+        <input matInput type="text" name="date" formControlName="date" >
+    </mat-form-field><br>
+    <mat-form-field appearance="outline" color="primary">
+        <mat-label>Status:</mat-label>
+        <input matInput type="text" name="status" formControlName="status" >
+    </mat-form-field><br>
+</form>
+<div>
+<button  class="button" mat-raised-button color="primary" (click)="select()" *ngIf="isVisible" [disabled] = "isDisabled">Select</button>
+</div>
+</div>

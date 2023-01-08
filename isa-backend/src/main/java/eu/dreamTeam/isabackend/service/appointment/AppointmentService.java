@@ -16,7 +16,10 @@ import eu.dreamTeam.isabackend.service.qr_code.QRCodeGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -120,7 +123,8 @@ public class AppointmentService {
         appointment.setUserEmail(scheduleAppointmentDTO.getUserEmail());
         appointment = appointmentRepository.save(appointment);
         try{
-            emailService.sendMessageWithAttachment(scheduleAppointmentDTO.getUserEmail(),
+            //scheduleAppointmentDTO.getUserEmail()
+            emailService.sendMessageWithAttachment("jelicm2000@gmail.com",
                     "Schedule appointment confirmation",
                     "You have successfully scheduled appointment.",
                     QRCodeGenerator.getQRCodeImage(appointment.toString(), 250, 250));
@@ -236,7 +240,7 @@ public class AppointmentService {
             AppointmentDTO dto = new AppointmentDTO();
             dto.setAppointmentStatus(appointment.getStatus());
             dto.setId(appointment.getId());
-            dto.setDate(appointment.getDate().toString()); //vidi
+            dto.setDate(appointment.getDate().toString());
             dto.setDuration(appointment.getDuration());
             dto.setEmail(appointment.getUserEmail());
             dto.setUser("");
@@ -255,6 +259,22 @@ public class AppointmentService {
     public List<AppointmentDTO> getAllAppointments(){
         var appointments = appointmentRepository.findAll();
         return getAppointmentDTOS(appointments);
+    }
+
+    public AppointmentDTO getTextFromAppointmentQR(File imageFile)
+    {
+        String appointmentString = QRCodeGenerator.getTextFromImage(imageFile);
+        Appointment appointment = new Appointment();
+        appointment = appointment.fromString(appointmentString);
+        if (appointment.getUserEmail() == null)
+            return null;
+        List<AppointmentDTO> appointments = getUserAppointments(appointment.getUserEmail());
+        for (AppointmentDTO dto : appointments){
+            if (dto.getDate().equals(appointment.getDate().toString())){
+                return dto;
+            }
+        }
+        return null;
     }
 //    private String adjustSelectedDateTimeForQuery(String selectedDateTime) {
 //        //"dd.MM.yyyy. HH:mm"
