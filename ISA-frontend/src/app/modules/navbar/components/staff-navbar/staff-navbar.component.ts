@@ -37,4 +37,9 @@ export class StaffNavbarComponent implements OnInit {
   navigateToCalendar(){
     this.router.navigate([Route.CALENDAR]);
   }
+
+  navigateToQR(){
+    this.router.navigate([Route.QR_READER]);
+  }
+
 }
