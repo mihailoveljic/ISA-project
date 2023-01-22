@@ -1,4 +1,3 @@
-import { Route } from 'src/app/utils/routes';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/auth/models/user';
@@ -49,7 +48,7 @@ export class CentersListComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-  displayedColumns: string[] = ['name', 'description', 'averageRating', 'startTime', 'endTime', 'street', 'number', 'city', 'country', 'buttons'];
+  displayedColumns: string[] = ['name', 'description', 'averageRating', 'startTime', 'endTime', 'street', 'number', 'city', 'country'];
   dataSource: MatTableDataSource<Center>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -217,8 +216,4 @@ export class CentersListComponent implements OnInit, AfterViewInit {
     this.openTime = undefined;
     this.closesTime = undefined;
   }
-
-  goToCenterAppointments(bloodBank: any) {
-    this.router.navigate([Route.CENTER_APPOINTMENTS + '/' + bloodBank.id])
-    }
 }
