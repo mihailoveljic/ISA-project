@@ -64,7 +64,9 @@ export class UserReviewComponent implements OnInit {
   }
 
   check(appointment:AppointmentDTO){
-    return !(new Date(appointment.date).getDate() === new Date().getDate() && appointment.appointmentStatus === 'SCHEDULED')
+    console.log(new Date(appointment.date).getDate() )
+    return !(new Date(appointment.date).getDate() === new Date().getDate() && new Date(appointment.date).getMonth() === new Date().getMonth() && 
+    new Date(appointment.date).getFullYear() === new Date().getFullYear() && appointment.appointmentStatus === 'SCHEDULED')
   }
 
   select(appointment:AppointmentDTO){
