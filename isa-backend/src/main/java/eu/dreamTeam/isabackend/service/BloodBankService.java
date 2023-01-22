@@ -6,6 +6,8 @@ import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
 import eu.dreamTeam.isabackend.repository.WorkTimeRepository;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -71,10 +73,13 @@ public class BloodBankService {
         return bloodBankRepository.save(newBloodBank);
     }
 
+    @RateLimiter(name = "standard", fallbackMethod = "standardFallback")
     public List<BloodBank> getAllBloodBanks(){
         return bloodBankRepository.findAll();
     }
-
+    public List<BloodBank> standardFallback(RequestNotPermitted rnp) {
+        throw rnp;
+    }
 
     public List<BloodBank> getAll() {
         return bloodBankRepository.findAll();
