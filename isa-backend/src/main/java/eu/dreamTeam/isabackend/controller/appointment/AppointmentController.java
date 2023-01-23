@@ -32,7 +32,7 @@ public class AppointmentController {
     @Autowired
     public EquipmentService equipmentService;
     @PostMapping
-    public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) {
+    public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) throws InterruptedException {
         appointmentService.createAppointment(createAppointmentDTO);
         return new ResponseEntity<>(createAppointmentDTO, HttpStatus.OK);
     }

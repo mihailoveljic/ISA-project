@@ -16,15 +16,21 @@ import eu.dreamTeam.isabackend.service.qr_code.QRCodeGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 @Slf4j
 public class AppointmentService {
+    private static ReentrantLock lock = new ReentrantLock();
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
@@ -37,22 +43,30 @@ public class AppointmentService {
     @Autowired
     private UserRepository userRepository;
 
-
-    public CreateAppointmentDTO createAppointment(CreateAppointmentDTO createAppointmentDTO) {
+    public CreateAppointmentDTO createAppointment(CreateAppointmentDTO createAppointmentDTO) throws InterruptedException {
+        if(lock.isLocked())
+            throw new InterruptedException();
+        lock.lock();
         try {
             Appointment appointment = CreateAppointmentDTOToEntity(createAppointmentDTO);
             appointmentRepository.save(appointment);
+            Thread.sleep(10000);
             return  createAppointmentDTO;
         }catch (Exception ex){
             throw new InvalidCreateAppointmentDTOException();
+        }
+        finally {
+            lock.unlock();
         }
 }
 
     private Appointment CreateAppointmentDTOToEntity(CreateAppointmentDTO createAppointmentDTO) {
         LocalDateTime localDateTime = TransformStringToLocalDateTime(createAppointmentDTO.getDate());
         Set<Staff> staffs = new HashSet<>();
-        for(Long id : createAppointmentDTO.getStaff()){
-            staffs.add(staffRepository.findById(id).stream().findFirst().orElse(null));
+        if (createAppointmentDTO.getStaff() != null){
+            for(Long id : createAppointmentDTO.getStaff()){
+                staffs.add(staffRepository.findById(id).stream().findFirst().orElse(null));
+            }
         }
         if(createAppointmentDTO.getPrice() < 0) throw new InvalidCreateAppointmentDTOException();
         return  Appointment.builder()
@@ -61,7 +75,7 @@ public class AppointmentService {
                 .status(AppointmentStatus.FREE)
                 .description(createAppointmentDTO.getDescription())
                 .price(createAppointmentDTO.getPrice())
-                .bloodBankForAppointment(bloodBankRepository.findById(createAppointmentDTO.getBloodBankForAppointment()).stream().findFirst().orElse(null))
+                .bloodBankForAppointment(createAppointmentDTO.getBloodBankForAppointment() == null ? null : bloodBankRepository.findById(createAppointmentDTO.getBloodBankForAppointment()).stream().findFirst().orElse(null))
                 .staff(staffs)
                 .build();
     }
