@@ -1,13 +1,9 @@
 package eu.dreamTeam.isabackend.repository;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import eu.dreamTeam.isabackend.model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.LockModeType;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {

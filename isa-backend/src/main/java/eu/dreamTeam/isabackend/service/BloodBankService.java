@@ -8,6 +8,7 @@ import eu.dreamTeam.isabackend.repository.StaffRepository;
 import eu.dreamTeam.isabackend.repository.WorkTimeRepository;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +48,7 @@ public class BloodBankService {
         return bloodBankRepository.save(bloodBankToUpdate);
     }
 
-
+    @Cacheable("bloodBank")
     public BloodBank getByStaffEmail(String email) {
         Staff staff = staffRepository.getStaffByAccount_Email(email);
         return bloodBankRepository.getBloodBankById(staff.getBloodBank().getId());
