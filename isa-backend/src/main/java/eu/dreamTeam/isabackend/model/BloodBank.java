@@ -46,5 +46,7 @@ public class BloodBank {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
+    @Version
+    private Integer version;
 
 }

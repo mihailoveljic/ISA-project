@@ -41,24 +41,24 @@ INSERT INTO public.work_time(
 	VALUES ('19:00', '05:00');
 
 INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (4.5, 'Prava banka krvi za vas', false, 'Krv na dar', 1, 1);
+	average_rating, description, is_deleted, name, address_id, worktime_id, version)
+	VALUES (4.5, 'Prava banka krvi za vas', false, 'Krv na dar', 1, 1, 0);
 
 INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (3, 'dobra banka najboljaaaaaa', false, 'Daj mi krv', 2, 2);
+	average_rating, description, is_deleted, name, address_id, worktime_id, version)
+	VALUES (3, 'dobra banka najboljaaaaaa', false, 'Daj mi krv', 2, 2, 0);
 
 INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (4.2, 'Vrhunska usluga samo za Vas!', false, 'Krv+', 3, 3);
+	average_rating, description, is_deleted, name, address_id, worktime_id, version)
+	VALUES (4.2, 'Vrhunska usluga samo za Vas!', false, 'Krv+', 3, 3, 0);
 
 INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (3.8, 'Brzo i efikasno! Jer smo najbolji.', false, 'KrvExpress', 4, 4);
+	average_rating, description, is_deleted, name, address_id, worktime_id, version)
+	VALUES (3.8, 'Brzo i efikasno! Jer smo najbolji.', false, 'KrvExpress', 4, 4, 0);
 
 INSERT INTO public.blood_bank(
-	average_rating, description, is_deleted, name, address_id, worktime_id)
-	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5);
+	average_rating, description, is_deleted, name, address_id, worktime_id, version)
+	VALUES (1.5, 'Losi smo, al smo takodje i skupi', false, 'PropalaBanka', 5, 5, 0);
 
 
 INSERT INTO public.question(
@@ -173,17 +173,17 @@ INSERT INTO public.users(
 	VALUES ( null, '1231235675678', 'Mihailo', '060-11-22-33', null, null, 'Veljić', 50, 0, 0, 3, null);
 
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-12 12:00:00', 'Test termin 1', 30, 5000, 'FREE', 1, NULL);
+	date, description, duration, price, status, blood_bank_id, user_email, version)
+	VALUES ('2022-12-12 12:00:00', 'Test termin 1', 30, 5000, 'FREE', 1, NULL, 0);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-22 15:00:00', 'Test termin 2', 60, 10000, 'FREE', 2, NULL);
+	date, description, duration, price, status, blood_bank_id, user_email, version)
+	VALUES ('2022-12-22 15:00:00', 'Test termin 2', 60, 10000, 'FREE', 2, NULL, 0);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-23 17:00:00', 'Moj termin 1', 60, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
+	date, description, duration, price, status, blood_bank_id, user_email, version)
+	VALUES ('2023-02-23 17:00:00', 'Moj termin 1', 30, 750, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com', 0);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-22 11:00:00', 'Moj termin 2', 60, 1000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
+	date, description, duration, price, status, blood_bank_id, user_email, version)
+	VALUES ('2023-02-22 11:00:00', 'Moj termin 2', 45, 1000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com', 0);
 INSERT INTO public.appointment(
-	date, description, duration, price, status, blood_bank_id, user_email)
-	VALUES ('2022-12-25 09:00:00', 'Moj termin 3', 60, 8000, 'SCHEDULED', 1, 'mihailoveljic3010@gmail.com');
+	date, description, duration, price, status, blood_bank_id, user_email, version)
+	VALUES ('2023-02-25 09:00:00', 'Moj termin 3', 60, 8000, 'DONE', 1, 'mihailoveljic3010@gmail.com', 0);

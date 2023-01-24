@@ -37,6 +37,8 @@ public class Appointment {
     private Set<Staff> staff;
     @Column(name = "user_email")
     private String userEmail;
+    @Version
+    private Integer version;
 
 
     @Override

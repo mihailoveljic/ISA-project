@@ -16,6 +16,8 @@ import eu.dreamTeam.isabackend.service.qr_code.QRCodeGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -99,7 +101,7 @@ public class AppointmentService {
         }
     }
 
-    private ScheduleAppointmentDTO FromAppointmentToScheduleAppointmentDto(Appointment appointment) {
+    public ScheduleAppointmentDTO FromAppointmentToScheduleAppointmentDto(Appointment appointment) {
         return ScheduleAppointmentDTO.builder()
                 .id(appointment.getId())
                 .date(appointment.getDate().toString())
@@ -128,7 +130,8 @@ public class AppointmentService {
                 .build();
     }
 
-    public ScheduleAppointmentDTO scheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO) {
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public ScheduleAppointmentDTO scheduleAppointment(ScheduleAppointmentDTO scheduleAppointmentDTO){
         Appointment appointment = appointmentRepository.findById(scheduleAppointmentDTO.getId()).stream().findFirst().orElse(null);
         if(appointment == null) return null;
         appointment.setStatus(AppointmentStatus.SCHEDULED);
