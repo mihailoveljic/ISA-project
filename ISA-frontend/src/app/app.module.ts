@@ -24,6 +24,7 @@ import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
 import {Calendar1Module} from './modules/calendar/calendar.module';
 import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
+import { LocationTrackerModule } from './modules/location-tracker/location-tracker.module';
 
 @NgModule({
   declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent, CreateAdminComponent],
@@ -53,6 +54,7 @@ import { CreateAdminComponent } from './modules/admin-info/components/create-adm
     CentersModule,
     StarRatingModule.forRoot(),
     Calendar1Module,
+    LocationTrackerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

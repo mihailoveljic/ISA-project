@@ -4,6 +4,13 @@ public class Constants {
     public static final String QUEUE = "news_queue";
     public static final String EXCHANGE = "news_exchange";
     public static final String ROUTING_KEY = "news_routing_key";
+
+
+    public static final String LOCATION_QUEUE = "location_queue";
+    public static final String LOCATION_EXCHANGE = "location_exchange";
+    public static final String LOCATION_ROUTING_KEY = "location_routing_key";
+
+
     public static final String TENDERS_QUEUE = "tenders_queue";
     public static final String TENDERS_EXCHANGE = "tenders_exchange";
     public static final String TENDERS_ROUTING_KEY = "tenders_routing_key";

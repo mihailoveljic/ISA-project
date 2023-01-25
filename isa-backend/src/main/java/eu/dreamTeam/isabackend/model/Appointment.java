@@ -38,6 +38,9 @@ public class Appointment {
     @Column(name = "user_email")
     private String userEmail;
 
+    @Column(name = "QR")
+    private byte[] QR;
+
 
     @Override
     public String toString() {

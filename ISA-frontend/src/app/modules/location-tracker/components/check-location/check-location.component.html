@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<div class="start-delivery-div">
+    <input type="number" placeholder="Delivery speed..." name="speed" (change)="updateSpeed($event)">
+    <div class="start-button">
+        <button style="width: 120px; margin-bottom: 5%;" mat-raised-button color="primary"(click)="startDelivery()">Begin delivery</button>
+        <button style="width: 120px;" mat-raised-button color="secondary"(click)="clearSelection()">clear selection</button>        
+    </div>
+</div>
+<div class="selected-panel">
+    <label>From Blood Bank:        </label><label *ngIf="selectedOriginBank">{{selectedOriginBank.name}}</label>
+    <br>
+    <label>To Blood Bank:        </label><label *ngIf="selectedDestinationBank">{{selectedDestinationBank.name}}</label>
+</div>  
+<div class="map" id="map"></div>

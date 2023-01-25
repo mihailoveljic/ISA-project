@@ -69,6 +69,7 @@ export class ScheduleAppointmentComponent implements OnInit {
                     next: (result:any) => {
                       if(result){
                         this.showSuccess();
+                        this.getAllFreeAppointment();
                       }
                     },
                     error: (e:any) => {

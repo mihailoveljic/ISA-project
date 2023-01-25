@@ -19,4 +19,5 @@ public class ScheduleAppointmentDTO {
     private Set<Long> staff;
     private String userEmail;
     private AppointmentStatus appointmentStatus;
+    private byte[] QR;
 }
