@@ -40,6 +40,9 @@ public class Appointment {
     @Version
     private Integer version;
 
+    @Column(name = "QR")
+    private byte[] QR;
+
 
     @Override
     public String toString() {

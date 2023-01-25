@@ -49,6 +49,8 @@ public class BloodBankController {
         this.apiKeyService = apiKeyService;
         TypeMap<BloodBank, BloodBankDTO> propertyMapper = modelMapper.createTypeMap(BloodBank.class, BloodBankDTO.class);
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCity(), BloodBankDTO::setCity));
+        propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getLatitude(), BloodBankDTO::setLatitude));
+        propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getLongitude(), BloodBankDTO::setLongitude));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getStreet(), BloodBankDTO::setStreet));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCountry(), BloodBankDTO::setCountry));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), BloodBankDTO::setNumber));

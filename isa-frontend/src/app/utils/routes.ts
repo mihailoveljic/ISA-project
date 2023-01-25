@@ -16,5 +16,6 @@ export enum Route {
   CENTER_APPOINTMENTS = "center_appointments",
   CALENDAR = "calendar",
   CREATE_ADMIN = "new-admin",
-  QR_READER = "qr-reader"
+  DELIVERY = "location-tracker/check",
+  QR_READER = "qr-reader",
 }

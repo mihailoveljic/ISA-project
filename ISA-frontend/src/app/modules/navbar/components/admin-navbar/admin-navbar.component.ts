@@ -38,5 +38,8 @@ export class AdminNavbarComponent implements OnInit {
     this.router.navigate([Route.CREATE_ADMIN])
   }
 
+  navigateToDelivery(){
+    this.router.navigate([Route.DELIVERY])
+  }
 
 }

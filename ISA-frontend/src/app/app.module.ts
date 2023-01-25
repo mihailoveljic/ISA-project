@@ -22,9 +22,11 @@ import { CreateStaffComponent } from './modules/staff-info/component/create-staf
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
-import {Calendar1Module} from './modules/calendar/calendar.module';
+import { Calendar1Module } from './modules/calendar/calendar.module';
 import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
+import { LocationTrackerModule } from './modules/location-tracker/location-tracker.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+
 @NgModule({
   declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent, CreateAdminComponent],
   imports: [
@@ -53,6 +55,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     CentersModule,
     StarRatingModule.forRoot(),
     Calendar1Module,
+    LocationTrackerModule,
     NgxQRCodeModule,
   ],
   providers: [],

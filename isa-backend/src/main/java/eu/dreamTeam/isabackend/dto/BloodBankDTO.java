@@ -36,4 +36,6 @@ public class BloodBankDTO {
     @Min(1)
     @Max(5)
     private double averageRating;
+    private double latitude;
+    private double longitude;
 }

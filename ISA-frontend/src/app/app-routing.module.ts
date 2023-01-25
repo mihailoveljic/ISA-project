@@ -20,13 +20,14 @@ const routes: Routes = [
   { path:'blood-bank-center-info', component: BloodBankCenterInfoComponent},
   { path: Route.CREATE_STAFF, component: CreateStaffComponent},
   { path: Route.CENTERS, loadChildren: () => import('./modules/centers/centers.module').then(m => m.CentersModule) },
-  {path: Route.USER_REVIEW, component: UserReviewComponent},
+  { path: Route.USER_REVIEW, component: UserReviewComponent},
   { path: 'questionnaire', loadChildren: () => import('./modules/questionnaire/questionnaire.module').then(m => m.QuestionnaireModule) },
-  {path: Route.USER_INFO, component: UserInfoComponent},
+  { path: Route.USER_INFO, component: UserInfoComponent},
   { path: 'news', loadChildren: () => import('./modules/news/news.module').then(m => m.NewsModule) },
   { path: 'tenders', loadChildren: () => import('./modules/tenders/tenders.module').then(m => m.TendersModule) },
   { path: Route.CREATE_ADMIN, component: CreateAdminComponent},
-  {path: Route.QR_READER, component: QrReaderComponent},
+  { path: 'location-tracker', loadChildren: () => import('./modules/location-tracker/location-tracker.module').then(m => m.LocationTrackerModule)},
+  { path: Route.QR_READER, component: QrReaderComponent},
 ];
 
 @NgModule({

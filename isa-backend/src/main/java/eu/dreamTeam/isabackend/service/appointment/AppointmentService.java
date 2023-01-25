@@ -112,6 +112,7 @@ public class AppointmentService {
                 .staff(null)
                 .appointmentStatus(appointment.getStatus())
                 .userEmail(appointment.getUserEmail())
+                .QR(appointment.getQR())
                 .build();
     }
 
@@ -136,18 +137,18 @@ public class AppointmentService {
         if(appointment == null) return null;
         appointment.setStatus(AppointmentStatus.SCHEDULED);
         appointment.setUserEmail(scheduleAppointmentDTO.getUserEmail());
-        appointment = appointmentRepository.save(appointment);
         try{
-            //scheduleAppointmentDTO.getUserEmail()
-            emailService.sendMessageWithAttachment("jelicm2000@gmail.com",
+            var QR = QRCodeGenerator.getQRCodeImage(appointment.toString(), 250, 250);
+            appointment.setQR(QR);
+            emailService.sendMessageWithAttachment(scheduleAppointmentDTO.getUserEmail(),
                     "Schedule appointment confirmation",
                     "You have successfully scheduled appointment.",
-                    QRCodeGenerator.getQRCodeImage(appointment.toString(), 250, 250));
+                    QR);
         }catch (Exception e){
             log.error("Error occurred during email sending...");
             log.error(e.getMessage());
         }
-
+        appointment = appointmentRepository.save(appointment);
         return scheduleAppointmentDTO;
     }
 

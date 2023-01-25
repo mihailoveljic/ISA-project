@@ -1,7 +1,9 @@
 package eu.dreamTeam.isabackend.rabbitmq.config;
 
 import eu.dreamTeam.isabackend.rabbitmq.constants.Constants;
+import eu.dreamTeam.isabackend.rabbitmq.consumer.LocationListener;
 import eu.dreamTeam.isabackend.rabbitmq.consumer.RabbitMQListener;
+import eu.dreamTeam.isabackend.service.DeliveryLocationService;
 import eu.dreamTeam.isabackend.service.HospitalService;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -16,14 +18,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
     private final HospitalService hospitalService;
+    private final DeliveryLocationService deliveryLocationService;
 
-    public RabbitMqConfig(HospitalService hospitalService){
+    public RabbitMqConfig(HospitalService hospitalService, DeliveryLocationService deliveryLocationService){
         this.hospitalService = hospitalService;
+        this.deliveryLocationService = deliveryLocationService;
     }
 
     @Bean
     public Queue queue(){
         return new Queue(Constants.QUEUE);
+    }
+    @Bean
+    public Queue location_queue(){
+        return new Queue(Constants.LOCATION_QUEUE);
     }
     @Bean
     public Queue register_queue(){
@@ -40,6 +48,10 @@ public class RabbitMqConfig {
         return new TopicExchange(Constants.EXCHANGE);
     }
     @Bean
+    public TopicExchange location_exchange(){
+        return new TopicExchange(Constants.LOCATION_EXCHANGE);
+    }
+    @Bean
     public TopicExchange delivery_exchange() {
         return new TopicExchange(Constants.DELIVERY_EXCHANGE);
     }
@@ -50,6 +62,10 @@ public class RabbitMqConfig {
     @Bean
     public Binding binding(Queue queue, TopicExchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with(Constants.ROUTING_KEY);
+    }
+    @Bean
+    public Binding location_binding(Queue queue, TopicExchange exchange){
+        return BindingBuilder.bind(queue).to(exchange).with(Constants.LOCATION_ROUTING_KEY);
     }
    @Bean
     public Binding register_binding(){
@@ -101,6 +117,16 @@ public class RabbitMqConfig {
         simpleMessageListenerContainer.setConnectionFactory(connectionFactory1);
         simpleMessageListenerContainer.setQueues(register_queue());
         simpleMessageListenerContainer.setMessageListener(new RabbitMQListener(hospitalService));
+        return simpleMessageListenerContainer;
+
+    }
+
+    @Bean
+    public MessageListenerContainer messageListenerContainerLocation(ConnectionFactory connectionFactory1 ) {
+        SimpleMessageListenerContainer simpleMessageListenerContainer = new SimpleMessageListenerContainer();
+        simpleMessageListenerContainer.setConnectionFactory(connectionFactory1);
+        simpleMessageListenerContainer.setQueues(location_queue());
+        simpleMessageListenerContainer.setMessageListener(new LocationListener(deliveryLocationService));
         return simpleMessageListenerContainer;
 
     }

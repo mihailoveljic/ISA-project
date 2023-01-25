@@ -22,6 +22,7 @@ export class ScheduledAppointmentsComponent implements OnInit {
     'description',
     'price',
     'bloodBankForAppointment',
+    'QR',
     'status',
     'buttons',
   ];
@@ -43,6 +44,7 @@ export class ScheduledAppointmentsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  
   getAllAppointmentsByUserEmail() {
     if(!this.user) return;
     if(!this.user.email) return;
@@ -52,11 +54,23 @@ export class ScheduledAppointmentsComponent implements OnInit {
         let now = new Date()
         now = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds())
         this.appointments.forEach((a:any) => {
+          try{
+            a.qr = atob(a.qr);
+          }catch(e){
+            console.log(e)
+          }
+          try{
+            atob(a.qr);
+          }catch(e){
+            a.qr = btoa(a.qr);
+          }
+          a.qr = 'data:image/png;base64,' + a.qr;
           let appointmentDate = new Date(a.date);
           if(appointmentDate >= now){
             a.canCancel = true;
           }else{
             a.canCancel = false;
+            a.appointmentStatus = 'DONE';
           }
         });
         this.dataSource.data = this.appointments;
