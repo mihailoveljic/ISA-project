@@ -6,11 +6,19 @@ import eu.dreamTeam.isabackend.model.enums.EquipmentType;
 import eu.dreamTeam.isabackend.service.BloodSampleService;
 import eu.dreamTeam.isabackend.service.EquipmentService;
 import eu.dreamTeam.isabackend.service.appointment.AppointmentService;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +32,7 @@ public class AppointmentController {
     @Autowired
     public EquipmentService equipmentService;
     @PostMapping
-    public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) {
+    public ResponseEntity<CreateAppointmentDTO> createAppointment(@RequestBody CreateAppointmentDTO createAppointmentDTO) throws InterruptedException {
         appointmentService.createAppointment(createAppointmentDTO);
         return new ResponseEntity<>(createAppointmentDTO, HttpStatus.OK);
     }
@@ -42,7 +50,6 @@ public class AppointmentController {
         return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
 
-    @CrossOrigin
     @GetMapping(value = "/getAllAppointmentsByUserEmail/{userEmail}")
     public ResponseEntity<ScheduledAppointmentsDTOs> getAllAppointmentsByUserEmail(@PathVariable String userEmail){
         ScheduledAppointmentsDTOs scheduledAppointmentsDTOs = new ScheduledAppointmentsDTOs();
@@ -50,7 +57,6 @@ public class AppointmentController {
         return new ResponseEntity<>(scheduledAppointmentsDTOs ,HttpStatus.OK);
     }
 
-    @CrossOrigin
     @GetMapping(value = "/checkForAppointmentInLast6Months/{userEmail}")
     public ResponseEntity checkForAppointmentInLast6Months(@PathVariable String userEmail){
         var response = appointmentService.checkForAppointmentInLast6Months(userEmail);
@@ -151,5 +157,31 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentDTO>> getUserAppointments(@PathVariable String email){
         List<AppointmentDTO> AppointmentsDTOs = appointmentService.getUserAppointments(email);
         return new ResponseEntity<>(AppointmentsDTOs ,HttpStatus.OK);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<AppointmentDTO> singleFileUpload(@RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+
+            return null;
+            //TODO error dodaj
+        }
+
+        try {
+
+            File convFile = new File(file.getOriginalFilename());
+            file.transferTo(convFile);
+            AppointmentDTO dto = appointmentService.getTextFromAppointmentQR(convFile);
+            if (dto == null){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(dto ,HttpStatus.OK);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

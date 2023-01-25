@@ -1,0 +1,18 @@
+.container {
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: #DCD6CC 1px solid;
+    background-color: white;
+}
+
+button {
+    margin-top: 2%;
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    width: 15%;
+    
+}

@@ -1,15 +1,13 @@
 package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
-import eu.dreamTeam.isabackend.handler.exceptions.*;
 import eu.dreamTeam.isabackend.dto.BloodBankDTOs;
-import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.BankNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.FailedUpdateException;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.handler.exceptions.WrongTimeRangeException;
+import eu.dreamTeam.isabackend.logger.CacheLogger;
 import eu.dreamTeam.isabackend.model.BloodBank;
-
-import java.nio.file.*;
 import eu.dreamTeam.isabackend.service.AccountService;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
 import eu.dreamTeam.isabackend.service.BloodBankService;
@@ -25,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +36,7 @@ public class BloodBankController {
 
     @Autowired
     private BloodBankService bloodBankService;
-    @Autowired
-    private AccountService accountService;
+    private CacheLogger cacheLogger;
     private final ApiKeyService apiKeyService;
     private final ModelMapper modelMapper;
 

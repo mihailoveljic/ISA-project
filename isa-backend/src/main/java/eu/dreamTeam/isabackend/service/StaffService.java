@@ -12,6 +12,7 @@ import eu.dreamTeam.isabackend.repository.AccountRepository;
 import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class StaffService {
     }
 
     public boolean checkStaffByJmbg(String jmbg) {return staffRepository.getStaffByJmbg(jmbg) != null;}
-
+    @Cacheable("staff")
     public Staff getByEmail(String email) {
         return staffRepository.getStaffByEmail(email);
     }

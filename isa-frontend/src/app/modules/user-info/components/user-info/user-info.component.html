@@ -6,6 +6,11 @@
         <mat-card-content class="centered">
           <p>{{userFromOurDbWithAdditionalFields.collectedPoints}} / 200 collected points</p>
         </mat-card-content>
+        <mat-card-content class="centered">
+            <p>Number of penalties: <span [ngClass]="{'high-penalties': userFromOurDbWithAdditionalFields.penalties == 2,
+                 'low-penalties': userFromOurDbWithAdditionalFields.penalties == 0,
+                  'medium-penalties': userFromOurDbWithAdditionalFields.penalties == 1}">{{userFromOurDbWithAdditionalFields.penalties}}</span></p>
+          </mat-card-content>
         <mat-card-actions class="centered">
             <div class="user-type-details-button">
                 <button  mat-raised-button color="primary">See details about user types</button>

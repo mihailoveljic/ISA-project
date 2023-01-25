@@ -9,7 +9,7 @@ import { UserInfoComponent } from './modules/user-info/components/user-info/user
 
 import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
 import { AppointmentComponent } from './modules/calendar/appointment/appointment.component';
-
+import { QrReaderComponent } from './modules/user-info/components/qr-reader/qr-reader.component';
 
 const routes: Routes = [
   //{ path: Route.APPOINTMENTS, loadChildren: () => import('./modules/appointments/appointments.module').then(m => m.AppointmentsModule)},
@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'tenders', loadChildren: () => import('./modules/tenders/tenders.module').then(m => m.TendersModule) },
   { path: Route.CREATE_ADMIN, component: CreateAdminComponent},
   { path: 'location-tracker', loadChildren: () => import('./modules/location-tracker/location-tracker.module').then(m => m.LocationTrackerModule)},
+  { path: Route.QR_READER, component: QrReaderComponent},
 ];
 
 @NgModule({

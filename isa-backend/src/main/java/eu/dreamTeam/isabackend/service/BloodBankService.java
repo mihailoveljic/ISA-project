@@ -6,11 +6,16 @@ import eu.dreamTeam.isabackend.repository.AddressRepository;
 import eu.dreamTeam.isabackend.repository.BloodBankRepository;
 import eu.dreamTeam.isabackend.repository.StaffRepository;
 import eu.dreamTeam.isabackend.repository.WorkTimeRepository;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +36,7 @@ public class BloodBankService {
         this.addressRepository = addressRepository;
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public BloodBank update(BloodBankDTO bloodBank) {
         BloodBank bloodBankToUpdate = bloodBankRepository.getBloodBankById(bloodBank.getId());
         bloodBankToUpdate.getAddress().setNumber(bloodBank.getNumber());
@@ -45,7 +51,7 @@ public class BloodBankService {
         return bloodBankRepository.save(bloodBankToUpdate);
     }
 
-
+    @Cacheable("bloodBank")
     public BloodBank getByStaffEmail(String email) {
         Staff staff = staffRepository.getStaffByAccount_Email(email);
         return bloodBankRepository.getBloodBankById(staff.getBloodBank().getId());
@@ -71,10 +77,13 @@ public class BloodBankService {
         return bloodBankRepository.save(newBloodBank);
     }
 
+    @RateLimiter(name = "standard", fallbackMethod = "standardFallback")
     public List<BloodBank> getAllBloodBanks(){
         return bloodBankRepository.findAll();
     }
-
+    public List<BloodBank> standardFallback(RequestNotPermitted rnp) {
+        throw rnp;
+    }
 
     public List<BloodBank> getAll() {
         return bloodBankRepository.findAll();
