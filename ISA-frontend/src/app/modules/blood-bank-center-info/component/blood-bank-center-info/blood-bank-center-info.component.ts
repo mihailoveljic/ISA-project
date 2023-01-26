@@ -8,6 +8,18 @@ import { BloodSample } from '../../model/BloodSample';
 import { CenterInfo } from '../../model/CenterInfo';
 import { StaffMainInfo } from '../../model/StaffMainInfo';
 import { BloodBankCenterInfoService } from '../../service/blood-bank-center-info.service';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import { fromLonLat } from 'ol/proj';
+import { OSM } from 'ol/source';
+import { Tile } from 'ol/layer';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Feature from 'ol/Feature';
+import { Point } from 'ol/geom';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import { BloodBankInfo } from '../../model/BloodBankInfo';
 
 @Component({
   selector: 'app-blood-bank-center-info',
@@ -19,9 +31,9 @@ export class BloodBankCenterInfoComponent implements OnInit {
   formGroup1!: FormGroup;
   formGroup2!: FormGroup;
   user?: User;
-  centerInfo: CenterInfo = {name: '', id: 0, description: '', averageRating: 0, startTime: '', endTime: '', 
-                          number: '', street: '', city: '', country: ''};
-  centerInfoCopy!: CenterInfo;
+  centerInfo: BloodBankInfo = {name: '', id: 0, description: '', averageRating: 0, startTime: '', endTime: '', 
+                          number: '', street: '', city: '', country: '', longitude: 0, latitude: 0};
+  centerInfoCopy!: BloodBankInfo;
   dataSourceStaff = new MatTableDataSource<StaffMainInfo>();
   displayedColumnsStaff = ['name', 'surname', 'phoneNumber', 'profession'];
   staffList: StaffMainInfo[] = [];
@@ -30,10 +42,33 @@ export class BloodBankCenterInfoComponent implements OnInit {
   displayedColumnsSamples = ['bloodType', 'amount'];
   sampleList: BloodSample[] = [];
   sample!: BloodSample;
+  map:any; 
+
 
   constructor(private toastr : ToastrService, private authService: AuthService, private centerInfoService: BloodBankCenterInfoService) { }
 
   ngOnInit(): void {
+    this.map = new Map({
+      target: 'map',
+      layers: [
+        new Tile({
+          source: new OSM()
+        }),
+        new VectorLayer({
+          source: new VectorSource()
+        }),
+        new VectorLayer({
+          source: new VectorSource()
+        }),
+        new VectorLayer({
+          source: new VectorSource()
+        })
+      ],
+      view: new View({
+        center: fromLonLat([19.8268391, 45.2490324]),
+        zoom: 15.5
+      })
+    });
     this.formGroup1 = new FormGroup({
       name: new FormControl(),
       description: new FormControl(),
@@ -72,9 +107,24 @@ export class BloodBankCenterInfoComponent implements OnInit {
           city: new FormControl(this.centerInfo.city, [Validators.required]),
           country: new FormControl(this.centerInfo.country, [Validators.required]),
         });
+        this.placeBloodBankMarker(this.centerInfo);
       },
       error: (e) => this.showError(e.message)
     });
+  }
+
+  private placeBloodBankMarker(bloodBank: any){
+    const marker = new Feature({
+      geometry: new Point(fromLonLat([bloodBank.longitude, bloodBank.latitude]))
+    });
+    marker.setStyle(new Style({
+      image: new Icon({
+        src: 'assets/images/hospital.png',
+        anchor: [0.5, 1],
+        scale: 0.075
+      })
+    }));
+    this.map.getLayers().item(1).getSource().addFeature(marker);
   }
 
   updateCenterInfo(){

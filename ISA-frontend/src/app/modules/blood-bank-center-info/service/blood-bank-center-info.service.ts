@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BloodBankInfo } from '../model/BloodBankInfo';
 import { BloodSample } from '../model/BloodSample';
 import { CenterInfo } from '../model/CenterInfo';
 import { StaffMainInfo } from '../model/StaffMainInfo';
@@ -23,8 +24,8 @@ export class BloodBankCenterInfoService {
 
   constructor(private http: HttpClient) { }
 
-  public get(email: any): Observable<CenterInfo> {
-    return this.http.get<CenterInfo>(this.apiUrl, { params: new HttpParams().set('email', email)});
+  public get(email: any): Observable<BloodBankInfo> {
+    return this.http.get<BloodBankInfo>(this.apiUrl, { params: new HttpParams().set('email', email)});
   }
 
   public getColleagues(email: any): Observable<StaffMainInfo[]> {
@@ -35,8 +36,8 @@ export class BloodBankCenterInfoService {
     return this.http.get<BloodSample[]>(this.samplesApi, { params: new HttpParams().set('email', email)});
   }
 
-  public update(centerInfo: CenterInfo): Observable<CenterInfo> {
-    return this.http.put<CenterInfo>(this.apiUrl, centerInfo, httpOptions);
+  public update(centerInfo: BloodBankInfo): Observable<BloodBankInfo> {
+    return this.http.put<BloodBankInfo>(this.apiUrl, centerInfo, httpOptions);
   }
 
   public create(centerInfo: CenterInfo): Observable<CenterInfo> {

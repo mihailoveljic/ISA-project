@@ -63,6 +63,8 @@ public class BloodBankService {
         address.setNumber(bloodBank.getNumber());
         address.setCountry(bloodBank.getCountry());
         address.setCity(bloodBank.getCity());
+        address.setLatitude(bloodBank.getLatitude());
+        address.setLongitude(bloodBank.getLatitude());
         address = addressRepository.save(address);
         newBloodBank.setAddress(address);
         newBloodBank.setName(bloodBank.getName());
@@ -73,7 +75,6 @@ public class BloodBankService {
         workTime.setEndTime(bloodBank.getEndTime());
         workTime = workTimeRepository.save(workTime);
         newBloodBank.setWorkTime(workTime);
-
         return bloodBankRepository.save(newBloodBank);
     }
 
