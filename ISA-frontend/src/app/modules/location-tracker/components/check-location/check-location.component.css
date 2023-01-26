@@ -1,0 +1,35 @@
+.map {
+  width: 100%;
+  height: 93%;
+}
+
+body {
+  overflow-x: hidden;
+}
+.start-delivery-div {
+  display: flex;
+  position: absolute;
+  height: 40px;
+  margin: 1%;
+  left: 82%;
+  text-align: center;
+  z-index: 100;
+}
+
+.start-button{
+  margin: auto;
+  margin-left: 1%;
+}
+
+.selected-panel{
+  width: 300px;
+  margin-top: 10%;
+  background-color: black;
+  color: white;
+  opacity: 0.7;
+  position: absolute;
+  right: 2%;
+  top: 0%;
+  z-index: 100;
+  padding: 1%;
+}

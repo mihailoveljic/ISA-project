@@ -17,10 +17,7 @@ public class QuestionnaireAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
-    @ManyToOne
-    @JoinColumn(name = "questionnaire_id")
-    private Questionnaire questionnaire;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;

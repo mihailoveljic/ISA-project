@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AppointmentService {
+  
+  
   constructor(protected http: HttpClient) {}
 
   createAppointment(appointmentDto: any): any {
@@ -20,9 +22,39 @@ export class AppointmentService {
       appointmentDto
     );
   }
+
+  unscheduleAppointment(appointmentDto: any) {
+    return this.http.put<any>(
+      `${environment.bloodBank}/api/appointment/unscheduleAppointment`,
+      appointmentDto
+    );
+  }
+
   getAllFreeAppointments(): any {
     return this.http.get<any>(
       `${environment.bloodBank}/api/appointment/freeAppointments`
+    );
+  }
+  getAllFreeAppointmentsByBloodBankId(bloodBankId: any) {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/freeAppointmentsByBloodBankId/` + bloodBankId
+    );
+  }
+
+  getAllAppointmentsByUserEmail(userEmail: string) {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/getAllAppointmentsByUserEmail/` + userEmail
+    );
+  }
+  checkForAppointmentInLast6Months(userEmail: string) {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/checkForAppointmentInLast6Months/` + userEmail
+    );
+  }
+
+  searchForAppointmentsWithCertainDateTime(selectedDateTime: any):any {
+    return this.http.get<any>(
+      `${environment.bloodBank}/api/appointment/allAppointmentsBySelectedDateTime/` + selectedDateTime
     );
   }
 }

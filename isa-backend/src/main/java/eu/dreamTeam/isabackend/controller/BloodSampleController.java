@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class BloodSampleController {
         this.accountService = accountService;
         this.modelMapper = modelMapper;
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<String> getBloodSample(
             HttpServletRequest httpServletRequest,
@@ -63,12 +64,10 @@ public class BloodSampleController {
 
             return new ResponseEntity<>("Blood type exists in chosen amount. There is currently " + availableAmount + "ml in supplies.", HttpStatus.OK);
         }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping("/supplies")
     public ResponseEntity<List<SampleDTO>> getBloodSample(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         Staff staff = staffService.getByEmail(email);
         if (staff == null)
             throw new StaffNotExistedException();

@@ -1,5 +1,6 @@
 package eu.dreamTeam.isabackend.dto;
 
+import eu.dreamTeam.isabackend.model.BloodBank;
 import eu.dreamTeam.isabackend.model.enums.AppointmentStatus;
 import lombok.*;
 import java.util.Set;
@@ -14,6 +15,9 @@ public class ScheduleAppointmentDTO {
     private int duration;
     private String description;
     private double price;
-    private Long bloodBankForAppointment;
+    private BloodBankDTO bloodBankForAppointment;
     private Set<Long> staff;
+    private String userEmail;
+    private AppointmentStatus appointmentStatus;
+    private byte[] QR;
 }

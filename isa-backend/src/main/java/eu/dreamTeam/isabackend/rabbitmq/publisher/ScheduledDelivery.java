@@ -33,7 +33,7 @@ public class ScheduledDelivery {
 
     @Scheduled(fixedRate = 60*3000)
     public void sendMessage() {
-        List<Hospital> hospitals = hospitalService.getAll();
+       List<Hospital> hospitals = hospitalService.getAll();
         List<BloodSample> samples = bloodSampleService.getAll();
         List<BloodSampleDTO> dtos = new ArrayList<BloodSampleDTO>() ;
         String message = "Nabavka uspesno obavljena";
@@ -43,7 +43,7 @@ public class ScheduledDelivery {
             BloodSampleDTO bsDTO = new BloodSampleDTO();
             bsDTO.setAmount(100);
             bsDTO.setBloodType(bs.getBloodType());
-            if(bs.getAmount()<100)
+            if(!bloodSampleService.getBloodSampleForPurchase(bs.getBloodType().toString(), 100))
             {
                 bsDTO.setAmount(0);
                 message = "Nije bilo moguce isporuciti sve tipove krvi";

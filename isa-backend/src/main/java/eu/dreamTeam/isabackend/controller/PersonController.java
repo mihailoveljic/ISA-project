@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,23 +58,26 @@ public class PersonController {
         propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), PersonDTO::setNumber));
         propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), PersonDTO::setEmail));
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<List<PersonDTO>> getAllPersons(){
         List<User> users = userService.getAllUsers();
         List <PersonDTO>  personDTOS = new ArrayList<PersonDTO>();
         for (User user: users){
             PersonDTO personDTO = modelMapper.map(user, PersonDTO.class);
+            personDTO.setType("User");
             personDTOS.add(personDTO);
         }
         List<SystemAdmin> admins = systemAdminService.getAllAdmins();
         for (SystemAdmin admin: admins){
             PersonDTO personDTO = modelMapper.map(admin, PersonDTO.class);
+            personDTO.setType("System admin");
             personDTOS.add(personDTO);
         }
         List<Staff> staff = staffService.getAllStaff();
         for (Staff s: staff){
             PersonDTO personDTO = modelMapper.map(s, PersonDTO.class);
+            personDTO.setType("Staff");
             personDTOS.add(personDTO);
         }
         return new ResponseEntity<>(personDTOS, HttpStatus.OK);

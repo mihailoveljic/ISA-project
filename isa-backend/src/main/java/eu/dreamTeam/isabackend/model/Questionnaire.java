@@ -24,6 +24,6 @@ public class Questionnaire {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "questionnaire")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<QuestionnaireAnswer> questionnaireAnswers;
 }

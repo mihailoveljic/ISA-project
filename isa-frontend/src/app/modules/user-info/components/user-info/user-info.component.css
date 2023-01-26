@@ -33,3 +33,15 @@
 .user-type-details-button{
     margin-bottom: 5%;
 }
+.high-penalties {
+    color: red;
+    font-size: 20px;
+  }
+.low-penalties {
+    color: green;
+    font-size: 16px;
+ }
+.medium-penalties{
+    color: rgb(229, 141, 17);
+    font-size: 18px;
+}

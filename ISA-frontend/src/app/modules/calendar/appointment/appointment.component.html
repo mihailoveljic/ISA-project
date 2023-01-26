@@ -1,0 +1,98 @@
+<br/>
+<div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+        <h1 style="text-align: center;">Questionnaire review</h1>
+    <ul *ngIf="answers.length > 0">
+        <li [ngClass]="answer.acceptableAnswer == answer.answer ? 'green_li' : 'red_li'" *ngFor="let answer of answers">
+            {{answer.question}}
+        </li>
+    </ul>
+    <p *ngIf="answers.length == 0">User didn't fill questionnaire correctly</p>
+    </div>
+</div>
+<div class="appointment-div">
+    <h1>Appointment</h1>
+    <div *ngIf = "check">
+        <div>
+            <form class="appointment-form">
+                <mat-label>{{check}}</mat-label>
+            </form>
+        </div>
+        <br/>
+        <button class="button" mat-raised-button color="primary" (click)="cancelAppointment()">Cancel appointment</button>
+    </div>
+    <div *ngIf = "!check">
+        <div>
+            <form class="appointment-form">
+                <mat-label>Has the user appeared for appointment?</mat-label>
+            </form>
+        </div>
+        <br/>
+        <button class="button" mat-raised-button color="primary" (click)="affirmativeAnswer()">Yes</button>
+        <button [disabled] = "nextStep" class="button" mat-raised-button color="primary" (click)="negativeAnswer()">No</button>
+    </div>
+    <br />
+    <div *ngIf = "nextStep">
+        <div>
+            <form class="appointment-form" [formGroup]="formGroup">
+                <mat-form-field appearance="fill">
+                    <mat-label>Aditional details:</mat-label>
+                    <input matNativeControl type="text" name="text" formControlName="text" [(ngModel)]="text">
+                </mat-form-field><br/>
+                <mat-form-field appearance="fill">
+                    <mat-label>Used blood type:</mat-label>
+                    <select matNativeControl name="bloodType" formControlName="bloodType" [(ngModel)]="bloodType">
+                      <option value="A_POS">A_POS</option>
+                      <option value="A_NEG">A_NEG</option>
+                      <option value="AB_POS">AB_POS</option>
+                      <option value="AB_NEG">AB_NEG</option>
+                      <option value="B_POS">B_POS</option>
+                      <option value="B_NEG">B_NEG</option>
+                      <option value="ZERO_POS">ZERO_POS</option>
+                      <option value="ZERO_NEG">ZERO_NEG</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of blood:</mat-label>
+                      <input matNativeControl type="number" name="amount" formControlName="amount" [(ngModel)]="amount">
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Used equipment type(1):</mat-label>
+                    <select matNativeControl name="equipmentType1" formControlName="equipmentType1" [(ngModel)]="equipmentType1">
+                      <option value="BLOOD_LANCETS">BLOOD_LANCETS</option>
+                      <option value="VIALS">VIALS</option>
+                      <option value="MICROSCOPIC_SLIDES">MICROSCOPIC_SLIDES</option>
+                      <option value="BLOOD_GROUPING_REAGENTS">BLOOD_GROUPING_REAGENTS</option>
+                      <option value="BLOOD_BAGS">BLOOD_BAGS</option>
+                      <option value="BLOOD_COLLECTION_TUBES">BLOOD_COLLECTION_TUBES</option>
+                      <option value="BLOOD_FILTERS">BLOOD_FILTERS</option>
+                      <option value="BLOOD_COLLECTION_NEEDLES">BLOOD_COLLECTION_NEEDLES</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of equipment(1):</mat-label>
+                      <input matNativeControl type="number" name="equipmentAmount1" formControlName="equipmentAmount1" [(ngModel)]="equipmentAmount1">
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Used equipment type(2):</mat-label>
+                    <select matNativeControl name="equipmentType2" formControlName="equipmentType2" [(ngModel)]="equipmentType2">
+                      <option value="BLOOD_LANCETS">BLOOD_LANCETS</option>
+                      <option value="VIALS">VIALS</option>
+                      <option value="MICROSCOPIC_SLIDES">MICROSCOPIC_SLIDES</option>
+                      <option value="BLOOD_GROUPING_REAGENTS">BLOOD_GROUPING_REAGENTS</option>
+                      <option value="BLOOD_BAGS">BLOOD_BAGS</option>
+                      <option value="BLOOD_COLLECTION_TUBES">BLOOD_COLLECTION_TUBES</option>
+                      <option value="BLOOD_FILTERS">BLOOD_FILTERS</option>
+                      <option value="BLOOD_COLLECTION_NEEDLES">BLOOD_COLLECTION_NEEDLES</option>
+                    </select>
+                  </mat-form-field><br/>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Used amount of equipment(2):</mat-label>
+                      <input matNativeControl type="number" name="equipmentAmount2" formControlName="equipmentAmount2" [(ngModel)]="equipmentAmount2">
+                  </mat-form-field>
+            </form>
+        </div>
+        <br/>
+        <button [disabled]="!formGroup.valid" class="button" mat-raised-button color="primary" (click)="finishAppointment()">Finish appointment</button>
+    </div>
+</div>

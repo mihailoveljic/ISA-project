@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OAuthService, AuthConfig,  OAuthErrorEvent, OAuthSuccessEvent, NullValidationHandler } from 'angular-oauth2-oidc';
+import { OAuthService, AuthConfig, OAuthErrorEvent, OAuthSuccessEvent, NullValidationHandler } from 'angular-oauth2-oidc';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
@@ -20,7 +20,7 @@ export class AuthService {
       clientId: 'blood-bank-angular',
       scope: 'openid profile email offline_access',
       responseType: 'code',
-      sessionChecksEnabled: true
+      sessionChecksEnabled: true,
   };
 
   constructor(private oauthService: OAuthService,

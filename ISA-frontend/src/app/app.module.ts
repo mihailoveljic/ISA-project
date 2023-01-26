@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { AppointmentsModule } from './modules/appointments/appointments.module';
 import { MaterialModule } from './modules/angular-material/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AuthModule } from './auth/auth.module';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { OAuthModule, OAuthService } from 'angular-oauth2-oidc';
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
 import { NavbarModule } from './modules/navbar/navbar.module';
@@ -22,10 +22,13 @@ import { CreateStaffComponent } from './modules/staff-info/component/create-staf
 import { UserReviewComponent } from './modules/user-review/user-review.component';
 import { UserInfoModule } from './modules/user-info/user-info.module';
 import { StarRatingModule } from 'angular-star-rating';
-
-
+import { Calendar1Module } from './modules/calendar/calendar.module';
+import { CreateAdminComponent } from './modules/admin-info/components/create-admin/create-admin.component';
+import { LocationTrackerModule } from './modules/location-tracker/location-tracker.module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 @NgModule({
-  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent],
+  declarations: [AppComponent, StaffInfoComponent, BloodBankCenterInfoComponent, CreateStaffComponent, UserReviewComponent, CreateAdminComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -51,8 +54,16 @@ import { StarRatingModule } from 'angular-star-rating';
     }),
     CentersModule,
     StarRatingModule.forRoot(),
+    Calendar1Module,
+    LocationTrackerModule,
+    NgxQRCodeModule,
   ],
-  providers: [],
+  providers: [OAuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true,
+  }
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,4 +9,5 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     @Query(value = "select * from appointment where status like 'FREE'", nativeQuery = true)
     List<Appointment> findAllFreeAppointments();
+    List<Appointment> findAllByUserEmail(String userEmail);
 }

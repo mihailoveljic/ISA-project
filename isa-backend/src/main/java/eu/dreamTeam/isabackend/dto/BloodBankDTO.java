@@ -1,14 +1,18 @@
 package eu.dreamTeam.isabackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
-
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Data
 public class BloodBankDTO {
     @NotNull
@@ -32,4 +36,6 @@ public class BloodBankDTO {
     @Min(1)
     @Max(5)
     private double averageRating;
+    private double latitude;
+    private double longitude;
 }

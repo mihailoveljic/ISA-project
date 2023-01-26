@@ -1,15 +1,13 @@
 package eu.dreamTeam.isabackend.controller;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
-import eu.dreamTeam.isabackend.handler.exceptions.*;
 import eu.dreamTeam.isabackend.dto.BloodBankDTOs;
-import eu.dreamTeam.isabackend.handler.exceptions.AccountNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.BankNotExistedException;
 import eu.dreamTeam.isabackend.handler.exceptions.FailedUpdateException;
+import eu.dreamTeam.isabackend.handler.exceptions.InvalidApiKeyException;
 import eu.dreamTeam.isabackend.handler.exceptions.WrongTimeRangeException;
+import eu.dreamTeam.isabackend.logger.CacheLogger;
 import eu.dreamTeam.isabackend.model.BloodBank;
-
-import java.nio.file.*;
 import eu.dreamTeam.isabackend.service.AccountService;
 import eu.dreamTeam.isabackend.service.ApiKeyService;
 import eu.dreamTeam.isabackend.service.BloodBankService;
@@ -20,11 +18,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +38,7 @@ public class BloodBankController {
 
     @Autowired
     private BloodBankService bloodBankService;
-    @Autowired
-    private AccountService accountService;
+    private CacheLogger cacheLogger;
     private final ApiKeyService apiKeyService;
     private final ModelMapper modelMapper;
 
@@ -50,6 +51,8 @@ public class BloodBankController {
         this.apiKeyService = apiKeyService;
         TypeMap<BloodBank, BloodBankDTO> propertyMapper = modelMapper.createTypeMap(BloodBank.class, BloodBankDTO.class);
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCity(), BloodBankDTO::setCity));
+        propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getLatitude(), BloodBankDTO::setLatitude));
+        propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getLongitude(), BloodBankDTO::setLongitude));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getStreet(), BloodBankDTO::setStreet));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getCountry(), BloodBankDTO::setCountry));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), BloodBankDTO::setNumber));
@@ -58,19 +61,17 @@ public class BloodBankController {
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getName(), BloodBankDTO::setName));
 
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<BloodBankDTO> getInfoByStaffEmail(
             @RequestParam String email) {
-        if(!accountService.check(email))
-            throw new AccountNotExistedException();
         BloodBank bloodBank = bloodBankService.getByStaffEmail(email);
         if (bloodBank == null)
             throw new BankNotExistedException();
         BloodBankDTO bloodBankDTO = modelMapper.map(bloodBank, BloodBankDTO.class);
         return new ResponseEntity<>(bloodBankDTO, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff', 'admin')")
     @PostMapping(value = "/notification", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> receiveNotification(
             HttpServletRequest httpServletRequest,
@@ -87,6 +88,7 @@ public class BloodBankController {
         }
         return new ResponseEntity<>("RECEIVED SUCCESSFULLY", HttpStatus.OK);
     }
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PutMapping
     public ResponseEntity<BloodBankDTO> updateInfo(
             @RequestBody @Valid BloodBankDTO updateBloodBankDTO) {
@@ -97,6 +99,7 @@ public class BloodBankController {
             throw new FailedUpdateException();
         return new ResponseEntity<>(updateBloodBankDTO, HttpStatus.OK);
     }
+    @PreAuthorize("hasAnyRole('user', 'staff', 'admin')")
     @PostMapping
     public ResponseEntity<BloodBankDTO> createCenter(
             @RequestBody @Valid BloodBankDTO createBloodBankDTO) {

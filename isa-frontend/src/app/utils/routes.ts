@@ -10,5 +10,12 @@ export enum Route {
   USER_REVIEW = 'user-review',
   QUESTIONNAIRE = 'questionnaire',
   USER_INFO = 'user-info',
-  TENDERS = 'tenders'
+  TENDERS = 'tenders',
+  MY_APPOINTMENTS = 'my-appointments',
+  PREFERED_APPOINTMENT = "prefered-appointment",
+  CENTER_APPOINTMENTS = "center_appointments",
+  CALENDAR = "calendar",
+  CREATE_ADMIN = "new-admin",
+  DELIVERY = "location-tracker/check",
+  QR_READER = "qr-reader",
 }

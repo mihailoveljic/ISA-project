@@ -50,8 +50,8 @@ services:
       DB_USER: user
       DB_SCHEMA: public
       DB_PASSWORD: user
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
+      #KEYCLOAK_USER: admin
+      #KEYCLOAK_PASSWORD: admin
     ports:
       - 28080:8080
     depends_on:
@@ -69,6 +69,26 @@ services:
     networks:
         - rabbitmq_go_net
 #----------------------------------------------------------------
+  api-gateway:
+    depends_on:
+      - eureka-server
+    build:
+      context: .
+      dockerfile: ISA-api-gateway/isa-api-gateway/Dockerfile
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+  #----------------------------------------------------------------
+  eureka-server:
+    build:
+      context: .
+      dockerfile: ISA-eureka-discovery/isa-eureka-server/Dockerfile
+    expose:
+      - "8761"
+    ports:
+      - "8761:8761"
+  #----------------------------------------------------------------
 volumes:
   pgadmin_data_isa:
   blood_bank_data_isa:
