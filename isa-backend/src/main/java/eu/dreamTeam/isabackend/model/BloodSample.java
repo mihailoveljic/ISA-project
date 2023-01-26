@@ -27,5 +27,7 @@ public class BloodSample {
     @ManyToOne
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
+    @Version
+    private Integer version;
 
 }
