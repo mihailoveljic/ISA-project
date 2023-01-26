@@ -39,7 +39,7 @@ public class BloodBanksTests {
             @Override
             public void run() {
                 System.out.println("Startovan Thread 1");
-                try { Thread.sleep(10); } catch (InterruptedException e) {}// thread uspavan na 3 sekunde da bi drugi thread mogao da izvrsi istu operaciju
+                try { Thread.sleep(500); } catch (InterruptedException e) {}// thread uspavan na 3 sekunde da bi drugi thread mogao da izvrsi istu operaciju
                 BloodBankDTO bloodBankForUpdate = BloodBankDTO.builder()
                                 .id(1L)
                                 .name("Izmenjeno ime 1").build();

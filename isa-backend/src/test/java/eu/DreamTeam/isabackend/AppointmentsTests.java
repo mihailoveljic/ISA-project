@@ -37,6 +37,7 @@ public class AppointmentsTests {
                 System.out.println("Startovan Thread 1");
                 Appointment defaultAppointment = new Appointment();
                 Optional<Appointment> appointmentToUpdate = appointmentRepository.findById(1L);// ocitan objekat sa id 1
+                appointmentToUpdate.get().setUserEmail("svenadev@gmail.com");
                 try { Thread.sleep(1000); } catch (InterruptedException e) {}// thread uspavan na 3 sekunde da bi drugi thread mogao da izvrsi istu operaciju
                 appointmentService.scheduleAppointment(appointmentService.FromAppointmentToScheduleAppointmentDto(appointmentToUpdate.orElse(defaultAppointment)));// bacice ObjectOptimisticLockingFailureException
             }
@@ -47,7 +48,9 @@ public class AppointmentsTests {
             public void run() {
                 System.out.println("Startovan Thread 2");
                 Appointment defaultAppointment = new Appointment();
-                Optional<Appointment> appointmentToUpdate = appointmentRepository.findById(1L);// ocitan isti objekat sa id 1 kao i iz prvog threada
+                Optional<Appointment> appointmentToUpdate = appointmentRepository.findById(1L);
+                appointmentToUpdate.get().setUserEmail("svenadev@gmail.com");
+                // ocitan isti objekat sa id 1 kao i iz prvog threada
                 /*
                  * prvi ce izvrsiti izmenu i izvrsi upit:
                  * Hibernate:
