@@ -22,6 +22,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.nio.file.Files;
@@ -119,6 +120,7 @@ public class BloodBankController {
         }
         return new ResponseEntity<>(bankDTOS, HttpStatus.OK);
     }
+
     @GetMapping("/getAll")
     public ResponseEntity<BloodBankDTOs> getAll(){
         List<BloodBank> bloodbanks = this.bloodBankService.getAll();

@@ -109,9 +109,9 @@ INSERT INTO public.staff(
 VALUES ('FEMALE', '1357902468007', 'Marija', '061/11-29-222','Doktor', 'Specijalista', 'Maric', null, 3, 1);
 
 
-INSERT INTO public.users(
-	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, penalties, user_type, account_id, address_id)
-	VALUES ('MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 50, 0, 3, 2, 6);
+INSERT INTO public.system_admin(
+	gender, jmbg, name, phone_number, profession, profession_info, surname, account_id, address_id)
+	VALUES ('MALE', '0123456789667', 'Miloš', '064/52-24-213', 'Software Engineer', 'WeDoSoftware', 'Zeljko', 2, 6);
 
 
 INSERT INTO public.api_key(
@@ -166,7 +166,7 @@ VALUES (2000, 'ZERO_POS', 1, null);
 
 INSERT INTO public.account(
 	email, password, required_password_change)
-	VALUES ( 'mihailoveljic3010@gmail.com', null, false);
+	VALUES ( 'mihailoveljic3010@gmail.com', '$2a$10$LEXs7TjyqHnCgD3uzEv6rOo9BDizvIVzCksQ6Rhf.aJH7eV2wni7C', false);
 
 INSERT INTO public.users(
 	gender, jmbg, name, phone_number, profession, profession_info, surname, collected_points, penalties, user_type, account_id, address_id)
