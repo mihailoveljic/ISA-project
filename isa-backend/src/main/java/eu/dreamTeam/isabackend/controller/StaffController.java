@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +42,7 @@ public class StaffController {
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), StaffDTO::setNumber));
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), StaffDTO::setEmail));
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<StaffDTO> getInfoByEmail(
             @RequestParam String email) {
@@ -51,7 +52,7 @@ public class StaffController {
             throw new StaffNotExistedException();
         return new ResponseEntity<>(staffDTO, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping("/colleagues")
     public ResponseEntity<List<StaffMainInfoDTO>> getStaffForCenter(
             @RequestParam String email) {
@@ -66,7 +67,7 @@ public class StaffController {
         }
         return new ResponseEntity<>(staffMainInfoDTOS, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PutMapping
     public ResponseEntity<StaffDTO> updateInfo(
             @RequestBody @Valid StaffDTO updateStaffDTO) {
@@ -75,7 +76,7 @@ public class StaffController {
             throw new FailedUpdateException();
         return new ResponseEntity<>(updateStaffDTO, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PostMapping
     public ResponseEntity<StaffWithCenterDTO> create(
             @RequestBody @Valid StaffWithCenterDTO createStaffDTO) {
@@ -88,7 +89,7 @@ public class StaffController {
             throw new FailedUpdateException();
         return new ResponseEntity<>(createStaffDTO, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PutMapping("/password")
     public ResponseEntity<UpdatePasswordDTO> updatePassword(
             @RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {

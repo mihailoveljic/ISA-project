@@ -60,7 +60,7 @@ public class BloodBankController {
         propertyMapper.addMappings(mapper -> mapper.map(src -> src.getName(), BloodBankDTO::setName));
 
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<BloodBankDTO> getInfoByStaffEmail(
             @RequestParam String email) {
@@ -70,7 +70,7 @@ public class BloodBankController {
         BloodBankDTO bloodBankDTO = modelMapper.map(bloodBank, BloodBankDTO.class);
         return new ResponseEntity<>(bloodBankDTO, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff', 'admin')")
     @PostMapping(value = "/notification", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> receiveNotification(
             HttpServletRequest httpServletRequest,
@@ -87,6 +87,7 @@ public class BloodBankController {
         }
         return new ResponseEntity<>("RECEIVED SUCCESSFULLY", HttpStatus.OK);
     }
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PutMapping
     public ResponseEntity<BloodBankDTO> updateInfo(
             @RequestBody @Valid BloodBankDTO updateBloodBankDTO) {
@@ -97,6 +98,7 @@ public class BloodBankController {
             throw new FailedUpdateException();
         return new ResponseEntity<>(updateBloodBankDTO, HttpStatus.OK);
     }
+    @PreAuthorize("hasAnyRole('user', 'staff', 'admin')")
     @PostMapping
     public ResponseEntity<BloodBankDTO> createCenter(
             @RequestBody @Valid BloodBankDTO createBloodBankDTO) {
@@ -117,7 +119,6 @@ public class BloodBankController {
         }
         return new ResponseEntity<>(bankDTOS, HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('user')")
     @GetMapping("/getAll")
     public ResponseEntity<BloodBankDTOs> getAll(){
         List<BloodBank> bloodbanks = this.bloodBankService.getAll();

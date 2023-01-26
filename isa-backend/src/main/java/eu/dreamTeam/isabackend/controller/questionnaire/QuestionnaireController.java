@@ -10,6 +10,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class QuestionnaireController {
 
     @Autowired
     private QuestionService questionService;
-
+    @PreAuthorize("hasAnyRole('user', 'staff')")
     @GetMapping("/check-completed/{userEmail}")
     public ResponseEntity<Object> checkIfUserCompletedQuestionnaire(@PathVariable String userEmail){
         QuestionnaireCompletedDTO response = QuestionnaireCompletedDTO.builder()
@@ -35,7 +36,7 @@ public class QuestionnaireController {
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff')")
     @GetMapping("/check")
     public ResponseEntity<StringDTO> check(@RequestParam String email){
         StringDTO string = new StringDTO();
@@ -45,12 +46,12 @@ public class QuestionnaireController {
         }
         return new ResponseEntity<>(string, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff')")
     @GetMapping("/{email}")
     public ResponseEntity<List<QuestionnaireReviewDTO>> getQuestionnaireByUser(@PathVariable String email){
         return new ResponseEntity<>(questionnaireService.getQuestionnaireByUser(email), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff')")
     @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody QuestionnaireDTO questionnaireDTO){
         User user = userService.getUserByEmail(questionnaireDTO.getUserEmail());
