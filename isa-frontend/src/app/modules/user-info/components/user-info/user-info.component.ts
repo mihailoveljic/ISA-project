@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Route } from 'src/app/utils/routes';
 import { UserInfoService } from '../../service/user-info.service';
 
 @Component({
