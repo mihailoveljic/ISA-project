@@ -1,3 +1,4 @@
+import { HasAdminRoleGuard } from './../../auth/guards/has-admin-role.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Route } from 'src/app/utils/routes';
@@ -7,7 +8,8 @@ import { CentersComponent } from './centers.component';
 
 const routes: Routes = [
   { path: '', component: CentersComponent },
-  { path: Route.CREATE_CENTER, component: CreateCenterComponent},];
+  { path: Route.CREATE_CENTER, component: CreateCenterComponent, canActivate: [HasAdminRoleGuard]},
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
