@@ -1,4 +1,4 @@
-/*package eu.dreamTeam.isabackend.rabbitmq.publisher;
+package eu.dreamTeam.isabackend.rabbitmq.publisher;
 
 import eu.dreamTeam.isabackend.dto.BloodBankDTO;
 import eu.dreamTeam.isabackend.dto.BloodSampleDTO;
@@ -57,4 +57,3 @@ public class ScheduledDelivery {
         System.out.println("Sent :" + message.toString());
     }
 }
-*/
