@@ -1,3 +1,5 @@
+import { HasStaffOrUserRoleGuard } from './../../auth/guards/has-staff-or-user-role.guard';
+import { HasUserRoleGuard } from './../../auth/guards/has-user-role.guard';
 import { CenterAppointmentsComponent } from './components/center-appointments/center-appointments.component';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 import { NgModule } from '@angular/core';
@@ -10,13 +12,11 @@ import { ScheduleAppointmentComponent } from './components/schedule-appointment/
 
 const routes: Routes = [
   { path: '', component: AppointmentsComponent },
-  // { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent, canActivate: [HasStaffRoleGuard]},
-  // { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent, canActivate: [HasUserRoleGuard]},
-  { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent},
-  { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent},
-  { path: Route.MY_APPOINTMENTS, component: ScheduledAppointmentsComponent},
-  { path: Route.PREFERED_APPOINTMENT, component: ScheduleAppointmentByUserPreferencesComponent},
-  { path: Route.CENTER_APPOINTMENTS+ '/:bloodBankId', component: CenterAppointmentsComponent},
+  { path: Route.CREATE_APPOINTMENT, component: CreateAppointmentComponent, canActivate: [HasStaffOrUserRoleGuard]},
+  { path: Route.SCHEDULE_APPOINTMENT, component: ScheduleAppointmentComponent, canActivate: [HasUserRoleGuard]},
+  { path: Route.MY_APPOINTMENTS, component: ScheduledAppointmentsComponent, canActivate: [HasUserRoleGuard]},
+  { path: Route.PREFERED_APPOINTMENT, component: ScheduleAppointmentByUserPreferencesComponent, canActivate: [HasUserRoleGuard]},
+  { path: Route.CENTER_APPOINTMENTS + '/:bloodBankId', component: CenterAppointmentsComponent},
 ];
 
 @NgModule({
