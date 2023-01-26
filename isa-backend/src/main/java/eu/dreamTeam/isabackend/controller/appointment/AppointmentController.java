@@ -171,9 +171,7 @@ public class AppointmentController {
             return null;
             //TODO error dodaj
         }
-
         try {
-
             File convFile = new File(file.getOriginalFilename());
             file.transferTo(convFile);
             AppointmentDTO dto = appointmentService.getTextFromAppointmentQR(convFile);
@@ -181,7 +179,6 @@ public class AppointmentController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>(dto ,HttpStatus.OK);
-
 
         } catch (IOException e) {
             e.printStackTrace();

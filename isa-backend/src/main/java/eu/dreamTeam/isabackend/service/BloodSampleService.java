@@ -6,8 +6,10 @@ import eu.dreamTeam.isabackend.repository.BloodSampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,13 +25,20 @@ public class BloodSampleService {
         return bloodSampleRepository.getBloodSample(bloodType);
     }
 
+
     public boolean getBloodSampleForPurchase(String bloodType, double amount){
         for(BloodSample bs : bloodSampleRepository.getBloodSamplesByBanks(bloodType))
-            if(bs.getAmount() >= amount){
-                bs.setAmount(bs.getAmount() - amount);
-                bloodSampleRepository.save(bs);
+            if(updateBloodSampleForPurchase(bs, amount))
                 return true;
-            }
+        return false;
+    }
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public boolean updateBloodSampleForPurchase(BloodSample bs, double amount){
+        if(bs.getAmount() >= amount){
+            bs.setAmount(bs.getAmount() - amount);
+            bloodSampleRepository.save(bs);
+            return true;
+        }
         return false;
     }
 
