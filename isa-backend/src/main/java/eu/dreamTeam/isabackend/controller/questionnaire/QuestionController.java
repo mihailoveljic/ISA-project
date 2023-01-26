@@ -12,6 +12,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class QuestionController {
         propertyMapper.addMappings(mapper -> mapper.map(Question::isAcceptableAnswer, QuestionDTO::setAcceptableAnswer));
         propertyMapper.addMappings(mapper -> mapper.map(Question::getForGender, QuestionDTO::setForGender));
     }
-
+    @PreAuthorize("hasAnyRole('user', 'staff')")
     @GetMapping("/get-all")
     public ResponseEntity<QuestionDTOs> getAll(){
         List<Question> questions = this.questionsService.getAll();

@@ -11,6 +11,7 @@ import eu.dreamTeam.isabackend.service.AccountService;
 import eu.dreamTeam.isabackend.service.SystemAdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class SystemAdminController {
         this.accountService = accountService;
     }
 
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @PostMapping
     public ResponseEntity<AdminDTO> create(
             @RequestBody @Valid AdminDTO adminDTO) {

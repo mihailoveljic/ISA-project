@@ -10,6 +10,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +30,14 @@ public class TenderMessageController {
 
     @Autowired
     private TenderOfferConfirmationMessagePublisher tenderOfferConfirmationMessagePublisher;
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping(value = "/getAll")
     public ResponseEntity<Object> getAllTenderMessages(HttpServletRequest httpServletRequest){
         var tenderMessages = tenderMessageService.getAll();
         return new ResponseEntity<>(tenderMessages, HttpStatus.OK);
 
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping(value = "/confirm/{tenderOfferId}")
     public ResponseEntity<Object> confirmTenderOffer(@PathVariable int tenderOfferId){
 
@@ -69,7 +70,7 @@ public class TenderMessageController {
 
 
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping(value = "/revoke/{tenderOfferId}")
     public ResponseEntity<Object> revokeTenderOffer(@PathVariable int tenderOfferId){
         var tenderOffer = tenderMessageService.getTenderOfferById(tenderOfferId);
@@ -86,7 +87,7 @@ public class TenderMessageController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping(value = "/delete/{tenderOfferId}")
     public ResponseEntity<Object> deleteTenderMessage(@PathVariable int tenderOfferId){
         var response = tenderMessageService.deleteTenderMessage(tenderOfferId);

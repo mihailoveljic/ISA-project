@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +58,7 @@ public class PersonController {
         propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAddress().getNumber(), PersonDTO::setNumber));
         propertyMapper3.addMappings(mapper -> mapper.map(src -> src.getAccount().getEmail(), PersonDTO::setEmail));
     }
-
+    @PreAuthorize("hasAnyRole('staff', 'admin')")
     @GetMapping
     public ResponseEntity<List<PersonDTO>> getAllPersons(){
         List<User> users = userService.getAllUsers();

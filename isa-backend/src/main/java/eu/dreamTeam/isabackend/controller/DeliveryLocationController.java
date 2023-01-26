@@ -8,6 +8,7 @@ import eu.dreamTeam.isabackend.service.DeliveryLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,13 +22,13 @@ public class DeliveryLocationController {
 
     @Autowired
     DeliveryLocationService deliveryLocationService;
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping()
     public ResponseEntity<Object> getDeliveryLocation() {
         return new ResponseEntity<>(deliveryLocationService.getDeliveryLocation(), HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/begin")
     public ResponseEntity<Object> beginDelivery(@RequestParam String origin, @RequestParam String destination, @RequestParam double speed) {
 
@@ -36,7 +37,7 @@ public class DeliveryLocationController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/end")
     public ResponseEntity<Object> endDelivery() {
 
