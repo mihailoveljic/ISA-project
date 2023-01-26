@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private AccountService accountService;
-    @PreAuthorize("hasAnyRole('user, 'staff', 'admin')")
+    @PreAuthorize("hasAnyRole('user' , 'staff', 'admin')")
     @GetMapping
     public ResponseEntity<User> getInfoByEmail(
             @RequestParam String email) {
